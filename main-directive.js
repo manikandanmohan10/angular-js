@@ -86,6 +86,6 @@
       scope.column = datas.column;
       console.log(scope)
     },
-    templateUrl: 'index1.html'
+    templateUrl: 'table.html'
   };
 });
