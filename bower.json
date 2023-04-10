@@ -1,0 +1,21 @@
+{
+  "name": "table-direct",
+  "homepage": "https://github.com/manikandanmohan10/angular-js",
+  "authors": [
+    "ramesh199823 <vemburamesh376@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-drag-and-drop-lists": "^2.1.0"
+  }
+}
