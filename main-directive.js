@@ -85,6 +85,9 @@
       scope.data = datas.data;
       scope.column = datas.column;
       console.log(scope)
+      setTimeout(function() {
+        $('#mytable').DataTable(); // Initialize DataTables plugin after AngularJS data is populated
+      }, 0);
     },
     templateUrl: 'table.html'
   };

@@ -1,14 +1,15 @@
-{{message}}
-sss
-ss12
 
-<table>
+<table id="mytable" class="display">
+  
+  <thead>
     <tr>
-      <th ng-repeat="columns in column">{{columns}}</th>
+      <th ng-repeat="col in column">{{col}}</th>
     </tr>
-    
+  </thead>
+  <tbody>
     <tr ng-repeat="row in data">
       <td ng-repeat="col in column">{{row[col]}}</td>
     </tr>
-    
-  </table>
+  </tbody>
+</table>
+
