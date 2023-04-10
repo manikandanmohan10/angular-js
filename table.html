@@ -2,20 +2,15 @@
 sss
 ss12
 
-<table>
-    <tr dnd-list="column">
-      <th ng-repeat="columns in column" dnd-draggable="item"
-      dnd-moved="column.splice($index, 1)"
-      dnd-effect-allowed="move"
-      dnd-selected="column.splice($index, 1)"
-      ng-class="{'selected': models.selected === item}">{{columns}}</th>
+<table id="mytable" class="display styled-table"> 
+  <thead>
+
+    <tr>
+      <th ng-repeat="columns in column" >{{columns}}</th>
     </tr>
+  </thead>
     <tbody dnd-list="data">
-    <tr ng-repeat="item in data" dnd-draggable="item"
-    dnd-moved="data.splice($index, 1)"
-    dnd-effect-allowed="move"
-    dnd-selected="data.splice($index, 1)"
-    ng-class="{'selected': models.selected === item}">
+    <tr ng-repeat="item in data" class="active-row">
       <td ng-repeat="col in column">{{item[col]}}</td>
     </tr>
   </tbody>
