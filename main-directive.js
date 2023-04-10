@@ -73,7 +73,7 @@
 //       };
 //   });
 
-  angular.module('myApp', [])
+  angular.module('myApp', ['dndLists'])
 .directive('myDirective', function() {
   return {
     restrict: 'AEC',

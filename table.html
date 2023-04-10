@@ -3,12 +3,21 @@ sss
 ss12
 
 <table>
-    <tr>
-      <th ng-repeat="columns in column">{{columns}}</th>
+    <tr dnd-list="column">
+      <th ng-repeat="columns in column" dnd-draggable="item"
+      dnd-moved="column.splice($index, 1)"
+      dnd-effect-allowed="move"
+      dnd-selected="column.splice($index, 1)"
+      ng-class="{'selected': models.selected === item}">{{columns}}</th>
     </tr>
-    
-    <tr ng-repeat="row in data">
-      <td ng-repeat="col in column">{{row[col]}}</td>
+    <tbody dnd-list="data">
+    <tr ng-repeat="item in data" dnd-draggable="item"
+    dnd-moved="data.splice($index, 1)"
+    dnd-effect-allowed="move"
+    dnd-selected="data.splice($index, 1)"
+    ng-class="{'selected': models.selected === item}">
+      <td ng-repeat="col in column">{{item[col]}}</td>
     </tr>
+  </tbody>
     
   </table>
