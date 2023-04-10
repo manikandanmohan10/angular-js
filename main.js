@@ -81,8 +81,9 @@
     link: function(scope, element, attrs) {
       element.css('color', 'red');
       scope.message = attrs.type;
-      scope.data = JSON.parse(attrs.data);
-      scope.column = JSON.parse(attrs.column);
+      let datas  = JSON.parse(attrs.datasource);
+      scope.data = datas.data;
+      scope.column = datas.column;
       console.log(scope)
     },
     templateUrl: 'index1.html'
