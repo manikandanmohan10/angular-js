@@ -1,11 +1,11 @@
-var module = angular.module("myApp", []);
+var module = angular.module("myApp");
 
 module.controller("exampleCtrl", function($scope) {
 
     $scope.name = 'MM';
-    $scope.column = ['name', 'data'];
+    $scope.column = ['name1', 'data'];
     $scope.data = [{
-        'name': 'sabari',
+        'name1': 'sabari',
         'data': 'sabari'
     }]
 

@@ -76,13 +76,15 @@
   angular.module('myApp', [])
 .directive('myDirective', function() {
   return {
-    restrict: 'A',
-    template: "<p>{{message}}</p>",
+    restrict: 'AEC',
+   // template: "<p>{{message}}</p>",
     link: function(scope, element, attrs) {
       element.css('color', 'red');
       scope.message = attrs.type;
-      scope.data = attrs.data;
-      scope.column = attrs.column;
-    }
+      scope.data = JSON.parse(attrs.data);
+      scope.column = JSON.parse(attrs.column);
+      console.log(scope)
+    },
+    templateUrl: 'index1.html'
   };
 });

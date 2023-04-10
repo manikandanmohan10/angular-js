@@ -1,14 +1,16 @@
 {{message}}
 sss
+ss12
 
 <table>
     <tr>
-      <th ng-repeat="columns of column">columns</th>
+      <th ng-repeat="columns in column">{{columns}}</th>
       <!-- <th>Contact</th>
       <th>Country</th> -->
     </tr>
-    <tr ng-repeat="row of data">
-      <td ng-repeat="col of column">{{row[col]}}</td>
+    
+    <tr ng-repeat="row in data">
+      <td ng-repeat="col in column">{{row[col]}}</td>
       <!-- <td>Maria Anders</td>
       <td>Germany</td> -->
     </tr>
