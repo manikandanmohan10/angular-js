@@ -12,7 +12,7 @@ angular.module('myApp', ['dndLists'])
       console.log(scope)
       setTimeout(function() {
         $('#mytable').DataTable(); // Initialize DataTables plugin after AngularJS data is populated
-        main-controller.js        $('#mytable').tableDnD(); // Initialize TableDnD plugin for row drag-and-drop
+        $('#mytable').tableDnD(); // Initialize TableDnD plugin for row drag-and-drop
         $('#mytable').colResizable({liveDrag: true}); // Initialize colResizable plugin for column drag-and-drop
         
       }, 0);
