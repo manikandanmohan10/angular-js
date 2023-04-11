@@ -3,13 +3,13 @@
   <thead>
 
     <tr class="dnd-moved">
-      <th ng-repeat="columns in column">{{columns.field}}</th>
+      <th ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">{{columns.field}}</th>
        <th>Update</th>
     </tr>
   </thead>
     <tbody dnd-list="data">
     <tr ng-repeat="item in data" class="active-row dnd-moved">
-      <td ng-repeat="col in column" ng-if="!item.editable">{{item[col.field]}}</td>
+      <td ng-repeat="col in column" ng-if="!item.editable" ng-class="{'sticky-column-body': col.frozen}">{{item[col.field]}}</td>
     <td ng-repeat="col in column" ng-if="item.editable" ng-disabled="!col['editable']">
       <input ng-if="col.type === 'input'" type="text" ng-model="item[col.field]"/>
       <select ng-if="col.type === 'select'" ng-model="item[col.field]" ng-options="x for x in col.dropdowndata">
@@ -26,3 +26,4 @@
   </tbody>
     
   </table>
+  

@@ -11,102 +11,122 @@ module.controller("exampleCtrl", function($scope) {
             {
                 field: 'name',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'phone',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'email',
                 type: 'email',
-                editable: false
+                editable: false,
+                frozen: false
             },
             {
                 field: 'address',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'postalZip',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'region',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'country',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'list',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'text',
                 type: 'text',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'numberrange',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'currency',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'alphanumeric',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'date',
                 type: 'date',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'constant',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'company',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'boolean',
                 type: 'boolean',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'list1',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'guid',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'cvv',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             {
                 field: 'track2',
                 type: 'input',
-                editable: true
+                editable: true,
+                frozen: false
             },
             
         ],

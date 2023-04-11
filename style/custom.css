@@ -37,3 +37,37 @@
     font-weight: bold;
     color: #009879;
 }
+.sticky-column-head {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: #009879;
+  }
+  .sticky-column-body {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: #f0f0f0;
+  }
+  .my-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  .my-table th,
+  .my-table td {
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  
+  .my-table thead th {
+    background-color: #dddddd;
+  }
+  
+  .my-table tbody {
+    display: block;
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+  
+  
