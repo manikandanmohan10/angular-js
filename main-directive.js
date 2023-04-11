@@ -2,6 +2,9 @@ angular.module('myApp', ['dndLists'])
 .directive('myDirective', function() {
   return {
     restrict: 'AEC',
+    scope: {
+      onButtonClick: "&",
+    },
     link: function(scope, element, attrs) {
       element.css('color', 'red');
       scope.message = attrs.type;
@@ -24,6 +27,7 @@ angular.module('myApp', ['dndLists'])
         // update the row
         row.editable = !row.editable
         row = row;
+        $scope.onButtonClick({$event: row});
       };
       $scope.deleteRow = function(row) {
         // delete the row

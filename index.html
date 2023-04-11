@@ -44,7 +44,7 @@
     
 </div> -->
 <div ng-app="myApp" ng-controller="exampleCtrl">
-    <my-directive type="text" datasource="{{dataSource}}"></my-directive>
+    <my-directive type="text" on-button-click="updateDatas($event)" datasource="{{dataSource}}"></my-directive>
     
 </div>
 
