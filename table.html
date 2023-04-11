@@ -1,82 +1,137 @@
 <div>
-    <span class="material-symbols-outlined"  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-format_color_fill
-</span>
+  <span
+    class="material-symbols-outlined"
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#exampleModal"
+    data-whatever="@mdo"
+  >
+    format_color_fill
+  </span>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown link
-  </a>
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="dropdown show">
+              <a
+                class="btn btn-secondary dropdown-toggle"
+                href="#"
+                role="button"
+                id="dropdownMenuLink"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Dropdown link
+              </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-           <input type="color" id="color1" />
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <input type="color" id="color1" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Send message</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
   <div>
-<table id="mytable" class="display styled-table" cellspacing="0" cellpadding="2">  
+    <table
+      id="mytable"
+      class="display styled-table"
+      cellspacing="0"
+      cellpadding="2"
+    >
+      <thead>
+        <tr>
+          <th ng-repeat="columns in column">{{columns.field}}</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <tbody dnd-list="data">
+        <tr ng-repeat="item in data" class="active-row">
+          <td
+            ng-repeat="col in column"
+            ng-class="{cellColor : col.type == 'number'  }"
+            ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'}"
+            ng-if="!item.editable"
+          >
+            {{item[col.field]}}
+          </td>
+          <td
+            ng-repeat="col in column"
+            ng-class="{cellColor : col.type == 'number'  }"
+            ng-style="item[col.field] >=5 && item[col.field] <=20 && col.type == 'number' && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'}"
+            ng-if="item.editable"
+            ng-disabled="!col['editable']"
+          >
+            <input
+              ng-if="col.type === 'input'"
+              type="text"
+              ng-model="item[col.field]"
+            />
+            <select
+              ng-if="col.type === 'select'"
+              ng-model="item[col.field]"
+              ng-options="x for x in col.dropdowndata"
+            ></select>
+            <input
+              ng-if="col.type === 'date'"
+              type="date"
+              ng-model="item[col.field]"
+            />
+            <input
+              ng-if="col.type === 'number'"
+              type="number"
+              ng-model="item[col.field]"
+            />
+          </td>
 
-  <thead>
-    <tr>
-      <th ng-repeat="columns in column">{{columns.field}}</th>
-       <th>Update</th>
-    </tr>
-  </thead>
-  <tbody dnd-list="data">
-    <tr ng-repeat="item in data" class="active-row">
-      <td ng-repeat="col in column"   ng-class="{cellColor : col.type == 'number'  }"
-        ng-style="item[col.field] >10 && item[col.field] <20 && {'background-color':'#f54225'} || item[col.field] <5 && {'background-color':'#7bdaff'} || item[col.field] >20 && {'background-color':'#84e784'}"
-       ng-if="!item.editable">{{item[col.field]}}</td>
-    <td ng-repeat="col in column"   ng-class="{cellColor : col.type == 'number'  }"
-        ng-style="item[col.field] >10 && item[col.field] <20 && {'background-color':'#f54225'} || item[col.field] <5 && {'background-color':'#7bdaff'} || item[col.field] >20 && {'background-color':'#84e784'}"
-       ng-if="item.editable" ng-disabled="!col['editable']">
-      <input ng-if="col.type === 'input'" type="text" ng-model="item[col.field]"/>
-      <select ng-if="col.type === 'select'" ng-model="item[col.field]" ng-options="x for x in col.dropdowndata">
-      </select>
-      <input ng-if="col.type === 'date'" type="date" ng-model="item[col.field]"/>
-      <input ng-if="col.type === 'number'" type="number"  ng-model="item[col.field]"/>
-    <td>
-       <button ng-click="editRow(item)">update</button>
-    </td>
-
-
-    </tr>
-  </tbody>
-    
-  </table>
-
+          <td>
+            <button ng-click="editRow(item)">update</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-  <!-- <script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function() {
         <span class="comment">// Initialise the table</span>
         $("#mytable").tableDnD();
     });
     </script> -->
 <div id="dndgrid" style="margin: auto"></div>
+

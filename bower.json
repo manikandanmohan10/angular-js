@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-drag-and-drop-lists": "^2.1.0"
+    "angular-drag-and-drop-lists": "^2.1.0",
+    "bootstrap": "3"
   }
 }

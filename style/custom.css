@@ -43,3 +43,40 @@
     margin: 10px;
     justify-content: center;
 }
+/* .display{
+    padding-top: 20px;
+} */
+#mytable_filter {
+    margin: 10px;
+  
+}
+.dataTables_length{
+     margin: 10px;
+      
+}
+.dataTables_length label{
+        font-size: large;
+    }
+#mytable_filter label{
+    font-size: large;
+}
+  #color1 {
+      -webkit-appearance: none;
+      padding: 0;
+      border: none;
+      border-radius: 4px;
+      width: 10px;
+      height: 20px;
+    }
+
+    #color1::-webkit-color-swatch {
+      border: none;
+      border-radius: 4px;
+      padding: 0;
+    }
+
+    #color1::-webkit-color-swatch-wrapper {
+      border: none;
+      border-radius: 4px;
+      padding: 0;
+    }
