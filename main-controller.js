@@ -3,6 +3,7 @@ var module = angular.module("myApp");
 module.controller("exampleCtrl", function($scope) {
 
     $scope.name = 'MM';
+
     $scope.dataSource = {        
         column : [
             {
