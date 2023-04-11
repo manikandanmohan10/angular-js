@@ -1,91 +1,34 @@
-
-//agGrid.initialiseAgGridWithAngular1(angular);
-
-// var module = angular.module("example", []);
-
-// // module.controller("exampleCtrl", function($scope) {
-
-// //     var columnDefs = [
-// //         {headerName: "Make", field: "make", rowGroup: true, rowDrag: true, editable: true},
-// //         {headerName: "Model", field: "model", rowGroup: true },
-// //         {headerName: "Price", field: "price"}
-// //     ];
-
-// //     var rowData = [
-// //         {make: "Toyota", model: "Celica", price: 35000},
-// //         {make: "Toyota", model: "Mondeo", price: 32000},
-// //         {make: "Porsche", model: "Boxter", price: 72000},
-// //         {make: "Mers", model: "E220", price: 78000}
-// //     ];
-    
-// //     var manual = false;
-    
-// // $scope.data;
-// //     $scope.gridOptions = {
-// //         columnDefs: columnDefs,
-// //         rowData: rowData,
-// //         rowDrag: true,
-// //         enableSorting: true,
-// //         enableColResize: true,
-// //         rowDragManaged: true,
-// //         animateRows: true,
-// //         treeData: true,
-// //         groupDefaultExpanded: -1,
-// //         getDataPath: (data) => {return data.orgHierarchy;},
-// //         onColumnResized: function(params) {
-// //    if(params.finished && manual) {
-// //             console.log('Post Resize Functionality');
-// //             manual = false;
-// //         }
-// //          console.log(params)
-// //         },
-// //         onRowDragEnd: function(event) {
-// //             // Handle row drag move event
-// //             console.log('Row drag move event:', event);
-// //           },
-// //         onGridReady: function(event) {
-// //          sizeToFit()
-         
-// //           // this.api.sizeColumnsToFit('ffd')
-// //     //   var allColumnIds = [];
-// //     //   columnDefs.forEach( function(columnDef) {
-// //     //     allColumnIds.push(columnDef.field);
-// //     // });
-// //     // this.columnApi.autoSizeColumns(allColumnIds)
-     
-// //        },
-// //     };
-    
-    
-// //     function sizeToFit() {
-// //     manual = false;
-// //     $scope.gridOptions.api.sizeColumnsToFit();
-// // }
-
-// // })
-
-// module.directive('myCustomer', function() {
-//     return {
-//         restrict: 'A',
-//         link: function(scope, element, attrs) {
-//           element.css('color', 'red');
-//         }
-//       };
-//   });
-
-  angular.module('myApp', ['dndLists'])
+angular.module('myApp', ['dndLists'])
 .directive('myDirective', function() {
   return {
     restrict: 'AEC',
-   // template: "<p>{{message}}</p>",
     link: function(scope, element, attrs) {
-      element.css('color', 'red');
-      scope.message = attrs.type;
-      let datas  = JSON.parse(attrs.datasource);
+      // Initialize the table data
+      var datas = JSON.parse(attrs.datasource);
       scope.data = datas.data;
       scope.column = datas.column;
       console.log(scope)
+      setTimeout(function() {
+        $('#mytable').DataTable(); // Initialize DataTables plugin after AngularJS data is populated
+        $('#mytable').tableDnD(); // Initialize TableDnD plugin for row drag-and-drop
+        $('.table').dragableColumns(); //Initialize dragndropjs for column dragndrop
+        
+      }, 0);
+      scope.temp = scope.column;
     },
-    templateUrl: 'table.html'
+    templateUrl: 'table.html',
+    controller: function($scope) {
+      $scope.editRow = function(row) {
+        // update the row
+        row.editable = !row.editable
+        row = row;
+      };
+      $scope.deleteRow = function(row) {
+        // delete the row
+      };
+      $scope.$watch('data', function() {
+        // update the table
+      });
+    }
   };
 });

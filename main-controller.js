@@ -4,19 +4,26 @@ module.controller("exampleCtrl", function($scope) {
 
     $scope.name = 'MM';
     $scope.dataSource = {
-        column : ['name1', 'data'],
+        column : [{ field: 'name1',
+                   type: 'input',
+                   }, {field: 'data',
+                    type: 'input'
+                   }],
         data : [{
         'name1': 'sabari',
-        'data': 'sabari'
+        'data': 'sabari',
+        'editable': false
     },
     {
         'name1': 'sabari2',
-        'data': 'sabari'
+        'data': 'sabari',
+        editable: false
     },
     {
         'name1': 'sabari3',
-        'data': 'sabari'
+        'data': 'sabari',
+        editable: false
     }]
-   }
+}
 
 })
