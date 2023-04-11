@@ -3,8 +3,10 @@ angular.module('myApp', ['dndLists'])
   return {
     restrict: 'AEC',
     link: function(scope, element, attrs) {
-      // Initialize the table data
-      var datas = JSON.parse(attrs.datasource);
+      element.css('color', 'red');
+      scope.message = attrs.type;
+      let datas  = JSON.parse(attrs.datasource);
+      console.log(datas)
       scope.data = datas.data;
       scope.column = datas.column;
       console.log(scope)
