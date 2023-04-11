@@ -3,8 +3,8 @@ var module = angular.module("myApp");
 module.controller("exampleCtrl", function($scope) {
 
     $scope.name = 'MM';
-    $scope.updateDatas = (data) => {
-       console.log(`------${data}`);
+    $scope.updateDatas = ($event) => {
+       console.log(`------${$event}`);
     },
     $scope.dataSource = {        
         column : [

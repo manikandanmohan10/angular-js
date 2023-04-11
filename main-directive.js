@@ -27,7 +27,7 @@ angular.module('myApp', ['dndLists'])
         // update the row
         row.editable = !row.editable
         row = row;
-        $scope.onButtonClick(row);
+        $scope.onButtonClick({$event: row});
       };
       $scope.deleteRow = function(row) {
         // delete the row
