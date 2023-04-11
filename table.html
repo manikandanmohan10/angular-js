@@ -9,8 +9,12 @@
     <tbody dnd-list="data">
     <tr ng-repeat="item in data" class="active-row">
       <td ng-repeat="col in column" ng-if="!item.editable">{{item[col.field]}}</td>
-    <td ng-repeat="col in column" ng-if="item.editable">
-      <input type="text" ng-model="item[col.field]"/>
+    <td ng-repeat="col in column" ng-if="item.editable" ng-disabled="!col['editable']">
+      <input ng-if="col.type === 'input'" type="text" ng-model="item[col.field]"/>
+      <select ng-if="col.type === 'select'" ng-model="item[col.field]" ng-options="x for x in col.dropdowndata">
+      </select>
+      <input ng-if="col.type === 'date'" type="date" ng-model="item[col.field]"/>
+      <input ng-if="col.type === 'number'" type="number"  ng-model="item[col.field]"/>
     </td>
     <td>
        <button ng-click="editRow(item)">update</button>
