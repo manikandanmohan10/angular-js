@@ -3,18 +3,18 @@ angular.module('myApp', ['dndLists'])
   return {
     restrict: 'AEC',
     link: function(scope, element, attrs) {
-      element.css('color', 'red');
-      scope.message = attrs.type;
-      let datas  = JSON.parse(attrs.datasource);
+      // Initialize the table data
+      var datas = JSON.parse(attrs.datasource);
       scope.data = datas.data;
       scope.column = datas.column;
       console.log(scope)
       setTimeout(function() {
         $('#mytable').DataTable(); // Initialize DataTables plugin after AngularJS data is populated
         $('#mytable').tableDnD(); // Initialize TableDnD plugin for row drag-and-drop
-        $('#mytable').colResizable({liveDrag: true}); // Initialize colResizable plugin for column drag-and-drop
+        $('.table').dragableColumns(); //Initialize dragndropjs for column dragndrop
         
       }, 0);
+      scope.temp = scope.column;
     },
     templateUrl: 'table.html',
     controller: function($scope) {

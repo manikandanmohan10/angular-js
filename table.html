@@ -1,30 +1,19 @@
-<table id="mytable" class="display styled-table" cellspacing="0" cellpadding="2">  
-  <thead>
-
-    <tr>
-      <th ng-repeat="columns in column">{{columns.field}}</th>
-       <th>Update</th>
-    </tr>
-  </thead>
+   <table id="mytable" class="table display styled-table" cellspacing="0" cellpadding="2" width="100%">
+    <thead>
+      <tr class="dnd-moved">
+        <th ng-repeat="columns in column" >{{columns.field}}</th>
+        <th>Update</th>
+      </tr>
+    </thead>
     <tbody dnd-list="data">
-    <tr ng-repeat="item in data" class="active-row">
-      <td ng-repeat="col in column" ng-if="!item.editable">{{item[col.field]}}</td>
-    <td ng-repeat="col in column" ng-if="item.editable">
-      <input type="text" ng-model="item[col.field]"/>
-    </td>
-    <td>
-       <button ng-click="editRow(item)">update</button>
-    </td>
-
-
-    </tr>
-  </tbody>
-    
+      <tr ng-repeat="item in data" class="dnd-moved active-row">
+        <td ng-repeat="col in column" ng-if="!item.editable">{{item[col.field]}}</td>
+        <td ng-repeat="col in column" ng-if="item.editable">
+          <input type="text" ng-model="item[col.field]"/>
+        </td>
+        <td>
+          <button ng-click="editRow(item)">update</button>
+       </td>
+      </tr>
+    </tbody>
   </table>
-
-  <!-- <script type="text/javascript">
-    $(document).ready(function() {
-        <span class="comment">// Initialise the table</span>
-        $("#mytable").tableDnD();
-    });
-    </script> -->
