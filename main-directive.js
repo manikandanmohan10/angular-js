@@ -6,12 +6,13 @@ angular.module('myApp', ['dndLists'])
       element.css('color', 'red');
       scope.message = attrs.type;
       let datas  = JSON.parse(attrs.datasource);
+      console.log(datas)
       scope.data = datas.data;
       scope.column = datas.column;
       console.log(scope)
       setTimeout(function() {
         $('#mytable').DataTable(); // Initialize DataTables plugin after AngularJS data is populated
-        $('#mytable').tableDnD(); // Initialize TableDnD plugin for row drag-and-drop
+        main-controller.js        $('#mytable').tableDnD(); // Initialize TableDnD plugin for row drag-and-drop
         $('#mytable').colResizable({liveDrag: true}); // Initialize colResizable plugin for column drag-and-drop
         
       }, 0);
