@@ -1,90 +1,61 @@
 <div>
   <span
-    class="material-symbols-outlined"
+    class="material-symbols-outlined color-icon"
     class="btn btn-primary"
-    data-toggle="modal"
-    data-target="#exampleModal"
-    data-whatever="@mdo"
+data-toggle="modal" data-target="#exampleModal"
   >
     format_color_fill
   </span>
-
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"></h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="dropdown show">
-              <a
-                class="btn btn-secondary dropdown-toggle"
-                href="#"
-                role="button"
-                id="dropdownMenuLink"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown link
-              </a>
-
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Message:</label>
-              <input type="color" id="color1" />
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">Send message</button>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Column Color</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="custom-select-wrapper">
+         <label for="exampleFormControlSelect2">Select Column</label>
+          <select class="custom-select" ng-model="selectedValue" id="exampleFormControlSelect2">
+          <!-- <option selected>Open this select menu</option> -->
+          <option  value="{{columns.field}}" ng-repeat="columns in column " ng-selected="columns === column[0]">
+            {{columns.field}}
+          </option>
+        </select>
+       <div  >
+  <input type="color" ng-model="myData">
+  <!-- <button>Get Data</button> -->
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  ng-click="getData()" data-dismiss="modal">Save changes</button>
       </div>
     </div>
+  </div>
+</div>
   </div>
   <div>
     <table
       id="mytable"
-      class="display styled-table"
+      class="table display styled-table"
       cellspacing="0"
       cellpadding="2"
     >
       <thead>
-        <tr>
+        <tr class="dnd-moved">
           <th ng-repeat="columns in column">{{columns.field}}</th>
           <th>Update</th>
         </tr>
       </thead>
       <tbody dnd-list="data">
-        <tr ng-repeat="item in data" class="active-row">
+        <tr ng-repeat="item in data" class="active-row dnd-moved">
           <td
             ng-repeat="col in column"
             ng-class="{cellColor : col.type == 'number'  }"
-            ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'}"
+            ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle"
             ng-if="!item.editable"
           >
             {{item[col.field]}}
@@ -134,4 +105,3 @@
     });
     </script> -->
 <div id="dndgrid" style="margin: auto"></div>
-

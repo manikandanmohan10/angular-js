@@ -1,82 +1,143 @@
 .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-
-
 .styled-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
 }
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+  padding: 12px 15px;
 }
 
 .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+  background-color: #f3f3f3;
 }
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+  border-bottom: 2px solid #009879;
 }
-
 
 .styled-table tbody tr.active-row {
-    font-weight: bold;
+  font-weight: bold;
 }
-.cellColor{
-    display: flex;
-    width: 25px;
-    border-radius: 13px;
-    margin: 10px;
-    justify-content: center;
+.cellColor {
+  display: flex;
+  width: 25px;
+  border-radius: 13px;
+  margin: 10px;
+  justify-content: center;
 }
 /* .display{
     padding-top: 20px;
 } */
 #mytable_filter {
-    margin: 10px;
-  
+  margin: 10px;
 }
-.dataTables_length{
-     margin: 10px;
-      
+.dataTables_length {
+  margin: 10px;
 }
-.dataTables_length label{
-        font-size: large;
-    }
-#mytable_filter label{
-    font-size: large;
+.dataTables_length label {
+  font-size: large;
 }
-  #color1 {
-      -webkit-appearance: none;
-      padding: 0;
-      border: none;
-      border-radius: 4px;
-      width: 10px;
-      height: 20px;
-    }
+#mytable_filter label {
+  font-size: large;
+}
+#color1 {
+  -webkit-appearance: none;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  width: 10px;
+  height: 20px;
+}
 
-    #color1::-webkit-color-swatch {
-      border: none;
-      border-radius: 4px;
-      padding: 0;
-    }
+#color1::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+}
 
-    #color1::-webkit-color-swatch-wrapper {
-      border: none;
-      border-radius: 4px;
-      padding: 0;
-    }
+#color1::-webkit-color-swatch-wrapper {
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+}
+.color-icon {
+  position: absolute;
+  z-index: 999;
+  left: 212px;
+  top: 10px;
+  cursor: pointer;
+}
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+#myDropdown {
+  max-height: 200px;
+  overflow: auto;
+}
+.custom-select {
+  height: 40px; /* Set the desired height here */
+}
+.custom-select option {
+  height: 30px; /* Set the desired height for the options here */
+}
+.custom-select-wrapper {
+  display: flex;
+    gap: 30px;
+    align-items: baseline;
+}
+
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 200px;
+  cursor: pointer;
+}
+
+.custom-select::after {
+  content: '\f0d7';
+  font-family: 'FontAwesome';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.custom-select:focus {
+  outline: none;
+}
+
+.custom-select option {
+  background-color: #fff;
+  color: #333;
+  padding: 10px;
+}
+
+.custom-select option:hover {
+  background-color: #f0f0f0;
+}
+.custom-dropdown .select2-results__option {
+  height: 40px; /* Set the desired height for the options */
+  line-height: 40px; /* Set the desired line-height for the options */
+}

@@ -3,6 +3,10 @@ var module = angular.module("myApp");
 module.controller("exampleCtrl", function($scope) {
 
     $scope.name = 'MM';
+  $("#my-select").select2({
+    dropdownCssClass: "custom-dropdown",
+    containerCssClass: "custom-container",
+  });
 
     $scope.dataSource = {
       column: [
