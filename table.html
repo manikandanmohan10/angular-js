@@ -46,7 +46,7 @@ data-toggle="modal" data-target="#exampleModal"
     >
       <thead>
         <tr class="dnd-moved">
-          <th ng-repeat="columns in column">{{columns.field}}</th>
+          <th ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">{{columns.field}}</th>
           <th>Update</th>
         </tr>
       </thead>
@@ -54,7 +54,7 @@ data-toggle="modal" data-target="#exampleModal"
         <tr ng-repeat="item in data" class="active-row dnd-moved">
           <td
             ng-repeat="col in column"
-            ng-class="{cellColor : col.type == 'number'  }"
+            ng-class="{cellColor : col.type == 'number', 'sticky-column-body': col.frozen  }"
             ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle"
             ng-if="!item.editable"
           >
