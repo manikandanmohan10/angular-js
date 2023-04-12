@@ -53,6 +53,31 @@ angular.module('myApp', ['dndLists'])
       $scope.$watch("data", function () {
         // update the table
       });
-    },
+      $scope.freezeColumnIndex = null;
+
+    // Function to toggle the frozen state of a column
+    
+
+    // Function to freeze a column based on user input
+    $scope.freezeColumn = function(index,field) {
+      $scope.freezeColumnIndex = index
+      console.log($scope.column)
+      if ($scope.freezeColumnIndex !== null && $scope.freezeColumnIndex >= 0 && $scope.freezeColumnIndex < $scope.column.length) {
+        
+        var forzenCount =0;
+        angular.forEach($scope.column,(col)=>{
+          if(col.field === field){
+              $scope.column[$scope.freezeColumnIndex].frozen = !$scope.column[$scope.freezeColumnIndex].frozen;
+            }
+            else{
+              col.frozen = false;
+
+            }
+        })
+        console.log($scope.column[$scope.freezeColumnIndex])
+      }
+      console.log('hello')
+    };
+    }
   };
 });

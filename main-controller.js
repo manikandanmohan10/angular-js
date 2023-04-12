@@ -7,6 +7,10 @@ module.controller("exampleCtrl", function($scope) {
     dropdownCssClass: "custom-dropdown",
     containerCssClass: "custom-container",
   });
+    $scope.updateDatas = ($event) => {
+       console.log(`------${$event}`);
+    },
+ 
 
     $scope.dataSource = {
       column: [
