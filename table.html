@@ -1,11 +1,49 @@
+<!-- <script src="pagenation.js"></script> -->
+<!-- <pagination items="data" items-per-page="10" on-page-change="onPageChange(pageItems)"></pagination> -->
+<div ng-click="keyPresses($event, 0, 0)">
+  <!-- <span style="cursor: pointer;" class="material-symbols-outlined" class="btn btn-primary" data-toggle="modal"
+    data-target="#exampleModal">
+    group
+  </span> -->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Grouping</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="custom-select-wrapper">
+          <label for="exampleFormControlSelect2">Select Column</label>
+          <select class="custom-select" ng-model="selectedValue" id="exampleFormControlSelect2">
+            <!-- <option selected>Open this select menu</option> -->
+            <option value="{{columns.field}}" ng-repeat="columns in column " ng-selected="columns === column[0]">
+              {{columns.field}}
+            </option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ng-click="getDataForGrouping()" data-dismiss="modal">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div>
-  <span
+  <!-- <span
     class="material-symbols-outlined color-icon"
     class="btn btn-primary"
 data-toggle="modal" data-target="#exampleModal"
   >
     format_color_fill
-  </span>
+  </span> -->
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -38,36 +76,66 @@ data-toggle="modal" data-target="#exampleModal"
 </div>
   </div>
   <div>
-    <table
+    <table 
       id="mytable"
       class="table display styled-table"
       cellspacing="0"
       cellpadding="2"
     >
       <thead>
-        <tr class="dnd-moved">
-          <th ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">{{columns.field}}</th>
-          <th>Update</th>
+        <tr  class="dnd-moved">
+          <th>
+          <div style="display:flex; gap: 10px; ">
+            <div style="align-items: center;">
+              <input type="checkbox" ng-click="checkBoxchanges($event)"/>
+            </div>
+            <div style="margin-top: 3px;">
+              <label for=""> checkbox</label>
+            </div>
+          </div>
+         </th>
+          <th  draggable="true"  ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
+            <div style="display: flex; justify-content: space-between;">
+              <div style="display: flex;gap: 5px;">
+                <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
+                {{columns.field}}
+              </div>
+              <div>
+                <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+              </div>
+            </div>
+          </th>
+          <!-- <th>Update</th> -->
         </tr>
       </thead>
-      <tbody dnd-list="data">
-        <tr ng-repeat="item in data" class="active-row dnd-moved">
-          <td
-            ng-repeat="col in column"
+      <tbody >
+        <tr  draggable="true" id="{{'rows'+i}}"
+        ng-repeat="(i, item) in data track by $index" class="rows active-row dnd-moved">
+          <td>
+            <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
+          </td>
+          <td ng-keyDown="keyPresses($event, i, j)"
+            ng-dblclick="selectCols(i, j)"
+            ng-repeat="(j, col) in column"  
             ng-class="{cellColor : col.type == 'number', 'sticky-column-body': col.frozen  }"
             ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle"
             ng-if="!item.editable"
           >
-            {{item[col.field]}}
+            <p id="{{i+'-'+j}}">{{item[col.field]}}</p>
+            <input id="{{i+'-'+j+'-index'}}" ng-style="{'display': 'none'}"
+              ng-if="col.type === 'input'"
+              type="text"
+              ng-model="item[col.field]"
+            />
           </td>
-          <td
+          <td 
             ng-repeat="col in column"
             ng-class="{cellColor : col.type == 'number'  }"
             ng-style="item[col.field] >=5 && item[col.field] <=20 && col.type == 'number' && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'}"
             ng-if="item.editable"
             ng-disabled="!col['editable']"
           >
-            <input
+            <input 
               ng-if="col.type === 'input'"
               type="text"
               ng-model="item[col.field]"
@@ -89,12 +157,14 @@ data-toggle="modal" data-target="#exampleModal"
             />
           </td>
 
-          <td>
+          <!-- <td>
             <button ng-click="editRow(item)">update</button>
-          </td>
+          </td> -->
         </tr>
       </tbody>
+      
     </table>
+   
   </div>
 </div>
 
@@ -105,3 +175,4 @@ data-toggle="modal" data-target="#exampleModal"
     });
     </script> -->
 <div id="dndgrid" style="margin: auto"></div>
+<myDirective></myDirective>
