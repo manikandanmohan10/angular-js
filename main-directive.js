@@ -56,11 +56,10 @@ angular.module('myApp', [])
       sortBy: "&",
     },
     link: function (scope, element, attrs) {
-     
-  
 
       scope.message = attrs.type;
       let datas = JSON.parse(attrs.datasource);
+      scope.moreOptions =  JSON.parse(attrs.moreoptions);
       scope.data = datas.data;
       scope.column = datas.column;
 
@@ -111,6 +110,15 @@ angular.module('myApp', [])
     templateUrl: "table.html",
     controller: function ($scope) {
       $scope.selectedCell = [];
+      $scope.parents = [{
+        name: 'sabari',
+        age: '25',
+        children: [{
+          
+            name: 'sabari',
+            age: '25',
+        }]
+      }]
       $scope.checkbox=false;
       // $scope.myData = ""; // Initialize the variable to hold the input field data
 
@@ -190,16 +198,24 @@ angular.module('myApp', [])
           if(e[0] === i && e[1] === j) {
             let a = document.getElementById(`${e[0]}-${e[1]}`);
             let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-            a.style.display = 'none';
-            b.style.display = 'block';
+            if(a && b) {
+              a.style.display = 'none';
+              b.style.display = 'block';
+              b.focus();
+            }
+            
             existData = e;
-            b.focus();
+            
             
           }  else {
             let a = document.getElementById(`${e[0]}-${e[1]}`);
             let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-            a.style.display = 'block';
-            b.style.display = 'none';
+            if(a && b) 
+            {
+              a.style.display = 'block';
+              b.style.display = 'none';
+            }
+           
             
           }
         })
@@ -324,6 +340,7 @@ angular.module('myApp', [])
            //}
         });
       });
+
       // Define the drag event handlers for each row
       rows.forEach(function(row) {
         row.addEventListener('dragstart', function(event) {
@@ -349,10 +366,10 @@ angular.module('myApp', [])
           // Retrieve the data that was set in the dragstart event handler
           
           var data = event.dataTransfer.getData('text/plain');
-      
+           
           // Get the row that was dragged
           var draggedRow = document.getElementById(data);
-      
+          let i = Number(draggedRow.id.slice(4));
           // Swap the rows
           //$scope.data = $scope.data.slice(0, 1);
           $scope.deleteRow('eerr');
@@ -360,7 +377,13 @@ angular.module('myApp', [])
           // /if (event.target.tagName === 'TR') {
             let rowa = draggedRow.parentNode;
             let sibiling = returnParent(event.target, 'TR')
-            rowa.insertBefore(draggedRow, sibiling.nextSibling);
+
+            let j = Number(sibiling.id.slice(4));
+            let c = $scope.data.splice(i, 1);
+            $scope.data.splice(j, 0, ...c);
+            $scope.$apply();
+           // rowa.insertBefore(draggedRow, sibiling.nextSibling);
+
            //}
         });
       });
@@ -374,7 +397,57 @@ angular.module('myApp', [])
         return a;
       }
     } 
-      
+
+    $scope.togglePopup = (headerIndex) => {
+      console.log(headerIndex)
+      var popup = document.getElementById("popup-" + headerIndex);
+      var allPopups = document.getElementsByClassName("popup-container");
+      var isVisible = window.getComputedStyle(popup).getPropertyValue("display") === "block";
+    //   if (isVisible) {
+    //     popup.style.display = "none";
+    // } else {
+    //     popup.style.display = "block";
+    // }
+      for (var i = 0; i < allPopups.length; i++) {
+        if (allPopups[i] !== popup ) {
+            allPopups[i].style.display = "none";
+        }
+    }
+    if (popup.style.display === "none" || !isVisible) {
+        popup.style.display = "block";
+    } else {
+        popup.style.display = "none";
+    }
+    }
+     // Add click event listener on document to close popup when clicked outside
+  //    document.addEventListener("click", function(event) {
+  //     var popups = document.getElementsByClassName("popup-container");
+  //     for (var i = 0; i < popups.length; i++) {
+  //         if (popups[i].style.display === "block" && !popups[i].contains(event.target)) {
+  //             popups[i].style.display = "none";
+  //         }
+  //     }
+  // });
+    // Function to set dynamic header cell color
+    function setHeaderColor(headerIndex, color) {
+      document.getElementById("header-" + headerIndex).style.backgroundColor = color;
+  }
+
+  // Function to open color picker for selecting color
+   $scope.openColorPicker = (option,headerIndex) => {
+    if(option === "Set Column Header Color") {
+
+      var colorPicker = document.getElementById("color-picker");
+      colorPicker.value = document.getElementById("header-" + headerIndex).style.backgroundColor;
+      colorPicker.addEventListener("change", function() {
+          setHeaderColor(headerIndex, colorPicker.value);
+      });
+      colorPicker.click();
+    }
+  }
+     $scope.closePopup = (headerIndex) => {
+      document.getElementById("popup-" + headerIndex).style.display = "none";
+  }
       // Define the drop event handlers for each row
       
       // $scope.keyPresses = (event, i , j) => {
@@ -464,7 +537,7 @@ angular.module('myApp', [])
       if ($scope.freezeColumnIndex !== null && $scope.freezeColumnIndex >= 0 && $scope.freezeColumnIndex < $scope.column.length) {
         
         var forzenCount =0;
-        angular.forEach($scope.column,(col)=>{
+        angular.forEach($scope.column, (col)=>{
           if(col.field === field){
               $scope.column[$scope.freezeColumnIndex].frozen = !$scope.column[$scope.freezeColumnIndex].frozen;
             }

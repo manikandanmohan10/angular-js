@@ -1,6 +1,76 @@
+<div class="icon-wrap">
+  <div class="icon-content">
+   
+      <span class="material-symbols-outlined icon-size">
+        menu
+        </span>
+        <span >
+          Views
+        </span>
+   
+  </div>
+  <div class="icon-content">
+   
+    <span class="material-symbols-outlined icon-size" style="color: rgb(31 127 247);">
+      table
+      </span>
+        <span>
+          {{value}}
+        </span>
+   
+    <span class="material-symbols-outlined icon-size">
+      groups_2
+    </span>
+      <span class="material-symbols-outlined icon-size">
+        keyboard_arrow_down
+        </span>
+   
+  </div>
+  <div class="icon-content">
+    <span class="material-symbols-outlined icon-size">
+      visibility_off
+      </span> {{}} Hidden fields
+  </div>
+
+  <div class="icon-content">
+      <span class="material-symbols-outlined icon-size">
+        filter_list
+      </span>
+   
+    <span style="text-align: center;">Filter</span>
+  </div>
+  <div class="icon-content">
+    <span class="material-symbols-outlined icon-size">
+      featured_play_list
+      </span> Group
+  </div>
+
+  <div class="icon-content">
+    <span class="material-symbols-outlined icon-size" >
+      swap_vert
+      </span> Sort
+  </div>
+<div class="icon-content">
+  <span class="material-symbols-outlined icon-size">
+    format_color_fill
+    </span> Color
+</div>
+  <div class="icon-content">
+    <span class="material-symbols-outlined icon-size">
+      grading
+      </span>
+  </div>
+  <div class="icon-content">
+    <span class="material-symbols-outlined icon-size">
+      share_windows
+      </span> Share view
+  </div>
+</div>
+
+
 <!-- <script src="pagenation.js"></script> -->
 <!-- <pagination items="data" items-per-page="10" on-page-change="onPageChange(pageItems)"></pagination> -->
-<div ng-click="keyPresses($event, 0, 0)">
+<div ng-if="false" ng-click="keyPresses($event, 0, 0)">
   <!-- <span style="cursor: pointer;" class="material-symbols-outlined" class="btn btn-primary" data-toggle="modal"
     data-target="#exampleModal">
     group
@@ -36,7 +106,7 @@
 
 
 
-<div>
+<div ng-if="false">
   <!-- <span
     class="material-symbols-outlined color-icon"
     class="btn btn-primary"
@@ -45,7 +115,7 @@ data-toggle="modal" data-target="#exampleModal"
     format_color_fill
   </span> -->
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div ng-if="false" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -76,41 +146,54 @@ data-toggle="modal" data-target="#exampleModal"
 </div>
   </div>
   <div>
-    <br/><hr/>
-    <div class="custom-select-wrapper">
+    <!-- <br/><hr/> -->
+    <!-- <div class="custom-select-wrapper">
       <label for="exampleFormControlSelect2">Sort</label>
       <select class="custom-select" ng-model="sortField" id="exampleFormControlSelect2">
         <option ng-repeat="col in column" value="{{col.field}}" ng-selected="col === SortColumn">{{col.field}}</option> 
       </select> 
       </select>
-    </div>
+    </div> -->
     <table 
       id="mytable"
       class="table display styled-table"
       cellspacing="0"
       cellpadding="2"
+      ng-table="tableParams"
     >
    
       <thead>
         <tr  class="dnd-moved">
           <th>
-          <div style="display:flex; gap: 10px; ">
-            <div style="align-items: center;">
-              <input type="checkbox" ng-click="checkBoxchanges($event)"/>
+          <div style="display:flex; gap: 10px; align-items: center; ">
+            <!-- <div style="align-items: center;di="> -->
+              <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)"/>
+              <label for="" style="margin: 0;"> checkbox</label>
             </div>
-            <div style="margin-top: 3px;">
-              <label for=""> checkbox</label>
-            </div>
-          </div>
+            <!-- <div style="margin-top: 3px;">
+            </div> -->
+          <!-- </div> -->
          </th>
-          <th  draggable="true"  class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="isHidden = freezeColumn($index,columns.field)">
-            <div style="display: flex; justify-content: space-between;">
-              <div style="display: flex;gap: 5px;">
+          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
+            <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
+              <div style="display: flex;gap: 20px;align-items: center;position: relative;">
+
                 <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
-                {{columns.field}}
+                {{columns.field}} 
+                <div style="position: relative;">
+
+                  <span class="icon material-symbols-outlined list-icon" ng-click="togglePopup($index)">
+                    menu
+                    </span>
+                                      <!-- Popup dropdown container -->
+                      <div id="popup-{{$index}}" class="popup-container">
+                        <!-- Popup dropdown items -->
+                        <div class="popup-item" ng-repeat="option in moreOptions" ng-click="closePopup($index);openColorPicker(option,$index)" >{{option}}</div>
+                    </div>
+                </div>
               </div>
-              <div ng-if="!isHidden">
-                <span style="font-size: large;" class="material-symbols-outlined" >expand_more</span>
+              <div style="display: flex;align-items: center;"  ng-if="!isHidden">
+                <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
               </div>
               <div ng-if="isHidden">
                 <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
@@ -136,10 +219,15 @@ data-toggle="modal" data-target="#exampleModal"
           >
             <p id="{{i+'-'+j}}">{{item[col.field]}}</p>
             <input id="{{i+'-'+j+'-index'}}" ng-style="{'display': 'none'}"
-              ng-if="col.type === 'input'"
-              type="text"
+              ng-if="(col.type === 'input' || col.type === 'email')"
+              type="{{col.dataType ? col.dataType : 'text'}}"
               ng-model="item[col.field]"
             />
+            <select
+              ng-if="col.type === 'select'"
+              ng-model="item[col.field]"
+              ng-options="x for x in col.dropdowndata"
+            ></select>
           </td>
           <td 
             ng-repeat="col in column"
@@ -215,5 +303,20 @@ data-toggle="modal" data-target="#exampleModal"
         $("#mytable").tableDnD();
     });
     </script> -->
-<div id="dndgrid" style="margin: auto"></div>
-<myDirective></myDirective>
+<!-- <div ng-if="false" id="dndgrid" style="margin: auto"></div> -->
+<!-- <myDirective></myDirective> -->
+<!-- <table ng-if="true">
+  <tr>
+    <th>Parent Name</th>
+    <th>age</th>
+  </tr>
+  
+  <tbody ng-repeat="parent in parents"> 
+    <tr>
+    <td>{{parent.name}}</td>
+    <td>{{parent.age}}</td>
+    <div  ng-include="'nested-tables.html'"></div>
+  </tr>
+  
+</tbody>
+</table> -->
