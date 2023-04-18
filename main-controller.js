@@ -26,7 +26,7 @@ module.controller("exampleCtrl", function($scope) {
         },
         {
           field: "email",
-          type: "email",
+          type: "input",
           editable: false,
         },
         {
@@ -56,17 +56,17 @@ module.controller("exampleCtrl", function($scope) {
         },
         {
           field: "text",
-          type: "text",
+          type: "input",
           editable: true,
         },
         {
           field: "numberrange",
-          type: "number",
+          type: "input",
           editable: true,
         },
         {
           field: "currency",
-          type: "number",
+          type: "input",
           editable: true,
         },
         {
@@ -76,12 +76,12 @@ module.controller("exampleCtrl", function($scope) {
         },
         {
           field: "date",
-          type: "date",
+          type: "input",
           editable: true,
         },
         {
           field: "constant",
-          type: "number",
+          type: "input",
           editable: true,
         },
         {
@@ -91,7 +91,7 @@ module.controller("exampleCtrl", function($scope) {
         },
         {
           field: "boolean",
-          type: "boolean",
+          type: "input",
           editable: true,
         },
         {
@@ -106,7 +106,7 @@ module.controller("exampleCtrl", function($scope) {
         },
         {
           field: "cvv",
-          type: "number",
+          type: "input",
           editable: true,
         },
         {
