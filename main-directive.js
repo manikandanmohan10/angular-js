@@ -239,7 +239,51 @@ angular.module('myApp', [])
 
       setTimeout(() => {
       var rows = document.querySelectorAll('.rows');
-
+      var columns = document.querySelectorAll('.columns');
+      columns.forEach(function(row) {
+        row.addEventListener('dragstart', function(event) {
+          // Set the data that you want to transfer
+          event.dataTransfer.setData('text/plain', event.target.id);
+      
+          // Set the opacity of the dragged row
+          event.target.style.opacity = '0.4';
+        });
+      
+        row.addEventListener('dragend', function(event) {
+          // Perform any necessary cleanup operations
+          event.target.style.opacity = '1';
+        });
+      });
+      columns.forEach(function(row) {
+        row.addEventListener('dragover', function(event) {
+          // Specify whether the drop target is a valid drop target
+          event.preventDefault();
+        });
+      
+        row.addEventListener('drop', function(event) {
+          // Retrieve the data that was set in the dragstart event handler
+          
+          var data = event.dataTransfer.getData('text/plain');
+      
+          // Get the row that was dragged
+          var draggedRow = document.getElementById(data);
+          let i = Number(draggedRow.id.slice(7));
+          // Swap the rows
+          //$scope.data = $scope.data.slice(0, 1);
+          $scope.deleteRow('eerr');
+        
+          // /if (event.target.tagName === 'TR') {
+            let rowa = draggedRow.parentNode;
+            let sibiling = returnParent(event.target, 'TH')
+            let j = Number(sibiling.id.slice(7));
+            let a = $scope.column.splice(i, 1);
+            $scope.column.splice(j, 0, ...a);
+            $scope.$apply();
+            //let sibiling = returnParent(event.target)
+            //rowa.insertBefore(draggedRow, sibiling.nextSibling);
+           //}
+        });
+      });
       // Define the drag event handlers for each row
       rows.forEach(function(row) {
         row.addEventListener('dragstart', function(event) {
@@ -275,18 +319,18 @@ angular.module('myApp', [])
         
           // /if (event.target.tagName === 'TR') {
             let rowa = draggedRow.parentNode;
-            let sibiling = returnParent(event.target)
+            let sibiling = returnParent(event.target, 'TR')
             rowa.insertBefore(draggedRow, sibiling.nextSibling);
            //}
         });
       });
     }, 1000)
 
-    function returnParent(event) {
-      if(event.tagName === 'TR') {
+    function returnParent(event, data) {
+      if(event.tagName === data) {
         return event
       } else {
-        let a =returnParent(event.parentNode);
+        let a =returnParent(event.parentNode, data);
         return a;
       }
     } 

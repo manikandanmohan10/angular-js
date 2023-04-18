@@ -103,7 +103,7 @@ data-toggle="modal" data-target="#exampleModal"
             </div>
           </div>
          </th>
-          <th  draggable="true"  ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="isHidden = freezeColumn($index,columns.field)">
+          <th  draggable="true"  class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="isHidden = freezeColumn($index,columns.field)">
             <div style="display: flex; justify-content: space-between;">
               <div style="display: flex;gap: 5px;">
                 <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
@@ -177,6 +177,8 @@ data-toggle="modal" data-target="#exampleModal"
       </tbody>
       
     </table>
+    <div data-pagination="" data-num-pages="numOfPages()" data-current-page="curPage" data-max-size="maxSize" data-boundary-links="true"></div>
+
    
   </div>
 </div>
