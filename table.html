@@ -177,6 +177,7 @@ data-toggle="modal" data-target="#exampleModal"
           <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
             <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
               <div style="display: flex;gap: 20px;align-items: center;position: relative;">
+
                 <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
                 {{columns.field}} 
                 <div style="position: relative;">
@@ -205,7 +206,7 @@ data-toggle="modal" data-target="#exampleModal"
       </thead>
       <tbody >
         <tr  draggable="true" id="{{'rows'+i}}"
-        ng-repeat="(i, item) in data| orderBy:sortField:reverse  track by $index" class="rows active-row dnd-moved">
+        ng-repeat="(i, item) in tableData| orderBy:sortField:reverse  track by $index" class="rows active-row dnd-moved">
           <td>
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>
@@ -264,6 +265,34 @@ data-toggle="modal" data-target="#exampleModal"
       </tbody>
       
     </table>
+    <!-- <div data-pagination="" data-num-pages="numOfPages()" data-current-page="curPage" data-max-size="maxSize" data-boundary-links="true"></div> -->
+    <!-- Pagination UI markup -->
+    <!-- Pagination UI markup with select field and next/previous buttons -->
+<div class="pagination" style="display: flex;">
+  <div>
+    <label>Page</label>
+    <select ng-model="itemsPerPage" ng-change="updateItemsPerPage()">
+      <option value="5" selected>5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+    </select>
+  </div>
+
+  <div>
+    <ul class="pagination-list" style="display: flex; list-style: none;">
+      <li ng-class="{disabled: curPage === 1}">
+        <a href="#" ng-click="prevPage()">Previous</a>
+      </li>
+      <li>({{curPage}} / {{numOfPages()}})</li>
+      <li ng-class="{disabled: curPage === numOfPages()}">
+        <a href="#" ng-click="nextPage()">Next</a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+
    
   </div>
 </div>
