@@ -10,7 +10,7 @@ module.controller("exampleCtrl", function($scope) {
     $scope.updateDatas = ($event) => {
        console.log(`------${$event}`);
     },
- 
+    
 
     $scope.dataSource = {
       column: [

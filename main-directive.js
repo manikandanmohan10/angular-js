@@ -52,6 +52,8 @@ angular.module('myApp', [])
     scope: {
       onButtonClick: "&",
       ngModel: "=",
+      SortColumn: '=',
+      sortBy: "&",
     },
     link: function (scope, element, attrs) {
       element.css("color", "red");
@@ -372,6 +374,7 @@ angular.module('myApp', [])
 
     // Function to freeze a column based on user input
     $scope.freezeColumn = function(index,field) {
+     
       $scope.freezeColumnIndex = index
       console.log($scope.column)
       if ($scope.freezeColumnIndex !== null && $scope.freezeColumnIndex >= 0 && $scope.freezeColumnIndex < $scope.column.length) {
@@ -389,6 +392,12 @@ angular.module('myApp', [])
         console.log($scope.column[$scope.freezeColumnIndex])
       }
       console.log('hello')
+      // $scope.SortColumn = field
+      // $scope.sortBy(field)
+      $scope.sortField = field;
+      
+      $scope.reverse = !$scope.reverse;
+      return $scope.reverse
     };
     }
   };

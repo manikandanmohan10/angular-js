@@ -76,12 +76,21 @@ data-toggle="modal" data-target="#exampleModal"
 </div>
   </div>
   <div>
+    <br/><hr/>
+    <div class="custom-select-wrapper">
+      <label for="exampleFormControlSelect2">Sort</label>
+      <select class="custom-select" ng-model="sortField" id="exampleFormControlSelect2">
+        <option ng-repeat="col in column" value="{{col.field}}" ng-selected="col === SortColumn">{{col.field}}</option> 
+      </select> 
+      </select>
+    </div>
     <table 
       id="mytable"
       class="table display styled-table"
       cellspacing="0"
       cellpadding="2"
     >
+   
       <thead>
         <tr  class="dnd-moved">
           <th>
@@ -94,23 +103,27 @@ data-toggle="modal" data-target="#exampleModal"
             </div>
           </div>
          </th>
-          <th  draggable="true"  ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
+          <th  draggable="true"  ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="isHidden = freezeColumn($index,columns.field)">
             <div style="display: flex; justify-content: space-between;">
               <div style="display: flex;gap: 5px;">
                 <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
                 {{columns.field}}
               </div>
-              <div>
-                <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+              <div ng-if="!isHidden">
+                <span style="font-size: large;" class="material-symbols-outlined" >expand_more</span>
               </div>
-            </div>
+              <div ng-if="isHidden">
+                <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
+              </div>
+
+            </div> 
           </th>
           <!-- <th>Update</th> -->
         </tr>
       </thead>
       <tbody >
         <tr  draggable="true" id="{{'rows'+i}}"
-        ng-repeat="(i, item) in data track by $index" class="rows active-row dnd-moved">
+        ng-repeat="(i, item) in data| orderBy:sortField:reverse  track by $index" class="rows active-row dnd-moved">
           <td>
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>
