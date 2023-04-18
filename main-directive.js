@@ -54,10 +54,14 @@ angular.module('myApp', [])
       ngModel: "=",
     },
     link: function (scope, element, attrs) {
+      var page=0
+      var limit = 4
+      scope.page=0
       element.css("color", "red");
       scope.message = attrs.type;
       let datas = JSON.parse(attrs.datasource);
-      scope.data = datas.data;
+      scope.totalPages = Math.ceil(datas.data.length / limit)-1;
+      scope.data = datas.data.slice((page*limit),(page*limit)+limit);
       scope.column = datas.column;
       // setTimeout(function () {
       //   $("#mytable").DataTable(); // Initialize DataTables plugin after AngularJS data is populated
@@ -65,6 +69,16 @@ angular.module('myApp', [])
         $(".table").dragableColumns(); //Initialize dragndropjs for column dragndrop
       // }, 0);
       scope.temp = scope.column;
+      scope.nextPage = function(page) {
+        var pageNumber = scope.page + page
+
+
+
+        var limit = 4  
+        let datas = JSON.parse(attrs.datasource);
+        scope.data = datas.data.slice((pageNumber*limit),(pageNumber*limit)+limit);
+        scope.page=pageNumber
+      }
     },
     templateUrl: "table.html",
     controller: function ($scope) {
@@ -178,6 +192,9 @@ angular.module('myApp', [])
           }; // Log the input data to the console
         }
       };
+
+    
+
       $scope.editRow = function (row) {
         // update the row
         row.editable = !row.editable;

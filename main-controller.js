@@ -2338,4 +2338,15 @@ module.controller("exampleCtrl", function($scope) {
           track2: "%B9214946886568838=4402470287?2",
         },
       ],
-    };})
+    };
+  
+    $scope.nextPage = function(pageNumber) {
+
+
+      var limit = 4  
+      let datas = JSON.parse(attrs.datasource);
+      $scope.data = datas.data.slice((pageNumber*limit),(pageNumber*limit)+limit);
+    }
+  
+  
+  })

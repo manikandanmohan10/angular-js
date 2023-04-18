@@ -162,8 +162,14 @@ data-toggle="modal" data-target="#exampleModal"
           </td> -->
         </tr>
       </tbody>
+     
       
     </table>
+    <div class="pagination">
+      <button ng-if="page != 0" ng-click="nextPage(-1)">Previous</button>
+      <a >{{page}}</a>
+      <button ng-if="page != totalPages"  ng-click="nextPage(1)">Next</button>
+    </div>
    
   </div>
 </div>
