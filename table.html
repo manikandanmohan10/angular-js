@@ -76,6 +76,11 @@ data-toggle="modal" data-target="#exampleModal"
 </div>
   </div>
   <div>
+  <div class="input-box" id="inputBox" placeholder="Drop here" ng-model="items" >
+    <div class="group-item" ng-repeat="(i,item) in groupingChild track by $index">{{item}}
+       <span ng-click="removeItem(item,i)">X</span>
+    </div>
+  </div>
     <table 
       id="mytable"
       class="table display styled-table"
@@ -94,7 +99,7 @@ data-toggle="modal" data-target="#exampleModal"
             </div>
           </div>
          </th>
-          <th  draggable="true"  ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
+          <th  class="drag-box cols" draggable="true"  ng-repeat="(i,columns) in column track by $index"  id="{{columns.field}}" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
             <div style="display: flex; justify-content: space-between;">
               <div style="display: flex;gap: 5px;">
                 <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>

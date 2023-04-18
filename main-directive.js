@@ -69,6 +69,7 @@ angular.module('myApp', [])
     templateUrl: "table.html",
     controller: function ($scope) {
       $scope.selectedCell = [];
+      $scope.groupingChild = [];
       $scope.checkbox=false;
       // $scope.myData = ""; // Initialize the variable to hold the input field data
 
@@ -261,9 +262,9 @@ angular.module('myApp', [])
       
         row.addEventListener('drop', function(event) {
           // Retrieve the data that was set in the dragstart event handler
-          
+          // $scope.data = $scope.data.slice(0, 1);
+          // $scope.$apply();
           var data = event.dataTransfer.getData('text/plain');
-      
           // Get the row that was dragged
           var draggedRow = document.getElementById(data);
       
@@ -390,6 +391,62 @@ angular.module('myApp', [])
       }
       console.log('hello')
     };
+    
+      setTimeout(() => {
+        var cols = document.querySelectorAll(".cols");
+
+        // Define the drag event handlers for each cols
+        cols.forEach(function (cols) {
+          cols.addEventListener("dragstart", function (event) {
+            // Set the data that you want to transfer
+            event.dataTransfer.setData("text/plain", event.target.id);
+
+            // Set the opacity of the dragged cols
+            event.target.style.opacity = "0.4";
+          });
+
+          cols.addEventListener("dragend", function (event) {
+            // Perform any necessary cleanup operations
+            event.target.style.opacity = "1";
+          });
+        });
+      }, 1000);
+  
+    setTimeout(() => {
+      $scope.dragBox = document.querySelector(".drag-box");
+      $scope.inputBox = document.querySelector("#inputBox");
+       $scope.dragBox.addEventListener("dragstart", (event) => {
+         // Store the value of the input box in the dataTransfer object
+        console.log($scope.inputBox.value, "ffffffffffffffffffffffff");
+         event.dataTransfer.setData("text/plain", $scope.inputBox.value);
+       });
+
+       // Add event listener for dragover event on inputBox
+       $scope.inputBox.addEventListener("dragover", (event) => {
+         // Prevent the default behavior to enable dropping
+         event.preventDefault();
+       });
+
+       // Add event listener for drop event on inputBox
+       $scope.inputBox.addEventListener("drop", (event) => {
+         // Prevent the default behavior to avoid navigating to a new page
+         event.preventDefault();
+
+         // Get the value from the dataTransfer object and set it as the input box's value
+         const draggedValue = event.dataTransfer.getData("text/plain");
+
+          if(!$scope.groupingChild.includes(draggedValue)){
+            $scope.groupingChild.push(draggedValue);
+          }
+         $scope.$apply();
+       });
+    }, 1000);
+
+
+    $scope.removeItem = function (item, index) {
+     $scope.groupingChild.splice(index,1)
+    };
+
     }
   };
 });
