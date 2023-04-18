@@ -177,3 +177,11 @@
   }
   
   
+  .arrow-icon {
+    font-size: 24px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .arrow-icon--up {
+    transform: rotate(180deg);
+  }
