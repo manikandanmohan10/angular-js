@@ -56,11 +56,51 @@ angular.module('myApp', [])
       sortBy: "&",
     },
     link: function (scope, element, attrs) {
-      element.css("color", "red");
+     
+  
+
       scope.message = attrs.type;
       let datas = JSON.parse(attrs.datasource);
       scope.data = datas.data;
       scope.column = datas.column;
+
+      scope.curPage = 1,
+      scope.itemsPerPage = 5,
+      scope.maxSize = 5;
+      
+      this.items = scope.data;
+      
+      scope.numOfPages = function () {
+        scope.tableData = scope.data.slice(parseInt(scope.curPage) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage) * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
+        return Math.ceil(scope.data.length / scope.itemsPerPage);
+      
+      };
+
+      scope.prevPage = function() {
+        if (scope.curPage > 1) {
+          scope.curPage--;
+        }
+      };
+      
+      // Function to handle next page button click
+      scope.nextPage = function() {
+        if (scope.curPage < scope.numOfPages()) {
+          scope.curPage++;
+        }
+      };
+      
+      // Function to set current page
+      scope.setPage = function(page) {
+        scope.curPage = page;
+      };
+      
+      scope.$watch('curPage + numPerPage', function() {
+      var begin = ((scope.curPage - 1) * scope.itemsPerPage),
+      end = begin + scope.itemsPerPage;
+      
+      scope.tableData = scope.data.slice(begin, end);
+      });
+      scope.pages = Array.from({length: scope.numOfPages()}, (_, i) => i + 1);
       // setTimeout(function () {
       //   $("#mytable").DataTable(); // Initialize DataTables plugin after AngularJS data is populated
       //   $("#mytable").tableDnD(); // Initialize TableDnD plugin for row drag-and-drop
