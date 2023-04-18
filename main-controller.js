@@ -10,8 +10,8 @@ module.controller("exampleCtrl", function($scope) {
     $scope.updateDatas = ($event) => {
        console.log(`------${$event}`);
     },
-    
-
+ 
+   $scope.moreOptions = ["Wrap Text", "Clip Text", "Set Column Header Color","Set Full Column Color","Set Conditional Colours"]
     $scope.dataSource = {
       column: [
         {
@@ -35,7 +35,7 @@ module.controller("exampleCtrl", function($scope) {
         {
           field: "address",
           type: "input",
-          dataType: 'input',
+          dataType: 'text',
           editable: true,
         },
         {
@@ -71,19 +71,17 @@ module.controller("exampleCtrl", function($scope) {
         {
           field: "numberrange",
           type: "input",
-          dataType: 'number',
+          dataType: "number",
           editable: true,
+        },
+        {
+            field: "alphanumeric",
+            type: "input",
+            editable: true,
         },
         {
           field: "currency",
-          type: "input",
-          dataType: 'input',
-          editable: true,
-        },
-        {
-          field: "alphanumeric",
-          type: "input",
-          dataType: 'number',
+          type: "number",
           editable: true,
         },
         {
@@ -2338,4 +2336,20 @@ module.controller("exampleCtrl", function($scope) {
           track2: "%B9214946886568838=4402470287?2",
         },
       ],
-    };})
+    };
+    // $scope.tableParams = new ngTableParams({
+    //     page: 1,
+    //     count: 10
+    // }, {
+    //     total: $scope.data.length,
+    //     getData: function ($defer, params) {
+    //         var filteredData = $scope.data;
+    //         var orderedData = params.sorting() ?
+    //                            $filter('orderBy')(filteredData, params.orderBy()) :
+    //                            filteredData;
+    
+    //         params.total(orderedData.length);
+    //         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+    //     }
+    // });
+})
