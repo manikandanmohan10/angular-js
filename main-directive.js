@@ -58,6 +58,7 @@ angular.module('myApp', [])
     link: function (scope, element, attrs) {
       scope.message = attrs.type;
       let datas = JSON.parse(attrs.datasource);
+      scope.HeaderColorOptions = JSON.parse(attrs.headercoloroptions);
       scope.moreOptions =  JSON.parse(attrs.moreoptions);
       scope.data = datas.data;
       scope.column = datas.column;
@@ -81,6 +82,7 @@ angular.module('myApp', [])
         }]
       }]
       $scope.checkbox=false;
+      $scope.isColorOption = false
       // $scope.myData = ""; // Initialize the variable to hold the input field data
 
       window.addEventListener('keydown', function(event){
@@ -388,20 +390,44 @@ angular.module('myApp', [])
   //     }
   // });
     // Function to set dynamic header cell color
-    function setHeaderColor(headerIndex, color) {
-      document.getElementById("header-" + headerIndex).style.backgroundColor = color;
-  }
-
   // Function to open color picker for selecting color
    $scope.openColorPicker = (option,headerIndex) => {
-    if(option === "Set Column Header Color") {
+     $scope.isColorOption = ! $scope.isColorOption;
+     $scope.colorPopupIndex = headerIndex
+   
+  }
 
-      var colorPicker = document.getElementById("color-picker");
-      colorPicker.value = document.getElementById("header-" + headerIndex).style.backgroundColor;
-      colorPicker.addEventListener("change", function() {
-          setHeaderColor(headerIndex, colorPicker.value);
-      });
-      colorPicker.click();
+  $scope.headerColor = (index,color,option, column) => {
+    if(option === "Set Column Header Color") {
+      // var colorPicker = document.getElementById("color-picker");
+      // colorPicker.value = document.getElementById("columns" + headerIndex).style.backgroundColor;
+      // colorPicker.addEventListener("change", function() {
+      //     setHeaderColor(headerIndex, colorPicker.value);
+      // });
+      // colorPicker.click();
+      document.getElementById("columns" + index).style.backgroundColor = color;
+    } else if( option === "Set Full Column Color"){
+      var targetHeaderText = column.field;
+
+// Find the index of the target column
+var targetColumnIndex = -1;
+var table = document.querySelector('.table');
+var headerRow = table.rows[0];
+for (var i = 0; i < headerRow.cells.length; i++) {
+  if (headerRow.cells[i].innerText.includes(targetHeaderText)) {
+    targetColumnIndex = i;
+    break;
+  }
+}
+
+// Set the background color of the cells in the target column
+if (targetColumnIndex !== -1) {
+  var targetCells = table.querySelectorAll('tr td:nth-child(' + (targetColumnIndex + 1) + ')');
+  for (var j = 0; j < targetCells.length; j++) {
+    targetCells[j].style.backgroundColor = color; // Set desired background color for the column
+  }
+}
+      // document.getElementById("cell").style.backgroundColor = color;
     }
   }
      $scope.closePopup = (headerIndex) => {

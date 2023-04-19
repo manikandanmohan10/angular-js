@@ -39,6 +39,12 @@ body{
 .popup-item {
   cursor: pointer;
     padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: space-between;
+
+
 } 
 .icon-wrap{
   display: flex;
@@ -145,4 +151,9 @@ body{
  /* Style for popup dropdown items on hover */
  .popup-item:hover {
   background-color: #f2f2f2;
+}
+
+.styled-table{
+  width: 100vw;
+  overflow-x: scroll;
 }
