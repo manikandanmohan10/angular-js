@@ -290,28 +290,50 @@ angular.module('myApp', [])
       $scope.filterTable= ()=>{
         console.log($scope.originalData)
           let filteredObjects = []
+          let tempObject = [];
+          let orderedFilterList =[]
+          let filterOrder=['not like', 'not equal', 'like', 'equal']
           // $scope.data=$scope.datas
-          console.log($scope.data, "fdsssssssssssssssssssssssssssssssssssssssssssssssssssssss");
           $scope.tableData = $scope.originalData;
           // console.log($scope.myForm.myFields)
           const filterArr = $scope.myForm.myFields;
-          if (filterArr.length > 0){
+          
+          filterOrder.forEach((filterorder)=>{
+            filterArr.forEach((filterarr)=>{
+              if((filterarr['expression']).toLowerCase() == filterorder){
+                  orderedFilterList.push(filterarr)
+              }
+            })
+
+          })
+          if (orderedFilterList.length > 0){
             // console.log("working")
-             filterArr.forEach((filterValue) => {
+             orderedFilterList.forEach((filterValue) => {
         
              if((filterValue.condition).toLowerCase() ==='and' || (filterValue.condition).toLowerCase() === 'where'){
-               filteredObjects = $scope.tableData.filter((col) => {
+               tempObject = $scope.tableData.filter((col) => {
                  return $scope.queryCondition(filterValue, col);
                });
+                tempObject.forEach((da)=>{
+                if(!filteredObjects.includes(da)){
+                 filteredObjects.push(da)
+              }
+            })
              }
              else if (filterValue.condition === "or") {
-               filteredObjects = $scope.originalData.filter((col) => {
+               tempObject = $scope.originalData.filter((col) => {
                  return $scope.queryCondition(filterValue, col);
                });
+                tempObject.forEach((da)=>{
+                if(!filteredObjects.includes(da)){
+                 filteredObjects.push(da)
+              }
+            }) 
              }
-             return false
-        
+           
+           
             })
+            
             $scope.data = filteredObjects; 
          console.log($scope.tableData);
         //  $scope.$apply();  
@@ -330,18 +352,39 @@ angular.module('myApp', [])
         }
         return false;
       case 'not equal':
-        if (data[filterValue.columnName.field] !== filterValue.colValue) {
+        if (data[filterValue.columnName.field].toString() !== filterValue.value) {
           return true;
         }
         return false;
       case 'like':
-        return this.filterValuefun(data,filterValue.colValue,filterValue.colName);
+        return $scope.filterValuefun(data,filterValue.value,filterValue.columnName.field);
       case 'not like':
         console.log("not like => ",filterValue)
-        return !this.filterValuefun(data,filterValue.colValue,filterValue.colName);
+        return !$scope.filterValuefun(data,filterValue.value,filterValue.columnName.field);
       default:
         return false
     }
+  }
+
+
+  $scope.filterValuefun = (col,filter,key=null)=> {
+    console.log(col,filter,key)
+    if (key){
+      if(col[key].toString().toLowerCase().includes(filter.toLowerCase())){
+        return true;
+      }
+    }
+    else{
+      let keys = Object.keys(col);
+    for(let key of keys){
+      console.log(key)
+      if(col[key].toString().toLowerCase().includes(filter.toLowerCase())){
+        return true;
+      }
+    }
+  }
+    
+    return false
   }
 
       setTimeout(() => {
