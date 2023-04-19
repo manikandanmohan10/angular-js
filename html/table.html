@@ -228,7 +228,7 @@ data-toggle="modal" data-target="#exampleModal"
     
         <thead>
           <tr  class="dnd-moved">
-            <th ng-if="toggleFirstColumn" class="sticky-column-head">
+            <th ng-if="toggleFirstColumn" class="sticky-column-head" style="width: 500px;">
               MyViews
             </th>
             <th>
@@ -289,9 +289,21 @@ data-toggle="modal" data-target="#exampleModal"
         <tbody >
           <tr  draggable="true" id="{{'rows'+i}}"
           ng-repeat="(i, item) in tableData| orderBy:sortField:reverse  track by $index" class="rows active-row dnd-moved">
-          <td ng-if="toggleFirstColumn" class="sticky-column-body" style="border: none;">
+          
+          <td ng-if="toggleFirstColumn && i === 0" class="sticky-column-body my-select-td" style="border: none;" rowspan="3">
+            <span class="material-symbols-outlined" ng-click="viewlistFunc()">
+              {{expandIcon}}
+              </span>My Views
+            <div ng-if="viewIcon">
+              <ul ng-repeat="data in listData" class="list-data">
+                <li>{{data}}</li>
+              </ul>
+            </div>
+          </td> 
+          <td ng-if="toggleFirstColumn && i > 0" class="sticky-column-body my-select-td" style="border: none;">
             
-          </td>  
+          </td> 
+
           <td>
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>

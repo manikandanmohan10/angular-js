@@ -558,6 +558,17 @@ angular.module('myApp', [])
 
       return Array(n-1).fill().map((_, index) => index + 1);
     };
+    $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data']
+    $scope.viewIcon = false
+    $scope.expandIcon = 'expand_more'
+    $scope.viewlistFunc = () => {
+      $scope.viewIcon = !$scope.viewIcon
+      if ($scope.viewIcon){
+        $scope.expandIcon = 'expand_less'
+      }else{
+        $scope.expandIcon = 'expand_more'
+      }
+    }
     }
   };
 });
