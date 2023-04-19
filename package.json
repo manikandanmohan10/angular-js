@@ -1,0 +1,9 @@
+{
+  "name": "angular-js",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {}
+  "scripts": {
+    "start": "http-server -p 8000"
+  }
+}

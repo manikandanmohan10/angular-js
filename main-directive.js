@@ -1,50 +1,4 @@
 
-// angular.module('myApp', []).directive ('myDirective', function ($rootScope, $compile, $templateRequest)
-// {
-// return {
-// replace: true,
-// template: '<div>My directive content</div>',
-// scope: false,
-// link: function (scope, elem, attrs) {
-// var target = "hello world"
-// var table = $(target).children();
-// var nelem = $('<div></div>').append($ (target).html());
-// //  var collection_name=nelem.find("table").attr("collection"); var uniqueid = 'tabletoggle' + (new Date()).getTime()+"_";
-// // var uniqueid = 'tabletoggle' + (new Date()).getTime()+"_";
-// nelem.find("table").addClass("cr-table");
-// // if (_logValidation (nelem.find("tbody").attr("ng-repeat"))) { var ngrepeat=nelem.find("tbody").attr("ng-repeat");
-// // }else{
-// //   var ngrepeat = nelem.find("tbody>tr").attr("ng-repeat");
-// // }
-// var freezed_cols = [];
-// nelem.find("thead").find("tr:last-child").children().each(function(i) {
-//   var is_freezed = $(this).attr("freez");
-//   if (typeof is_freezed !== 'undefined' && is_freezed !==  
-//   false){ 
-//     freezed_cols.push((i+1)); $(this).addClass("freez-Column");
-//     $(this).addClass("freez-Column");
-// }
-// });
-
-// var actual_display_columns = [];
-// nelem.find("thead").find("tr:last-child").children().each(function() {
-// if (isset($(this).attr("column"))) {
-// if ($(this).attr("filter") == "date") {
-// actual_display_columns.push($(this).attr("column")+"Text");
-// }else{
-// actual_display_columns.push($(this).attr("column"));
-// }
-// }
-// if (isset($(this).attr("editable"))) {
-// var k = $(this).attr("col_ref_id");
-// editable_columns [k] = $(this).attr("editable");
-// }
-
-// });
-// }
-// }
-// })
-
 angular.module('myApp', [])
 .directive('myDirective', function() {
   return {
@@ -62,15 +16,19 @@ angular.module('myApp', [])
       scope.moreOptions =  JSON.parse(attrs.moreoptions);
       scope.data = datas.data;
       scope.column = datas.column;
-
+      scope.tableData = [];
       scope.curPage = 1,
       scope.itemsPerPage = 5,
       scope.maxSize = 5;
-      
+      // scope.tableData = [...datas.data];
       this.items = scope.data;
+      let begin = ((scope.curPage - 1) * scope.itemsPerPage);
+      let end = begin + scope.itemsPerPage;
       
+     scope.tableData = scope.data.slice(begin, end);
+     
       scope.numOfPages = function () {
-        scope.tableData = scope.data.slice(parseInt(scope.curPage) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage) * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
+        
         return Math.ceil(scope.data.length / scope.itemsPerPage);
       
       };
@@ -86,18 +44,25 @@ angular.module('myApp', [])
         if (scope.curPage < scope.numOfPages()) {
           scope.curPage++;
         }
+        scope.tableData = scope.data.slice(parseInt(scope.curPage) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage) * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
       };
+      
+      scope.gotopage = function(n){
+        scope.curPage = n
+        scope.tableData = scope.data.slice(parseInt(scope.curPage) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage) * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
+      }
       
       // Function to set current page
       scope.setPage = function(page) {
         scope.curPage = page;
+        scope.tableData = scope.data.slice(parseInt(scope.curPage) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage) * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
       };
       
       scope.$watch('curPage + numPerPage', function() {
-      var begin = ((scope.curPage - 1) * scope.itemsPerPage),
-      end = begin + scope.itemsPerPage;
+      //                               var begin = ((scope.curPage - 1) * scope.itemsPerPage),
+      // end = begin + scope.itemsPerPage;
       
-      scope.tableData = scope.data.slice(begin, end);
+      // scope.tableData = scope.data.slice(begin, end);       
       });
       scope.pages = Array.from({length: scope.numOfPages()}, (_, i) => i + 1);
       // setTimeout(function () {
@@ -107,7 +72,7 @@ angular.module('myApp', [])
       // }, 0);
       scope.temp = scope.column;
     },
-    templateUrl: "table.html",
+    templateUrl: "html/table.html",
     controller: function ($scope) {
       $scope.selectedCell = [];
       $scope.parents = [{
@@ -120,6 +85,7 @@ angular.module('myApp', [])
         }]
       }]
       $scope.checkbox=false;
+      //$scope.tableData = [...$scope.tableData]
       // $scope.myData = ""; // Initialize the variable to hold the input field data
 
       window.addEventListener('keydown', function(event){
@@ -133,55 +99,16 @@ angular.module('myApp', [])
           event.preventDefault();
           $scope.selectedCell.push([i, j+1])
           updateCellByButton(i, j+1);
-          // $scope.selectedCell.forEach(e => {
-          //   if(e[0] === i && e[1] === j+1) {
-          //     let a = document.getElementById(`${e[0]}-${e[1]}`);
-          //     let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-          //     a.style.display = 'none';
-          //     b.style.display = 'block';
-          //   }  else {
-          //     let a = document.getElementById(`${e[0]}-${e[1]}`);
-          //     let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-          //     a.style.display = 'block';
-          //     b.style.display = 'none';
-          //   }
-          // })
         } else if(event.key === "ArrowUp") {
           if(i-1 >= 0) {
             $scope.selectedCell.push([i-1, j])
             updateCellByButton(i-1, j)
-            // $scope.selectedCell.forEach(e => {
-            //   if(e[0] === i-1 && e[1] === j) {
-            //     let a = document.getElementById(`${e[0]}-${e[1]}`);
-            //     let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-            //     a.style.display = 'none';
-            //     b.style.display = 'block';
-            //   }  else {
-            //     let a = document.getElementById(`${e[0]}-${e[1]}`);
-            //     let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-            //     a.style.display = 'block';
-            //     b.style.display = 'none';
-            //   }
-            // })
           } 
           
         } else if(event.key === "ArrowDown") {
           if(i >= 0) {
             $scope.selectedCell.push([i+1, j])
             updateCellByButton(i+1, j);
-            // $scope.selectedCell.forEach(e => {
-            //   if(e[0] === i+1 && e[1] === j) {
-            //     let a = document.getElementById(`${e[0]}-${e[1]}`);
-            //     let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-            //     a.style.display = 'none';
-            //     b.style.display = 'block';
-            //   }  else {
-            //     let a = document.getElementById(`${e[0]}-${e[1]}`);
-            //     let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-            //     a.style.display = 'block';
-            //     b.style.display = 'none';
-            //   }
-            // })
           } 
         }else if(event.key === "ArrowLeft") {
           if(j-1 >= 0) {
@@ -379,8 +306,9 @@ angular.module('myApp', [])
             let sibiling = returnParent(event.target, 'TR')
 
             let j = Number(sibiling.id.slice(4));
-            let c = $scope.data.splice(i, 1);
-            $scope.data.splice(j, 0, ...c);
+            let c = $scope.tableData.splice(i, 1);
+            $scope.tableData.splice(j, 0, ...c);
+            //$scope.tableData = [...$scope.tableData];
             $scope.$apply();
            // rowa.insertBefore(draggedRow, sibiling.nextSibling);
 
@@ -448,73 +376,7 @@ angular.module('myApp', [])
      $scope.closePopup = (headerIndex) => {
       document.getElementById("popup-" + headerIndex).style.display = "none";
   }
-      // Define the drop event handlers for each row
       
-      // $scope.keyPresses = (event, i , j) => {
-      //   //console.log(event);
-      //   if(event.key === "Tab") {
-      //     $scope.selectedCell.forEach(e => {
-      //       if(e[0] === i && e[1] === j+1) {
-      //         let a = document.getElementById(`${e[0]}-${e[1]}`);
-      //         let b = document.getElementById(`${e[1]}-${e[1]}-index`);
-      //         a.style.display = 'none';
-      //         b.style.display = 'block';
-      //       }  else {
-      //         let a = document.getElementById(`${e[0]}-${e[1]}`);
-      //         let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-      //         a.style.display = 'block';
-      //         b.style.display = 'none';
-      //       }
-      //     })
-      //   } else if(event.key === "ArrowUp") {
-      //     if(i-1 >= 0) {
-      //       $scope.selectedCell.push([i-1, j])
-      //       $scope.selectedCell.forEach(e => {
-      //         if(e[0] === i-1 && e[1] === j) {
-      //           let a = document.getElementById(`${e[0]}-${e[1]}`);
-      //           let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-      //           a.style.display = 'none';
-      //           b.style.display = 'block';
-      //         }  else {
-      //           let a = document.getElementById(`${e[0]}-${e[1]}`);
-      //           let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-      //           a.style.display = 'block';
-      //           b.style.display = 'none';
-      //         }
-      //       })
-      //     } 
-         
-      //     // let a1 = document.getElementById(`${i-1}-${j}`);
-      //     // let b1 = document.getElementById(`${i-1}-${j}-index`);
-      //     // if(a1 && b1) {
-      //     //   let a = document.getElementById(`${i}-${j}`);
-      //     // let b = document.getElementById(`${i}-${j}-index`);
-      //     // a.style.display = 'block';
-      //     // b.style.display = 'none';
-          
-      //     // a1.style.display = 'none';
-      //     // b1.style.display = 'block';
-      //     // }
-          
-      //   } else if(event.key === "ArrowDown") {
-      //     if(i-1 >= 0) {
-      //       $scope.selectedCell.push([i+1, j])
-      //       $scope.selectedCell.forEach(e => {
-      //         if(e[0] === i+1 && e[1] === j) {
-      //           let a = document.getElementById(`${e[0]}-${e[1]}`);
-      //           let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-      //           a.style.display = 'none';
-      //           b.style.display = 'block';
-      //         }  else {
-      //           let a = document.getElementById(`${e[0]}-${e[1]}`);
-      //           let b = document.getElementById(`${e[0]}-${e[1]}-index`);
-      //           a.style.display = 'block';
-      //           b.style.display = 'none';
-      //         }
-      //       })
-      //     } 
-      //   }
-      // }
       $scope.deleteRow = function (row) {
         // delete the row
         //$scope.data = $scope.data.slice(0, 4);
@@ -548,13 +410,29 @@ angular.module('myApp', [])
         })
         console.log($scope.column[$scope.freezeColumnIndex])
       }
-      console.log('hello')
-      // $scope.SortColumn = field
-      // $scope.sortBy(field)
+     
+    };
+    // sort
+    $scope.sortBy = function(field){
       $scope.sortField = field;
       
       $scope.reverse = !$scope.reverse;
       return $scope.reverse
+    }
+    $scope.showSortPopup = function(event) {
+      $scope.sortPopupVisible = true;
+      $scope.popupPosition = {
+        top: event.clientY + 'px',
+        left: event.clientX + 'px'
+      };
+
+    };
+    $scope.hideSortPopup = function() {
+      $scope.sortPopupVisible = false;
+    };
+    $scope.generateArray = function(n) {
+
+      return Array(n-1).fill().map((_, index) => index + 1);
     };
     }
   };

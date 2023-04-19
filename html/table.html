@@ -44,12 +44,37 @@
       featured_play_list
       </span> Group
   </div>
+  <!-- Sort -->
+  <button ng-click="showSortPopup($event)">
+    <div class="icon-content">
+      
+      <span class="material-symbols-outlined icon-size" >
+        swap_vert
+        </span> Sort  
+        
+    </div>
+</button> 
+<div class="popup" ng-show="sortPopupVisible" ng-style="popupPosition">
+  <h4>Sort Options</h4>
+  <ul>
+    <li ></li>
+  </ul>
+  <button ng-click="addSort()">+ Add Sort</button>
+  <select class="custom-select" ng-model="sortField" id="exampleFormControlSelect2" placeholder="+ Add Sort">
+    <option ng-repeat="col in column" value="{{col.field}}" ng-selected="col === SortColumn">{{col.field}}</option> 
+  </select> 
+   <!-- <br/><hr/> -->
+    <!-- <div class="custom-select-wrapper">
+      <label for="exampleFormControlSelect2">Sort</label>
+      <select class="custom-select" ng-model="sortField" id="exampleFormControlSelect2">
+        <option ng-repeat="col in column" value="{{col.field}}" ng-selected="col === SortColumn">{{col.field}}</option> 
+      </select> 
+      </select>
+    </div> -->
+  <button ng-click="hideSortPopup()">Close Popup</button>
+</div>
 
-  <div class="icon-content">
-    <span class="material-symbols-outlined icon-size" >
-      swap_vert
-      </span> Sort
-  </div>
+
 <div class="icon-content">
   <span class="material-symbols-outlined icon-size">
     format_color_fill
@@ -146,14 +171,7 @@ data-toggle="modal" data-target="#exampleModal"
 </div>
   </div>
   <div>
-    <!-- <br/><hr/> -->
-    <!-- <div class="custom-select-wrapper">
-      <label for="exampleFormControlSelect2">Sort</label>
-      <select class="custom-select" ng-model="sortField" id="exampleFormControlSelect2">
-        <option ng-repeat="col in column" value="{{col.field}}" ng-selected="col === SortColumn">{{col.field}}</option> 
-      </select> 
-      </select>
-    </div> -->
+   
     <table 
       id="mytable"
       class="table display styled-table"
@@ -192,12 +210,15 @@ data-toggle="modal" data-target="#exampleModal"
                     </div>
                 </div>
               </div>
-              <div style="display: flex;align-items: center;"  ng-if="!isHidden">
-                <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+              <div ng-click="isHidden = sortBy(columns.field)">
+                <div style="display: flex;align-items: center;" ng-if="!isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+                </div>
+                <div style="display: flex;align-items: center;" ng-if="isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
+                </div>
               </div>
-              <div ng-if="isHidden">
-                <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
-              </div>
+              
 
             </div> 
           </th>
@@ -249,7 +270,7 @@ data-toggle="modal" data-target="#exampleModal"
             <input
               ng-if="col.type === 'date'"
               type="date"
-              ng-model="item[col.field]"
+              ng-model="new Date(item[col.field])"
             />
             <input
               ng-if="col.type === 'number'"
@@ -269,25 +290,30 @@ data-toggle="modal" data-target="#exampleModal"
     <!-- Pagination UI markup -->
     <!-- Pagination UI markup with select field and next/previous buttons -->
 <div class="pagination" style="display: flex;">
-  <div>
+  <div class="page-size">
     <label>Page</label>
     <select ng-model="itemsPerPage" ng-change="updateItemsPerPage()">
       <option value="5" selected>5</option>
       <option value="10">10</option>
       <option value="20">20</option>
     </select>
-  </div>
-
-  <div>
-    <ul class="pagination-list" style="display: flex; list-style: none;">
-      <li ng-class="{disabled: curPage === 1}">
-        <a href="#" ng-click="prevPage()">Previous</a>
-      </li>
-      <li>({{curPage}} / {{numOfPages()}})</li>
-      <li ng-class="{disabled: curPage === numOfPages()}">
-        <a href="#" ng-click="nextPage()">Next</a>
-      </li>
-    </ul>
+    <div class="page-selection">
+      <ul class="pagination-list" style="display: flex; list-style: none;">
+        <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li">
+          <a class="btn-pagination" href="#" ng-click="prevPage()">Previous</a>
+        </li>
+        <div ng-class="{disabled: curPage === numOfPages()}" ng-repeat="i in generateArray(numOfPages()) track by $index" ng-if="$index >= curPage - 3 && $index <= curPage + 1">
+          <li class="btn-pagination-li">
+          <button class="pagination-btn" ng-click="gotopage(i)" ng-class="{active: i===curPage}">{{i}}</button>
+          </li>
+          
+        </div>
+        <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li">
+          <a  class="btn-pagination" href="#" ng-click="nextPage()">Next</a>
+        </li>
+      </ul>
+    </div>
+    
   </div>
 
 </div>
