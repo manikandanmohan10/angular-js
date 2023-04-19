@@ -21,6 +21,8 @@ angular.module('myApp', [])
       scope.itemsPerPage = 5,
       scope.maxSize = 5;
       // scope.tableData = [...datas.data];
+      scope.originalData = scope.data
+      
       this.items = scope.data;
       let begin = ((scope.curPage - 1) * scope.itemsPerPage);
       let end = begin + scope.itemsPerPage;
@@ -28,7 +30,7 @@ angular.module('myApp', [])
      scope.tableData = scope.data.slice(begin, end);
      
       scope.numOfPages = function () {
-        
+        scope.tableData = scope.data.slice(parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
         return Math.ceil(scope.data.length / scope.itemsPerPage);
       
       };
@@ -74,6 +76,13 @@ angular.module('myApp', [])
     },
     templateUrl: "html/table.html",
     controller: function ($scope) {
+      $scope.conditionDropdownItems = ["WHERE", "AND", "OR"];
+      $scope.expressionDropdownItems = ["EQUAL","NOT EQUAL", "LIKE", "NOT LIKE", "IN", "NOT IN", "IS"];
+      $scope.myForm = {
+           myFields: [
+             { condition: "WHERE", columnName: "", expression: "", value: "" },
+           ],
+         };
       $scope.selectedCell = [];
       $scope.parents = [{
         name: 'sabari',
@@ -219,6 +228,101 @@ angular.module('myApp', [])
         })
 
       }
+
+
+       $scope.removeField = function (index) {
+         $scope.myForm.myFields.splice(index, 1);
+       };
+       $scope.addField = function () {
+         var field = {
+           condition: "",
+           columnName: "",
+           expression: "",
+           value: "",
+         };
+         $scope.myForm.myFields.push(field);
+         console.log($scope.myForm);
+       };
+         $scope.submitForm = function () {
+           $scope.assignValues();
+           $scope.column.forEach((value) => {
+             console.log(value.field);
+             $scope.data.forEach((da) => {
+               if (!$scope.filterData[value.field].includes(da[value.field])) {
+                 $scope.filterData[value.field].push(da[value.field]);
+               }
+             });
+           });
+           console.log($scope.filterData);
+         };
+    
+       $scope.assignValues = () => {
+         $scope.filterData = {};
+         // console.log($scope.column,$scope.data)
+         $scope.column.forEach((value) => {
+          //  console.log($scope.data[0][value.field]);
+           $scope.filterData[value.field] = [];
+           // console.log(value)
+         });
+         // console.log($scope.filterData)
+       };
+
+      $scope.filterTable= ()=>{
+        console.log($scope.originalData)
+          let filteredObjects = []
+          // $scope.data=$scope.datas
+          console.log($scope.data, "fdsssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+          $scope.tableData = $scope.originalData;
+          // console.log($scope.myForm.myFields)
+          const filterArr = $scope.myForm.myFields;
+          if (filterArr.length > 0){
+            // console.log("working")
+             filterArr.forEach((filterValue) => {
+        
+             if((filterValue.condition).toLowerCase() ==='and' || (filterValue.condition).toLowerCase() === 'where'){
+               filteredObjects = $scope.tableData.filter((col) => {
+                 return $scope.queryCondition(filterValue, col);
+               });
+             }
+             else if (filterValue.condition === "or") {
+               filteredObjects = $scope.originalData.filter((col) => {
+                 return $scope.queryCondition(filterValue, col);
+               });
+             }
+             return false
+        
+            })
+            $scope.data = filteredObjects; 
+         console.log($scope.tableData);
+        //  $scope.$apply();  
+          }
+        else{
+          filteredObjects = $scope.data;
+        }
+  }
+
+
+   $scope.queryCondition= (filterValue,data)=>{
+    switch ((filterValue.expression).toLowerCase()) {
+      case 'equal':
+        if (data[filterValue.columnName.field].toString() === filterValue.value) {
+          return true;
+        }
+        return false;
+      case 'not equal':
+        if (data[filterValue.columnName.field] !== filterValue.colValue) {
+          return true;
+        }
+        return false;
+      case 'like':
+        return this.filterValuefun(data,filterValue.colValue,filterValue.colName);
+      case 'not like':
+        console.log("not like => ",filterValue)
+        return !this.filterValuefun(data,filterValue.colValue,filterValue.colName);
+      default:
+        return false
+    }
+  }
 
       setTimeout(() => {
       var rows = document.querySelectorAll('.rows');
