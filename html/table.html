@@ -289,6 +289,15 @@ data-toggle="modal" data-target="#exampleModal"
                 <div ng-if="!findsortorder(columns.field)">
                   <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
                 </div>
+              </div>
+              <div ng-click="sortByField(columns.field)">
+
+                <div style="display: flex;align-items: center;" ng-if="findsortorder(columns.field)">
+                  <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+                </div>
+                <div ng-if="!findsortorder(columns.field)">
+                  <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
+                </div>
   
               </div> 
             </th>
