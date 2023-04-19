@@ -1,12 +1,9 @@
 <div class="icon-wrap">
   <div class="icon-content">
    
-      <span class="material-symbols-outlined icon-size">
+      <span ng-click="toggleSidenav()" class="material-symbols-outlined icon-size">
         menu
-        </span>
-        <span >
-          Views
-        </span>
+        </span> Views
    
   </div>
   <div class="icon-content">
@@ -171,44 +168,27 @@ data-toggle="modal" data-target="#exampleModal"
 </div>
   </div>
   <div>
-   
-    <table 
-      id="mytable"
-      class="table display styled-table"
-      cellspacing="0"
-      cellpadding="2"
-      ng-table="tableParams"
-    >
-   
-      <thead>
-        <tr  class="dnd-moved">
-          <th>
-          <div style="display:flex; gap: 10px; align-items: center; ">
-            <!-- <div style="align-items: center;di="> -->
-              <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)"/>
-              <label for="" style="margin: 0;"> checkbox</label>
-            </div>
-            <!-- <div style="margin-top: 3px;">
-            </div> -->
-          <!-- </div> -->
-         </th>
-          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
-            <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
-              <div style="display: flex;gap: 20px;align-items: center;position: relative;">
 
-                <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
-                {{columns.field}} 
-                <div style="position: relative;">
+      <table 
+        id="mytable"
+        class="table display styled-table"
+        cellspacing="0"
+        cellpadding="2"
+        ng-table="tableParams"
+      >
+    
+        <thead>
+          <tr  class="dnd-moved">
+            <th ng-if="toggleFirstColumn" class="sticky-column-head">
+              MyViews
+            </th>
+            <th>
+            
 
-                  <span class="icon material-symbols-outlined list-icon" ng-click="togglePopup($index)">
-                    menu
-                    </span>
-                                      <!-- Popup dropdown container -->
-                      <div id="popup-{{$index}}" class="popup-container">
-                        <!-- Popup dropdown items -->
-                        <div class="popup-item" ng-repeat="option in moreOptions" ng-click="closePopup($index);openColorPicker(option,$index)" >{{option}}</div>
-                    </div>
-                </div>
+            <div style="display:flex; gap: 10px; align-items: center; ">
+              <!-- <div style="align-items: center;di="> -->
+                <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)"/>
+                <label for="" style="margin: 0;"> checkbox</label>
               </div>
               <div ng-click="isHidden = sortBy(columns.field)">
                 <div style="display: flex;align-items: center;" ng-if="!isHidden">
@@ -221,13 +201,48 @@ data-toggle="modal" data-target="#exampleModal"
               
 
             </div> 
+
+              <!-- <div style="margin-top: 3px;">
+              </div> -->
+            <!-- </div> -->
+
           </th>
-          <!-- <th>Update</th> -->
-        </tr>
-      </thead>
-      <tbody >
-        <tr  draggable="true" id="{{'rows'+i}}"
-        ng-repeat="(i, item) in tableData| orderBy:sortField:reverse  track by $index" class="rows active-row dnd-moved">
+            <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
+              <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
+                <div style="display: flex;gap: 20px;align-items: center;position: relative;">
+  
+                  <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
+                  {{columns.field}} 
+                  <div style="position: relative;">
+  
+                    <span class="icon material-symbols-outlined list-icon" ng-click="togglePopup($index)">
+                      menu
+                      </span>
+                                        <!-- Popup dropdown container -->
+                        <div id="popup-{{$index}}" class="popup-container">
+                          <!-- Popup dropdown items -->
+                          <div class="popup-item" ng-repeat="option in moreOptions" ng-click="closePopup($index);openColorPicker(option,$index)" >{{option}}</div>
+                      </div>
+                  </div>
+                </div>
+                <div style="display: flex;align-items: center;"  ng-if="!isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+                </div>
+                <div ng-if="isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
+                </div>
+  
+              </div> 
+            </th>
+            <!-- <th>Update</th> -->
+          </tr>
+        </thead>
+        <tbody >
+          <tr  draggable="true" id="{{'rows'+i}}"
+          ng-repeat="(i, item) in tableData| orderBy:sortField:reverse  track by $index" class="rows active-row dnd-moved">
+          <td ng-if="toggleFirstColumn" class="sticky-column-body" style="border: none;">
+            
+          </td>  
           <td>
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>
@@ -322,6 +337,16 @@ data-toggle="modal" data-target="#exampleModal"
    
   </div>
 </div>
+
+<!-- <div id="mySidenav" class="sidenav">
+  <a href="#" class="closebtn">&times;</a>
+  <select id="navSelect2">
+    <option value="#home">Home</option>
+    <option value="#about">About</option>
+    <option value="#contact">Contact</option>
+  </select>
+</div> -->
+
 
 <!-- <script type="text/javascript">
     $(document).ready(function() {

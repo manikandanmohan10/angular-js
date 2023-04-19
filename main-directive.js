@@ -10,7 +10,7 @@ angular.module('myApp', [])
       sortBy: "&",
     },
     link: function (scope, element, attrs) {
-
+      scope.toggleFirstColumn = false
       scope.message = attrs.type;
       let datas = JSON.parse(attrs.datasource);
       scope.moreOptions =  JSON.parse(attrs.moreoptions);
@@ -148,6 +148,21 @@ angular.module('myApp', [])
         })
         $scope.selectedCell = $scope.selectedCell.filter(data => (existData[0] === data[0] && existData[0] === data[0]))
       }
+      $scope.toggleSidenav = () => {
+        // const sideNav = document.querySelector('.side-nav');        
+        // sideNav.classList.toggle('side-nav--open');
+        // document.getElementById("mySidenav").classList.add("show-nav");
+
+        // $scope.column = [{field: 'test', type: 'input', daatType: 'input', editable: true}].concat($scope.column)
+        $scope.toggleFirstColumn = !$scope.toggleFirstColumn
+        $scope.freezeColumn(0, 'MyViews')
+
+      }
+      // document.getElementsByClassName("closebtn")[0].addEventListener("click", function() {
+      //   document.getElementById("mySidenav").classList.remove("show-nav");
+      // });
+
+
       $scope.getData = function () {
         var inputData = $scope.myData; // Get the input field data from the bound variable
         console.log("Input Data: " + inputData); 
@@ -178,6 +193,11 @@ angular.module('myApp', [])
             a.style.display = 'none';
             b.style.display = 'block';
             b.focus();
+            document.addEventListener("click", function() {
+                b.blur(); // Remove focus from the input element
+                a.style.display = 'block';
+                b.style.display = 'none';
+            });
           }  else {
             let a = document.getElementById(`${e[0]}-${e[1]}`);
             let b = document.getElementById(`${e[0]}-${e[1]}-index`);
