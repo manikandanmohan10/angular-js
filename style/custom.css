@@ -211,6 +211,17 @@ display: inline-block;
 .btn-pagination-li{
   padding: 2px;
 }
+.sort-list{
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.sort-key{
+  
+}
+.sort-value{
+
+}
 
 
 

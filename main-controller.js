@@ -1,6 +1,8 @@
 var module = angular.module("myApp");
 
 module.controller("exampleCtrl", function($scope) {
+    $scope.searchItem='';
+    $scope.sortedFieldDict = [];
 
     $scope.name = 'MM';
   $("#my-select").select2({
