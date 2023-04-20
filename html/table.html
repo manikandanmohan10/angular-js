@@ -6,13 +6,13 @@
         </span> Views
    
   </div>
-  <div class="icon-content">
+  <div class="icon-content second-icon">
    
     <span class="material-symbols-outlined icon-size" style="color: rgb(31 127 247);">
       table
       </span>
         <span>
-          {{value}}
+          {{groupValue}}
         </span>
    
     <span class="material-symbols-outlined icon-size">
@@ -23,10 +23,18 @@
         </span>
    
   </div>
-  <div class="icon-content">
-    <span class="material-symbols-outlined icon-size">
-      visibility_off
-      </span> {{}} Hidden fields
+  <div class="hide-column">
+    <div class="icon-content"> 
+      <span class="material-symbols-outlined icon-size" ng-click="callDropdown()">
+        visibility_off
+        </span> {{}} Hidden fields
+    </div>
+  <div class="hide-column-list" ng-if="viewHideColumn">
+          <ul  ng-repeat="col in hidingColumnArryList"  class="list-data">
+            <li>{{col.field}}</li>
+            <input  type="checkbox" ng-click="hidingColumn(col.field, $event)"/>
+          </ul>
+      </div>
   </div>
 
   <div class="icon-content">
@@ -53,21 +61,24 @@
 </button> 
 <div class="popup" ng-show="sortPopupVisible" ng-style="popupPosition">
   <h4>Sort Options</h4>
-  <ul>
-    <li ></li>
-  </ul>
-  <button ng-click="addSort()">+ Add Sort</button>
-  <select class="custom-select" ng-model="sortField" id="exampleFormControlSelect2" placeholder="+ Add Sort">
+
+  <div ng-repeat="(key, value) in sortedFieldDict" class="sort-list">
+    <span>
+      <span class="sort-key">{{ key }}</span>
+      <button class="sort-value" ng-click="updateAscDsc(key, value)">
+        <span ng-if="value">Asc</span>
+        <span ng-if="!value">Dsc</span>
+      </button>
+      <button class="btn icon" ng-click="removeSort(key)"><span class="material-symbols-outlined filter-box-icon">
+        delete
+        </span></button>
+    </span>
+    
+  </div>
+
+  <select class="custom-select" ng-model="sortField" ng-change="updateMyObj()" id="exampleFormControlSelect2">
     <option ng-repeat="col in column" value="{{col.field}}" ng-selected="col === SortColumn">{{col.field}}</option> 
-  </select> 
-   <!-- <br/><hr/> -->
-    <!-- <div class="custom-select-wrapper">
-      <label for="exampleFormControlSelect2">Sort</label>
-      <select class="custom-select" ng-model="sortField" id="exampleFormControlSelect2">
-        <option ng-repeat="col in column" value="{{col.field}}" ng-selected="col === SortColumn">{{col.field}}</option> 
-      </select> 
-      </select>
-    </div> -->
+  </select>
   <button ng-click="hideSortPopup()">Close Popup</button>
 </div>
 
@@ -139,9 +150,31 @@
             <!-- <button ng-click="submitForm()">Submit</button> -->
           </form>
         </div>
+        <div class="modal-body">
+          <form >
+            <div class="tab-icon">
+              <input type="text" ng-model="searchItem" value=""/>
+              <button class=" btn icon" ng-click="getColumn(searchItem)"><span class="material-symbols-outlined filter-box-icon">
+                search 
+                </span>
+              </button>
+            </div>
+
+              <div ng-repeat="name in getColumnList" class="tab-icon"> 
+                <div>{{name}}
+                  <button class="btn icon" ng-click="removeColumn(name)"><span class="material-symbols-outlined filter-box-icon">
+                    delete
+                    </span></button>
+                  </div>
+               
+              </div>
+            
+          </form>
+        </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="filterTable()"> Filter</button>
+          <button type="button" class="btn btn-primary" ng-click="filterTable()"> View</button>
         </div>
       </div>
     </div>
@@ -235,7 +268,7 @@ data-toggle="modal" data-target="#exampleModal"
             
 
             <div style="display:flex; gap: 10px; align-items: center; ">
-              <!-- <div style="align-items: center;di="> -->
+              <div style="align-items: center">
                 <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)"/>
                 <label for="" style="margin: 0;"> checkbox</label>
               </div>
@@ -255,29 +288,31 @@ data-toggle="modal" data-target="#exampleModal"
               </div> -->
             <!-- </div> -->
 
-          </th>
-            <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
-              <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
-                <div style="display: flex;gap: 20px;align-items: center;position: relative;">
-  
-                  <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
-                  {{columns.field}} 
-                  <div style="position: relative;">
-  
-                    <span class="icon material-symbols-outlined list-icon" ng-click="togglePopup($index)">
-                      menu
-                      </span>
-                                        <!-- Popup dropdown container -->
-                        <div id="popup-{{$index}}" class="popup-container">
-                          <!-- Popup dropdown items -->
-                          <div class="popup-item" ng-repeat="option in moreOptions" ng-click="closePopup($index);openColorPicker(option,$index)" >{{option}}</div>
-                      </div>
-                  </div>
+         </th>
+          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
+            <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
+              <div style="display: flex;gap: 20px;align-items: center;position: relative;">
+
+                <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
+                {{columns.field}} 
+                <div style="position: relative;">
+
+                  <span class="icon material-symbols-outlined list-icon" ng-click="togglePopup($index)">
+                    menu
+                    </span>
+                                      <!-- Popup dropdown container -->
+                      <div id="popup-{{$index}}" class="popup-container">
+                        <!-- Popup dropdown items -->
+                        <div class="popup-item" ng-repeat="option in moreOptions" ng-click="closePopup($index);openColorPicker(option,$index)" >{{option}}</div>
+                    </div>
                 </div>
-                <div style="display: flex;align-items: center;"  ng-if="!isHidden">
+              </div>
+              <div ng-click="sortByField(columns.field)">
+
+                <div style="display: flex;align-items: center;" ng-if="findsortorder(columns.field)">
                   <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
                 </div>
-                <div ng-if="isHidden">
+                <div ng-if="!findsortorder(columns.field)">
                   <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
                 </div>
   
@@ -288,22 +323,27 @@ data-toggle="modal" data-target="#exampleModal"
         </thead>
         <tbody >
           <tr  draggable="true" id="{{'rows'+i}}"
-          ng-repeat="(i, item) in tableData| orderBy:sortField:reverse  track by $index" class="rows active-row dnd-moved">
-          
-          <td ng-if="toggleFirstColumn && i === 0" class="sticky-column-body my-select-td" style="border: none;" rowspan="5">
-            <span class="material-symbols-outlined" ng-click="viewlistFunc()">
-              {{expandIcon}}
-              </span>My Views
+          ng-repeat="(i, item) in tableData| orderBy:sortedFieldList  track by $index" class="rows active-row dnd-moved">
+          <td ng-if="toggleFirstColumn && i === 0" class="sticky-column-body my-select-td" style="border: none;" rowspan="20">
+            <div>
+              <input type="search" placeholder="Search"> 
+            </div>
+            <div class="view-title">
+
+              <span class="material-symbols-outlined" ng-click="viewlistFunc()">
+                {{expandIcon}}
+                </span>My Views
+            </div>
             <div ng-if="viewIcon">
               <ul ng-repeat="data in listData" class="list-data">
-                <li>{{data}}</li>
+                <li class="view-value" ng-click="getListValue($event)">{{data}}</li>
               </ul>
             </div>
           </td> 
-          <td ng-if="toggleFirstColumn && i > 4" class="sticky-column-body my-select-td" style="border: none;">
+          <td ng-if="toggleFirstColumn && i > 19" class="sticky-column-body my-select-td" style="border: none;">
             
-          </td>  
-          <td>
+        </td>    
+        <td>
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>
           <td ng-keyDown="keyPresses($event, i, j)"
@@ -374,18 +414,24 @@ data-toggle="modal" data-target="#exampleModal"
     </select>
     <div class="page-selection">
       <ul class="pagination-list" style="display: flex; list-style: none;">
-        <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li">
-          <a class="btn-pagination" href="#" ng-click="prevPage()">Previous</a>
-        </li>
+        <div ngIf="!(curPage === 1)">
+          <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li" ngIf="!(curPage === 1)">
+            <a class="btn-pagination" href="#" ng-click="prevPage()">Previous</a>
+          </li>
+        </div>
+        
         <div ng-class="{disabled: curPage === numOfPages()}" ng-repeat="i in generateArray(numOfPages()) track by $index" ng-if="$index >= curPage - 3 && $index <= curPage + 1">
           <li class="btn-pagination-li">
           <button class="pagination-btn" ng-click="gotopage(i)" ng-class="{active: i===curPage}">{{i}}</button>
           </li>
           
         </div>
-        <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li">
-          <a  class="btn-pagination" href="#" ng-click="nextPage()">Next</a>
-        </li>
+        <div  ngIf="!(curPage === numOfPages())">
+          <li ng-class="{disabled: curPage === numOfPages()}" class="btn-pagination-li">
+            <a  class="btn-pagination" href="#" ng-click="nextPage()">Next</a>
+          </li>
+        </div>
+        
       </ul>
     </div>
     

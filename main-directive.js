@@ -1,6 +1,6 @@
 
 angular.module('myApp', [])
-.directive('myDirective', function() {
+.directive('myDirective', function($http) {
   return {
     restrict: "AEC",
     scope: {
@@ -18,6 +18,7 @@ angular.module('myApp', [])
       scope.data = datas.data;
       scope.column = datas.column;
       scope.tableData = [];
+      scope.tableColumn = scope.column
       scope.curPage = 1,
       scope.itemsPerPage = 5,
       scope.maxSize = 5;
@@ -31,6 +32,7 @@ angular.module('myApp', [])
      scope.tableData = scope.data.slice(begin, end);
      
       scope.numOfPages = function () {
+        //
         scope.tableData = scope.data.slice(parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
         return Math.ceil(scope.data.length / scope.itemsPerPage);
       
@@ -40,6 +42,7 @@ angular.module('myApp', [])
         if (scope.curPage > 1) {
           scope.curPage--;
         }
+        scope.tableData = scope.data.slice(parseInt(scope.curPage) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage) * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
       };
       
       // Function to handle next page button click
@@ -77,6 +80,9 @@ angular.module('myApp', [])
     },
     templateUrl: "html/table.html",
     controller: function ($scope) {
+      setTimeout(()=>{
+         $scope.hidingColumnArryList = [...$scope.column];
+      },1000)
       $scope.conditionDropdownItems = ["WHERE", "AND", "OR"];
       $scope.expressionDropdownItems = ["EQUAL","NOT EQUAL", "LIKE", "NOT LIKE", "IN", "NOT IN", "IS"];
       $scope.myForm = {
@@ -84,6 +90,13 @@ angular.module('myApp', [])
              { condition: "WHERE", columnName: "", expression: "", value: "" },
            ],
          };
+
+      $scope.ColumnForm = {
+        myFields:[
+          {name: "", no: ""},
+        ],
+        arrangement: "",
+      }
       $scope.selectedCell = [];
       $scope.parents = [{
         name: 'sabari',
@@ -253,6 +266,18 @@ angular.module('myApp', [])
        $scope.removeField = function (index) {
          $scope.myForm.myFields.splice(index, 1);
        };
+       $scope.getColumn = function (index) {
+        if (!index){
+          return
+        }
+        if (!$scope.getColumnList){
+          $scope.getColumnList = []
+        }
+        $scope.getColumnList.push(index)
+       };
+       $scope.removeColumn = function(index){
+        $scope.getColumnList.splice(index, 1)
+       }
        $scope.addField = function () {
          var field = {
            condition: "",
@@ -287,60 +312,84 @@ angular.module('myApp', [])
          // console.log($scope.filterData)
        };
 
+       
+
       $scope.filterTable= ()=>{
+        // column start
+        // if ($scope.getColumnList.length){
+        //   $scope.column = $scope.tableColumn.filter((item) => {
+        //     return $scope.getColumnList.includes(item.field);
+        //   });
+        // }
+        // else{
+          
+        //   $scope.column = $scope.tableColumn
+        // }
+        
+        // column end
+        // Filter 
         console.log($scope.originalData)
           let filteredObjects = []
+          let checkConditions =false;
           let tempObject = [];
           let orderedFilterList =[]
-          let filterOrder=['not like', 'not equal', 'like', 'equal']
+          let filterOrder=['not like', 'like', 'not equal', 'equal']
           // $scope.data=$scope.datas
           $scope.tableData = $scope.originalData;
           // console.log($scope.myForm.myFields)
           const filterArr = $scope.myForm.myFields;
-          
+
+        
+        filterArr.forEach((da)=>{
+            if(da['condition'].toLowerCase()=='or'){
+              checkConditions= true
+            }
+          }) 
+        if(checkConditions){
+          orderedFilterList=filterArr;
+         }else{
           filterOrder.forEach((filterorder)=>{
             filterArr.forEach((filterarr)=>{
               if((filterarr['expression']).toLowerCase() == filterorder){
                   orderedFilterList.push(filterarr)
               }
             })
-
           })
-          if (orderedFilterList.length > 0){
-            // console.log("working")
+         }
+        if (orderedFilterList.length > 0){
              orderedFilterList.forEach((filterValue) => {
         
              if((filterValue.condition).toLowerCase() ==='and' || (filterValue.condition).toLowerCase() === 'where'){
-               tempObject = $scope.tableData.filter((col) => {
+              if(orderedFilterList.indexOf(filterValue)==0){
+                 tempObject = $scope.originalData.filter((col) => {
                  return $scope.queryCondition(filterValue, col);
                });
-                tempObject.forEach((da)=>{
-                if(!filteredObjects.includes(da)){
-                 filteredObjects.push(da)
               }
-            })
-             }
-             else if (filterValue.condition === "or") {
-               tempObject = $scope.originalData.filter((col) => {
+              else{
+                 tempObject = tempObject.filter((col) => {
+                 return $scope.queryCondition(filterValue, col);
+                });
+              }
+            }
+             else if (filterValue.condition.toLowerCase() === "or") {
+               filteredObjects = $scope.originalData.filter((col) => {
                  return $scope.queryCondition(filterValue, col);
                });
-                tempObject.forEach((da)=>{
-                if(!filteredObjects.includes(da)){
-                 filteredObjects.push(da)
+                filteredObjects.forEach((da)=>{
+                  if(!tempObject.includes(da)){
+                   tempObject.push(da)
+                  }
+                }) 
               }
-            }) 
-             }
-           
-           
             })
             
-            $scope.data = filteredObjects; 
-         console.log($scope.tableData);
-        //  $scope.$apply();  
-          }
+         $scope.data = tempObject;
+         $scope.numOfPages() 
+        }
         else{
           filteredObjects = $scope.data;
         }
+
   }
 
 
@@ -372,6 +421,9 @@ angular.module('myApp', [])
     if (key){
       if(col[key].toString().toLowerCase().includes(filter.toLowerCase())){
         return true;
+      }
+      else{
+        return false;
       }
     }
     else{
@@ -604,12 +656,71 @@ if (targetColumnIndex !== -1) {
      
     };
     // sort
-    $scope.sortBy = function(field){
-      $scope.sortField = field;
-      
+
+    $scope.sortByField = function(field){
+      if (!$scope.sortedFieldDict) {
+        $scope.sortedFieldDict = {};
+      }
       $scope.reverse = !$scope.reverse;
-      return $scope.reverse
+      
+      $scope.sortedFieldDict[field] = $scope.reverse
+
+      $scope.updateSortList()
+      
+      $scope.sortField = ''
+      return  $scope.reverse
+    };
+
+    $scope.sortBy = function(field, bolval=true){
+      if (!$scope.sortedFieldDict) {
+        $scope.sortedFieldDict = {};
+      }
+      $scope.reverse = bolval;
+      $scope.sortedFieldDict[field] = $scope.reverse
+
+      $scope.updateSortList()
+      
+      $scope.sortField = ''
+      return  $scope.reverse
+    };
+    $scope.updateSortList = function(){
+      $scope.sortedFieldList = []
+      for (let name in $scope.sortedFieldDict ){
+            if ($scope.sortedFieldDict[name]) {
+              $scope.sortedFieldList.push(name)
+            }
+            else{
+              $scope.sortedFieldList.push('-'+name)
+              
+            }
+            
+          }
     }
+    $scope.updateMyObj = function() {
+      if ($scope.sortField) {
+        $scope.sortBy($scope.sortField)
+      } 
+    };
+    $scope.updateAscDsc = function(key, val){
+      if(val){
+        val = false
+      }
+      else{
+        val = true
+      }
+      $scope.sortBy(key, val)
+    };
+
+    $scope.removeSort = function(key){
+      delete $scope.sortedFieldDict[key];
+      $scope.updateSortList()
+    };
+    $scope.findsortorder = function(key){
+      if (!$scope.sortedFieldDict){
+        return true
+      }
+      return $scope.sortedFieldDict[key]
+    };
     $scope.showSortPopup = function(event) {
       $scope.sortPopupVisible = true;
       $scope.popupPosition = {
@@ -625,16 +736,117 @@ if (targetColumnIndex !== -1) {
 
       return Array(n-1).fill().map((_, index) => index + 1);
     };
-    $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data']
+    $scope.groupValue = 'No Views'
+    $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data', 'Sixth Data', 'Seventh Data', 'Eighth Data', 'Ninth Data', 'Tenth Data'];
+    
     $scope.viewIcon = false
     $scope.expandIcon = 'expand_more'
     $scope.viewlistFunc = () => {
       $scope.viewIcon = !$scope.viewIcon
       if ($scope.viewIcon){
+        // $http({
+        //   method: 'POST',
+        //   url: 'https://c236-14-98-32-198.ngrok-free.app/register',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data: {
+        //     name: 'rafiq2s3332343',
+        //     password: 'rafiq232ssfds33@gmail.com'
+        //   }
+        // }).then(function successCallback(response) {
+        //   // This function will be called if the API call is successful
+        //   $scope.listData = response.data;
+        // }, function errorCallback(response) {
+        //   // This function will be called if there is an error with the API call
+        //   console.error('Error retrieving data:', response.status, response.statusText);
+        // });
+
         $scope.expandIcon = 'expand_less'
       }else{
         $scope.expandIcon = 'expand_more'
       }
+    }
+
+    $scope.getListValue = function($event){
+      console.log($event.currentTarget.textContent)
+      $scope.groupValue = $event.currentTarget.textContent
+      $scope.newColumn = [{
+        field: "name",
+        type: "input",
+        dataType: 'input',
+        editable: true,
+      },
+      {
+        field: "phone",
+        type: "input",
+        dataType: 'input',
+        editable: true,
+      },
+      {
+        field: "email",
+        type: "input",
+        dataType: 'email',
+        editable: false,
+      },
+      {
+        field: "address",
+        type: "input",
+        dataType: 'text',
+        editable: true,
+      },
+      {
+        field: "postalZip",
+        type: "input",
+        dataType: 'input',
+        editable: true,
+      },
+     ]
+    //  $scope.column = $scope.newColumn
+
+    // $scope.columnList = $scope.newColumn.map(item => {
+    //   return item.field
+    // })
+
+    $scope.columnList = ['name', 'phone']
+
+    $scope.updatedColumn = []
+    $scope.column.forEach(column => {
+      if ($scope.columnList.includes(column.field)) {
+        $scope.updatedColumn.push(column)
+      }
+    });
+    $scope.column = $scope.updatedColumn
+    $scope.searchButton = $event => {
+      console.log($event)
+    }
+  }
+    
+    
+    $scope.viewHideColumn = false;
+    $scope.callDropdown = () => {
+      $scope.viewHideColumn = !$scope.viewHideColumn
+    }
+
+    $scope.hidingColumn=(event,item)=>{
+      let checBox =item.target.checked
+      console.log(item)
+      if(checBox){
+         $scope.column.forEach((da)=>{
+        if(da['field']==event){
+          let index= $scope.column.indexOf(da)
+           $scope.column.splice(index,1)
+        }
+      })
+      }
+      else{
+            $scope.hidingColumnArryList.forEach((d)=>{
+               if(d['field']==event){
+                  let index= $scope.hidingColumnArryList.indexOf(d)
+                   $scope.column.splice(index,0,d)
+               }
+            })
+        } 
     }
     }
   };
