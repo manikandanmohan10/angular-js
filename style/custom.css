@@ -479,3 +479,8 @@ nav select {
     left: -5px;
     right: -5px;
     cursor: crosshair; 
+.second-icon{
+  border: 1px solid rgb(227 226 226);
+  padding: 4px;
+  background-color: transparent;
+}

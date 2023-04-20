@@ -77,6 +77,9 @@ angular.module('myApp', [])
     },
     templateUrl: "html/table.html",
     controller: function ($scope) {
+      setTimeout(()=>{
+         $scope.hidingColumnArryList = [...$scope.column];
+      },1000)
       setTimeout(() => {
         var cells = document.getElementsByTagName("td");
 
@@ -690,7 +693,7 @@ if (targetColumnIndex !== -1) {
 
       return Array(n-1).fill().map((_, index) => index + 1);
     };
-    $scope.groupValue = '1. Review'
+    $scope.groupValue = ''
     $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data', 'Sixth Data', 'Seventh Data', 'Eighth Data', 'Ninth Data', 'Tenth Data'];
     
     $scope.viewIcon = false
