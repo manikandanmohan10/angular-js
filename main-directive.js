@@ -723,6 +723,7 @@ if (targetColumnIndex !== -1) {
     }
     $scope.getListValue = function($event){
       console.log($event.currentTarget.textContent)
+      $scope.groupValue = $event.currentTarget.textContent
       $scope.newColumn = [{
         field: "name",
         type: "input",

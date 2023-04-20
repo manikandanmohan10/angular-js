@@ -294,12 +294,15 @@ data-toggle="modal" data-target="#exampleModal"
             <div>
               <input type="search" placeholder="Search"> 
             </div>
-            <span class="material-symbols-outlined" ng-click="viewlistFunc()">
-              {{expandIcon}}
-              </span>My Views
+            <div class="view-title">
+
+              <span class="material-symbols-outlined" ng-click="viewlistFunc()">
+                {{expandIcon}}
+                </span>My Views
+            </div>
             <div ng-if="viewIcon">
               <ul ng-repeat="data in listData" class="list-data">
-                <li><a ng-click="getListValue($event)">{{data}}</a></li>
+                <li ng-click="getListValue($event)">{{data}}</li>
               </ul>
             </div>
           </td> 

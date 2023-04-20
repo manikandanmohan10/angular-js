@@ -463,6 +463,11 @@ nav select {
   /* height: 300px; */
 
 
+.view-title{
+  display: flex;
+  margin: 20px;
+  font-size: 20px;
+}
 
 
   /* td:hover::before {
