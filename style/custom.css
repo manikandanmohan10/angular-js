@@ -85,7 +85,12 @@ body{
   transform: translateY(-50%);
   pointer-events: none;
 }
-
+.modal-header{
+  border-bottom: none;
+}
+select{
+  height: 25px;
+}
 .custom-select:focus {
   outline: none;
 }
@@ -402,14 +407,18 @@ nav select {
 }
 .tab-icon span{
   width: 49%;
-  background-color: #dcd9d9;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   height: 35px;
   margin: auto;
+  border: 1px solid lavender;
+  display: flex;
+  align-items: center;
 }
-
+.modal-content{
+  width: fit-content;
+}
 /* table{
   width: 100%;
   border-collapse: collapse;
