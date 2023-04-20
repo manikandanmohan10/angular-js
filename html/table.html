@@ -23,10 +23,18 @@
         </span>
    
   </div>
-  <div class="icon-content">
-    <span class="material-symbols-outlined icon-size">
-      visibility_off
-      </span> {{}} Hidden fields
+  <div class="hide-column">
+    <div class="icon-content"> 
+      <span class="material-symbols-outlined icon-size" ng-click="callDropdown()">
+        visibility_off
+        </span> {{}} Hidden fields
+    </div>
+  <div class="hide-column-list" ng-if="viewHideColumn">
+          <ul  ng-repeat="col in hidingColumnArryList"  class="list-data">
+            <li>{{col.field}}</li>
+            <input  type="checkbox" ng-click="hidingColumn(col.field, $event)"/>
+          </ul>
+      </div>
   </div>
 
   <div class="icon-content">
@@ -235,7 +243,7 @@ data-toggle="modal" data-target="#exampleModal"
             
 
             <div style="display:flex; gap: 10px; align-items: center; ">
-              <!-- <div style="align-items: center;di="> -->
+              <div style="align-items: center;">
                 <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)"/>
                 <label for="" style="margin: 0;"> checkbox</label>
               </div>
