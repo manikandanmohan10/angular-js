@@ -39,6 +39,12 @@ body{
 .popup-item {
   cursor: pointer;
     padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: space-between;
+
+
 } 
 .icon-wrap{
   display: flex;
@@ -449,7 +455,7 @@ nav select {
   vertical-align: top;
   column-span: 5;
   /* height: 300px; */
-} */
+
 
 
 
