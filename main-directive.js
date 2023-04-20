@@ -33,7 +33,7 @@ angular.module('myApp', [])
      
       scope.numOfPages = function () {
         //
-        // scope.tableData = scope.data.slice(parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
+        scope.tableData = scope.data.slice(parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
         return Math.ceil(scope.data.length / scope.itemsPerPage);
       
       };
@@ -312,17 +312,19 @@ angular.module('myApp', [])
          // console.log($scope.filterData)
        };
 
+       
+
       $scope.filterTable= ()=>{
         // column start
-        if ($scope.getColumnList.length){
-          $scope.column = $scope.tableColumn.filter((item) => {
-            return $scope.getColumnList.includes(item.field);
-          });
-        }
-        else{
+        // if ($scope.getColumnList.length){
+        //   $scope.column = $scope.tableColumn.filter((item) => {
+        //     return $scope.getColumnList.includes(item.field);
+        //   });
+        // }
+        // else{
           
-          $scope.column = $scope.tableColumn
-        }
+        //   $scope.column = $scope.tableColumn
+        // }
         
         // column end
         // Filter 
@@ -381,7 +383,8 @@ angular.module('myApp', [])
               }
             })
             
-         $scope.data = tempObject; 
+         $scope.data = tempObject;
+         $scope.numOfPages() 
         }
         else{
           filteredObjects = $scope.data;
