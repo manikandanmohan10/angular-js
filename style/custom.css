@@ -39,6 +39,12 @@ body{
 .popup-item {
   cursor: pointer;
     padding: 5px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: space-between;
+
+
 } 
 .icon-wrap{
   display: flex;
@@ -446,3 +452,21 @@ nav select {
   grid-auto-flow: column;
   grid-template-columns: 10%;
 } */
+.my-select-td {
+  /* height: 300px; */
+  border: none;
+  min-width: 300px;
+  /* rowspan: "5"; */
+}
+.list-data{
+  list-style: none;
+}
+
+/* table tr:first-child td:first-child {
+  vertical-align: top;
+  column-span: 5;
+  /* height: 300px; */
+
+
+
+

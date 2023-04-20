@@ -110,7 +110,7 @@
         </div>
         <div class="tab-icon" >
          <span >Filter</span>
-         <span>column</span>
+         <span >column</span>
         </div>
         <div class="modal-body">
           <form >
@@ -294,6 +294,7 @@ data-toggle="modal" data-target="#exampleModal"
 
             </div> 
           </th>
+
           <!-- <th>Update</th> -->
         </tr>
       </thead>
@@ -301,6 +302,53 @@ data-toggle="modal" data-target="#exampleModal"
         <tr  draggable="true" id="{{'rows'+i}}"
         ng-repeat="(i, item) in tableData| orderBy: sortedFieldList  track by $index" class="rows active-row dnd-moved">
         <td ng-if="toggleFirstColumn" class="sticky-column-body" style="border: none;">
+
+            <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
+              <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
+                <div style="display: flex;gap: 20px;align-items: center;position: relative;">
+  
+                  <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
+                  {{columns.field}} 
+                  <div style="position: relative;">
+  
+                    <span class="icon material-symbols-outlined list-icon" ng-click="togglePopup($index)">
+                      menu
+                      </span>
+                                        <!-- Popup dropdown container -->
+                        <div id="popup-{{$index}}" class="popup-container">
+                          <!-- Popup dropdown items -->
+                          <div class="popup-item" ng-repeat="option in moreOptions" ng-click="closePopup($index);openColorPicker(option,$index)" >{{option}}</div>
+                      </div>
+                  </div>
+                </div>
+                <div style="display: flex;align-items: center;"  ng-if="!isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+                </div>
+                <div ng-if="isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
+                </div>
+  
+              </div> 
+            </th>
+            <!-- <th>Update</th> -->
+          </tr>
+        </thead>
+        <tbody >
+          <tr  draggable="true" id="{{'rows'+i}}"
+          ng-repeat="(i, item) in tableData| orderBy:sortField:reverse  track by $index" class="rows active-row dnd-moved">
+          
+          <td ng-if="toggleFirstColumn && i === 0" class="sticky-column-body my-select-td" style="border: none;" rowspan="5">
+            <span class="material-symbols-outlined" ng-click="viewlistFunc()">
+              {{expandIcon}}
+              </span>My Views
+            <div ng-if="viewIcon">
+              <ul ng-repeat="data in listData" class="list-data">
+                <li>{{data}}</li>
+              </ul>
+            </div>
+          </td> 
+          <td ng-if="toggleFirstColumn && i > 4" class="sticky-column-body my-select-td" style="border: none;">
+
             
         </td>    
         <td>

@@ -13,6 +13,7 @@ angular.module('myApp', [])
       scope.toggleFirstColumn = false
       scope.message = attrs.type;
       let datas = JSON.parse(attrs.datasource);
+      scope.HeaderColorOptions = JSON.parse(attrs.headercoloroptions);
       scope.moreOptions =  JSON.parse(attrs.moreoptions);
       scope.data = datas.data;
       scope.column = datas.column;
@@ -104,7 +105,6 @@ angular.module('myApp', [])
         }]
       }]
       $scope.checkbox=false;
-      //$scope.tableData = [...$scope.tableData]
       // $scope.myData = ""; // Initialize the variable to hold the input field data
 
       window.addEventListener('keydown', function(event){
@@ -318,37 +318,65 @@ angular.module('myApp', [])
         // Filter 
         console.log($scope.originalData)
           let filteredObjects = []
+          let checkConditions =false;
+          let tempObject = [];
+          let orderedFilterList =[]
+          let filterOrder=['not like', 'like', 'not equal', 'equal']
           // $scope.data=$scope.datas
-          console.log($scope.data, "fdsssssssssssssssssssssssssssssssssssssssssssssssssssssss");
           $scope.tableData = $scope.originalData;
           // console.log($scope.myForm.myFields)
           const filterArr = $scope.myForm.myFields;
-          if (filterArr.length > 0){
-            // console.log("working")
-             filterArr.forEach((filterValue) => {
+
+        
+        filterArr.forEach((da)=>{
+            if(da['condition'].toLowerCase()=='or'){
+              checkConditions= true
+            }
+          }) 
+        if(checkConditions){
+          orderedFilterList=filterArr;
+         }else{
+          filterOrder.forEach((filterorder)=>{
+            filterArr.forEach((filterarr)=>{
+              if((filterarr['expression']).toLowerCase() == filterorder){
+                  orderedFilterList.push(filterarr)
+              }
+            })
+          })
+         }
+        if (orderedFilterList.length > 0){
+             orderedFilterList.forEach((filterValue) => {
         
              if((filterValue.condition).toLowerCase() ==='and' || (filterValue.condition).toLowerCase() === 'where'){
-               filteredObjects = $scope.tableData.filter((col) => {
+              if(orderedFilterList.indexOf(filterValue)==0){
+                 tempObject = $scope.originalData.filter((col) => {
                  return $scope.queryCondition(filterValue, col);
                });
-             }
-             else if (filterValue.condition === "or") {
+              }
+              else{
+                 tempObject = tempObject.filter((col) => {
+                 return $scope.queryCondition(filterValue, col);
+                });
+              }
+            }
+             else if (filterValue.condition.toLowerCase() === "or") {
                filteredObjects = $scope.originalData.filter((col) => {
                  return $scope.queryCondition(filterValue, col);
                });
-             }
-             return false
-        
+                filteredObjects.forEach((da)=>{
+                  if(!tempObject.includes(da)){
+                   tempObject.push(da)
+                  }
+                }) 
+              }
             })
-            $scope.data = filteredObjects; 
-         console.log($scope.tableData);
-        //  $scope.$apply();  
-          }
+            
+         $scope.data = tempObject; 
+        }
         else{
           filteredObjects = $scope.data;
         }
 
-  }
 
 
    $scope.queryCondition= (filterValue,data)=>{
@@ -359,18 +387,42 @@ angular.module('myApp', [])
         }
         return false;
       case 'not equal':
-        if (data[filterValue.columnName.field] !== filterValue.colValue) {
+        if (data[filterValue.columnName.field].toString() !== filterValue.value) {
           return true;
         }
         return false;
       case 'like':
-        return this.filterValuefun(data,filterValue.colValue,filterValue.colName);
+        return $scope.filterValuefun(data,filterValue.value,filterValue.columnName.field);
       case 'not like':
         console.log("not like => ",filterValue)
-        return !this.filterValuefun(data,filterValue.colValue,filterValue.colName);
+        return !$scope.filterValuefun(data,filterValue.value,filterValue.columnName.field);
       default:
         return false
     }
+  }
+
+
+  $scope.filterValuefun = (col,filter,key=null)=> {
+    console.log(col,filter,key)
+    if (key){
+      if(col[key].toString().toLowerCase().includes(filter.toLowerCase())){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else{
+      let keys = Object.keys(col);
+    for(let key of keys){
+      console.log(key)
+      if(col[key].toString().toLowerCase().includes(filter.toLowerCase())){
+        return true;
+      }
+    }
+  }
+    
+    return false
   }
 
       setTimeout(() => {
@@ -510,20 +562,44 @@ angular.module('myApp', [])
   //     }
   // });
     // Function to set dynamic header cell color
-    function setHeaderColor(headerIndex, color) {
-      document.getElementById("header-" + headerIndex).style.backgroundColor = color;
-  }
-
   // Function to open color picker for selecting color
    $scope.openColorPicker = (option,headerIndex) => {
-    if(option === "Set Column Header Color") {
+     $scope.isColorOption = ! $scope.isColorOption;
+     $scope.colorPopupIndex = headerIndex
+   
+  }
 
-      var colorPicker = document.getElementById("color-picker");
-      colorPicker.value = document.getElementById("header-" + headerIndex).style.backgroundColor;
-      colorPicker.addEventListener("change", function() {
-          setHeaderColor(headerIndex, colorPicker.value);
-      });
-      colorPicker.click();
+  $scope.headerColor = (index,color,option, column) => {
+    if(option === "Set Column Header Color") {
+      // var colorPicker = document.getElementById("color-picker");
+      // colorPicker.value = document.getElementById("columns" + headerIndex).style.backgroundColor;
+      // colorPicker.addEventListener("change", function() {
+      //     setHeaderColor(headerIndex, colorPicker.value);
+      // });
+      // colorPicker.click();
+      document.getElementById("columns" + index).style.backgroundColor = color;
+    } else if( option === "Set Full Column Color"){
+      var targetHeaderText = column.field;
+
+// Find the index of the target column
+var targetColumnIndex = -1;
+var table = document.querySelector('.table');
+var headerRow = table.rows[0];
+for (var i = 0; i < headerRow.cells.length; i++) {
+  if (headerRow.cells[i].innerText.includes(targetHeaderText)) {
+    targetColumnIndex = i;
+    break;
+  }
+}
+
+// Set the background color of the cells in the target column
+if (targetColumnIndex !== -1) {
+  var targetCells = table.querySelectorAll('tr td:nth-child(' + (targetColumnIndex + 1) + ')');
+  for (var j = 0; j < targetCells.length; j++) {
+    targetCells[j].style.backgroundColor = color; // Set desired background color for the column
+  }
+}
+      // document.getElementById("cell").style.backgroundColor = color;
     }
   }
      $scope.closePopup = (headerIndex) => {
@@ -646,6 +722,17 @@ angular.module('myApp', [])
 
       return Array(n-1).fill().map((_, index) => index + 1);
     };
+    $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data']
+    $scope.viewIcon = false
+    $scope.expandIcon = 'expand_more'
+    $scope.viewlistFunc = () => {
+      $scope.viewIcon = !$scope.viewIcon
+      if ($scope.viewIcon){
+        $scope.expandIcon = 'expand_less'
+      }else{
+        $scope.expandIcon = 'expand_more'
+      }
+    }
     }
   };
 });
