@@ -306,11 +306,12 @@ data-toggle="modal" data-target="#exampleModal"
           <td>
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>
-          <td ng-keyDown="keyPresses($event, i, j)"
+          <td  
+          ng-keyDown="keyPresses($event, i, j)"
             ng-dblclick="selectCols(i, j)"
             ng-repeat="(j, col) in column"  
             ng-class="{cellColor : col.type == 'number', 'sticky-column-body': col.frozen  }"
-            ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle"
+            ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle "
             ng-if="!item.editable"
           >
             <p id="{{i+'-'+j}}">{{item[col.field]}}</p>

@@ -18,7 +18,12 @@ th, td {
   border: 1px solid #b3a2a2;
   padding: 8px;
   text-align: left;
+  
 }
+td{
+  
+}
+
 body{
   margin: 20px;
 }
@@ -459,3 +464,12 @@ nav select {
 
 
 
+  /* td:hover::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    bottom: -5px;
+    left: -5px;
+    right: -5px;
+    cursor: crosshair; 
