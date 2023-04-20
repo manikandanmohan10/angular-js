@@ -769,6 +769,9 @@ if (targetColumnIndex !== -1) {
       }
     });
     $scope.column = $scope.updatedColumn
+    $scope.searchButton = $event => {
+      console.log($event)
+    }
   }
     
     
