@@ -332,6 +332,9 @@ angular.module('myApp', [])
          $scope.myForm.myFields.splice(index, 1);
        };
        $scope.getColumn = function (index) {
+        if (!index){
+          return
+        }
         if (!$scope.getColumnList){
           $scope.getColumnList = []
         }
