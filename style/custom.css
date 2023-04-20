@@ -464,4 +464,6 @@ nav select {
   font-size: 20px;
 }
 
-
+.view-value{
+  cursor: pointer;
+}
