@@ -31,6 +31,7 @@ angular.module('myApp', [])
      scope.tableData = scope.data.slice(begin, end);
      
       scope.numOfPages = function () {
+        //
         scope.tableData = scope.data.slice(parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
         return Math.ceil(scope.data.length / scope.itemsPerPage);
       
@@ -355,6 +356,8 @@ angular.module('myApp', [])
          // console.log($scope.filterData)
        };
 
+       
+
       $scope.filterTable= ()=>{
         console.log($scope.originalData)
           let filteredObjects = []
@@ -411,7 +414,8 @@ angular.module('myApp', [])
               }
             })
             
-         $scope.data = tempObject; 
+         $scope.data = tempObject;
+         $scope.numOfPages() 
         }
         else{
           filteredObjects = $scope.data;
