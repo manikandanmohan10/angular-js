@@ -222,6 +222,17 @@ display: inline-block;
 .btn-pagination-li{
   padding: 2px;
 }
+.sort-list{
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.sort-key{
+  
+}
+.sort-value{
+
+}
 
 
 
@@ -478,18 +489,37 @@ nav select {
    margin-right: 20px;
 }
 
+.view-title{
+  display: flex;
+  margin: 20px;
+  font-size: 20px;
+}
 
-  /* td:hover::before {
-    content: '';
-    display: block;
+
+.hide-column{
+  position:relative
+}
+.hide-column-list{
+  background-color:#ddd;
+   width:200px;
     position: absolute;
-    top: -5px;
-    bottom: -5px;
-    left: -5px;
-    right: -5px;
-    cursor: crosshair; 
+     z-index: 99;
+}
+.hide-column-list ul{
+  display:flex; 
+  justify-content:
+   space-between;
+   margin-right: 20px;
+}
+
+.view-value{
+  cursor: pointer;
+}
+
 .second-icon{
   border: 1px solid rgb(227 226 226);
   padding: 4px;
   background-color: transparent;
+
 }
+
