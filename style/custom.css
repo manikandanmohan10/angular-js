@@ -456,6 +456,20 @@ nav select {
   column-span: 5;
   /* height: 300px; */
 
-
+.hide-column{
+  position:relative
+}
+.hide-column-list{
+  background-color:#ddd;
+   width:200px;
+    position: absolute;
+     z-index: 99;
+}
+.hide-column-list ul{
+  display:flex; 
+  justify-content:
+   space-between;
+   margin-right: 20px;
+}
 
 
