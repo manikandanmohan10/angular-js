@@ -23,10 +23,18 @@
         </span>
    
   </div>
-  <div class="icon-content">
-    <span class="material-symbols-outlined icon-size">
-      visibility_off
-      </span> {{}} Hidden fields
+  <div class="hide-column">
+    <div class="icon-content"> 
+      <span class="material-symbols-outlined icon-size" ng-click="callDropdown()">
+        visibility_off
+        </span> {{}} Hidden fields
+    </div>
+  <div class="hide-column-list" ng-if="viewHideColumn">
+          <ul  ng-repeat="col in hidingColumnArryList"  class="list-data">
+            <li>{{col.field}}</li>
+            <input  type="checkbox" ng-click="hidingColumn(col.field, $event)"/>
+          </ul>
+      </div>
   </div>
 
   <div class="icon-content">
@@ -242,25 +250,43 @@ data-toggle="modal" data-target="#exampleModal"
 </div>
   </div>
   <div>
-    <table 
-      id="mytable"
-      class="table display styled-table"
-      cellspacing="0"
-      cellpadding="2"
-      ng-table="tableParams"
-    >
-   
-      <thead>
-        <tr  class="dnd-moved">
-          <th>
-          <div style="display:flex; gap: 10px; align-items: center; ">
-            <!-- <div style="align-items: center;di="> -->
-              <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)"/>
-              <label for="" style="margin: 0;"> checkbox</label>
+
+      <table 
+        id="mytable"
+        class="table display styled-table"
+        cellspacing="0"
+        cellpadding="2"
+        ng-table="tableParams"
+      >
+    
+        <thead>
+          <tr  class="dnd-moved">
+            <th ng-if="toggleFirstColumn" class="sticky-column-head">
+              MyViews
+            </th>
+            <th>
             
-            <!-- <div style="margin-top: 3px;">
-            </div> -->
-          <!-- </div> -->
+
+            <div style="display:flex; gap: 10px; align-items: center; ">
+              <div style="align-items: center">
+                <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)"/>
+                <label for="" style="margin: 0;"> checkbox</label>
+              </div>
+              <div ng-click="isHidden = sortBy(columns.field)">
+                <div style="display: flex;align-items: center;" ng-if="!isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+                </div>
+                <div style="display: flex;align-items: center;" ng-if="isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
+                </div>
+              </div>
+              
+
+            </div> 
+
+              <!-- <div style="margin-top: 3px;">
+              </div> -->
+            <!-- </div> -->
 
          </th>
           <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">

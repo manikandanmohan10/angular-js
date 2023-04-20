@@ -80,6 +80,9 @@ angular.module('myApp', [])
     },
     templateUrl: "html/table.html",
     controller: function ($scope) {
+      setTimeout(()=>{
+         $scope.hidingColumnArryList = [...$scope.column];
+      },1000)
       $scope.conditionDropdownItems = ["WHERE", "AND", "OR"];
       $scope.expressionDropdownItems = ["EQUAL","NOT EQUAL", "LIKE", "NOT LIKE", "IN", "NOT IN", "IS"];
       $scope.myForm = {
@@ -761,6 +764,7 @@ if (targetColumnIndex !== -1) {
         $scope.expandIcon = 'expand_more'
       }
     }
+
     $scope.getListValue = function($event){
       console.log($event.currentTarget.textContent)
       $scope.groupValue = $event.currentTarget.textContent
@@ -816,6 +820,31 @@ if (targetColumnIndex !== -1) {
   }
     
     
+    $scope.viewHideColumn = false;
+    $scope.callDropdown = () => {
+      $scope.viewHideColumn = !$scope.viewHideColumn
+    }
+
+    $scope.hidingColumn=(event,item)=>{
+      let checBox =item.target.checked
+      console.log(item)
+      if(checBox){
+         $scope.column.forEach((da)=>{
+        if(da['field']==event){
+          let index= $scope.column.indexOf(da)
+           $scope.column.splice(index,1)
+        }
+      })
+      }
+      else{
+            $scope.hidingColumnArryList.forEach((d)=>{
+               if(d['field']==event){
+                  let index= $scope.hidingColumnArryList.indexOf(d)
+                   $scope.column.splice(index,0,d)
+               }
+            })
+        } 
+    }
     }
   };
 });
