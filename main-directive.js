@@ -393,54 +393,61 @@ angular.module('myApp', [])
         // Filter 
         console.log($scope.originalData)
           let filteredObjects = []
+          let checkConditions =false;
           let tempObject = [];
           let orderedFilterList =[]
-          let filterOrder=['not like', 'not equal', 'like', 'equal']
+          let filterOrder=['not like', 'like', 'not equal', 'equal']
           // $scope.data=$scope.datas
           $scope.tableData = $scope.originalData;
           // console.log($scope.myForm.myFields)
           const filterArr = $scope.myForm.myFields;
-          
+
+        
+        filterArr.forEach((da)=>{
+            if(da['condition'].toLowerCase()=='or'){
+              checkConditions= true
+            }
+          }) 
+        if(checkConditions){
+          orderedFilterList=filterArr;
+         }else{
           filterOrder.forEach((filterorder)=>{
             filterArr.forEach((filterarr)=>{
               if((filterarr['expression']).toLowerCase() == filterorder){
                   orderedFilterList.push(filterarr)
               }
             })
-
           })
-          if (orderedFilterList.length > 0){
-            // console.log("working")
+         }
+        if (orderedFilterList.length > 0){
              orderedFilterList.forEach((filterValue) => {
         
              if((filterValue.condition).toLowerCase() ==='and' || (filterValue.condition).toLowerCase() === 'where'){
-               tempObject = $scope.tableData.filter((col) => {
+              if(orderedFilterList.indexOf(filterValue)==0){
+                 tempObject = $scope.originalData.filter((col) => {
                  return $scope.queryCondition(filterValue, col);
                });
-                tempObject.forEach((da)=>{
-                if(!filteredObjects.includes(da)){
-                 filteredObjects.push(da)
               }
-            })
-             }
-             else if (filterValue.condition === "or") {
-               tempObject = $scope.originalData.filter((col) => {
+              else{
+                 tempObject = tempObject.filter((col) => {
+                 return $scope.queryCondition(filterValue, col);
+                });
+              }
+            }
+             else if (filterValue.condition.toLowerCase() === "or") {
+               filteredObjects = $scope.originalData.filter((col) => {
                  return $scope.queryCondition(filterValue, col);
                });
-                tempObject.forEach((da)=>{
-                if(!filteredObjects.includes(da)){
-                 filteredObjects.push(da)
+                filteredObjects.forEach((da)=>{
+                  if(!tempObject.includes(da)){
+                   tempObject.push(da)
+                  }
+                }) 
               }
-            }) 
-             }
-           
-           
             })
             
-            $scope.data = filteredObjects; 
-         console.log($scope.tableData);
-        //  $scope.$apply();  
-          }
+         $scope.data = tempObject; 
+        }
         else{
           filteredObjects = $scope.data;
         }
@@ -476,6 +483,9 @@ angular.module('myApp', [])
     if (key){
       if(col[key].toString().toLowerCase().includes(filter.toLowerCase())){
         return true;
+      }
+      else{
+        return false;
       }
     }
     else{
