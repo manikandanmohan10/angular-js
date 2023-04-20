@@ -291,6 +291,9 @@ data-toggle="modal" data-target="#exampleModal"
           ng-repeat="(i, item) in tableData | orderBy:sortField:reverse  track by $index" class="rows active-row dnd-moved">
           
           <td ng-if="toggleFirstColumn && i === 0" class="sticky-column-body my-select-td" style="border: none;" rowspan="20">
+            <div>
+              <input type="search" placeholder="Search"> 
+            </div>
             <span class="material-symbols-outlined" ng-click="viewlistFunc()">
               {{expandIcon}}
               </span>My Views
