@@ -18,7 +18,6 @@ angular.module('myApp', [])
       scope.data = datas.data;
       scope.column = datas.column;
       scope.tableData = [];
-      scope.tableColumn = scope.column
       scope.curPage = 1,
       scope.itemsPerPage = 5,
       scope.maxSize = 5;
@@ -32,8 +31,7 @@ angular.module('myApp', [])
      scope.tableData = scope.data.slice(begin, end);
      
       scope.numOfPages = function () {
-        //
-        // scope.tableData = scope.data.slice(parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
+        scope.tableData = scope.data.slice(parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
         return Math.ceil(scope.data.length / scope.itemsPerPage);
       
       };
@@ -42,7 +40,6 @@ angular.module('myApp', [])
         if (scope.curPage > 1) {
           scope.curPage--;
         }
-        scope.tableData = scope.data.slice(parseInt(scope.curPage) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage) * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
       };
       
       // Function to handle next page button click
@@ -155,13 +152,6 @@ angular.module('myApp', [])
              { condition: "WHERE", columnName: "", expression: "", value: "" },
            ],
          };
-
-      $scope.ColumnForm = {
-        myFields:[
-          {name: "", no: ""},
-        ],
-        arrangement: "",
-      }
       $scope.selectedCell = [];
       $scope.parents = [{
         name: 'sabari',
@@ -331,18 +321,6 @@ angular.module('myApp', [])
        $scope.removeField = function (index) {
          $scope.myForm.myFields.splice(index, 1);
        };
-       $scope.getColumn = function (index) {
-        if (!index){
-          return
-        }
-        if (!$scope.getColumnList){
-          $scope.getColumnList = []
-        }
-        $scope.getColumnList.push(index)
-       };
-       $scope.removeColumn = function(index){
-        $scope.getColumnList.splice(index, 1)
-       }
        $scope.addField = function () {
          var field = {
            condition: "",
@@ -378,19 +356,6 @@ angular.module('myApp', [])
        };
 
       $scope.filterTable= ()=>{
-        // column start
-        if ($scope.getColumnList.length){
-          $scope.column = $scope.tableColumn.filter((item) => {
-            return $scope.getColumnList.includes(item.field);
-          });
-        }
-        else{
-          
-          $scope.column = $scope.tableColumn
-        }
-        
-        // column end
-        // Filter 
         console.log($scope.originalData)
           let filteredObjects = []
           let checkConditions =false;
@@ -451,8 +416,7 @@ angular.module('myApp', [])
         else{
           filteredObjects = $scope.data;
         }
-
-  }
+      }
 
 
    $scope.queryCondition= (filterValue,data)=>{
@@ -718,71 +682,12 @@ if (targetColumnIndex !== -1) {
      
     };
     // sort
-
-    $scope.sortByField = function(field){
-      if (!$scope.sortedFieldDict) {
-        $scope.sortedFieldDict = {};
-      }
+    $scope.sortBy = function(field){
+      $scope.sortField = field;
+      
       $scope.reverse = !$scope.reverse;
-      
-      $scope.sortedFieldDict[field] = $scope.reverse
-
-      $scope.updateSortList()
-      
-      $scope.sortField = ''
-      return  $scope.reverse
-    };
-
-    $scope.sortBy = function(field, bolval=true){
-      if (!$scope.sortedFieldDict) {
-        $scope.sortedFieldDict = {};
-      }
-      $scope.reverse = bolval;
-      $scope.sortedFieldDict[field] = $scope.reverse
-
-      $scope.updateSortList()
-      
-      $scope.sortField = ''
-      return  $scope.reverse
-    };
-    $scope.updateSortList = function(){
-      $scope.sortedFieldList = []
-      for (let name in $scope.sortedFieldDict ){
-            if ($scope.sortedFieldDict[name]) {
-              $scope.sortedFieldList.push(name)
-            }
-            else{
-              $scope.sortedFieldList.push('-'+name)
-              
-            }
-            
-          }
+      return $scope.reverse
     }
-    $scope.updateMyObj = function() {
-      if ($scope.sortField) {
-        $scope.sortBy($scope.sortField)
-      } 
-    };
-    $scope.updateAscDsc = function(key, val){
-      if(val){
-        val = false
-      }
-      else{
-        val = true
-      }
-      $scope.sortBy(key, val)
-    };
-
-    $scope.removeSort = function(key){
-      delete $scope.sortedFieldDict[key];
-      $scope.updateSortList()
-    };
-    $scope.findsortorder = function(key){
-      if (!$scope.sortedFieldDict){
-        return true
-      }
-      return $scope.sortedFieldDict[key]
-    };
     $scope.showSortPopup = function(event) {
       $scope.sortPopupVisible = true;
       $scope.popupPosition = {
