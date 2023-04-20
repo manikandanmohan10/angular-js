@@ -450,6 +450,7 @@ nav select {
   /* height: 300px; */
   border: none;
   min-width: 300px;
+  width: 300px;
   /* rowspan: "5"; */
 }
 .list-data{

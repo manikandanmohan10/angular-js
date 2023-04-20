@@ -1,6 +1,6 @@
 
 angular.module('myApp', [])
-.directive('myDirective', function() {
+.directive('myDirective', function($http) {
   return {
     restrict: "AEC",
     scope: {
@@ -690,17 +690,88 @@ if (targetColumnIndex !== -1) {
 
       return Array(n-1).fill().map((_, index) => index + 1);
     };
-    $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data']
+    $scope.groupValue = '1. Review'
+    $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data', 'Sixth Data', 'Seventh Data', 'Eighth Data', 'Ninth Data', 'Tenth Data'];
+    
     $scope.viewIcon = false
     $scope.expandIcon = 'expand_more'
     $scope.viewlistFunc = () => {
       $scope.viewIcon = !$scope.viewIcon
       if ($scope.viewIcon){
+        // $http({
+        //   method: 'POST',
+        //   url: 'https://c236-14-98-32-198.ngrok-free.app/register',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   data: {
+        //     name: 'rafiq2s3332343',
+        //     password: 'rafiq232ssfds33@gmail.com'
+        //   }
+        // }).then(function successCallback(response) {
+        //   // This function will be called if the API call is successful
+        //   $scope.listData = response.data;
+        // }, function errorCallback(response) {
+        //   // This function will be called if there is an error with the API call
+        //   console.error('Error retrieving data:', response.status, response.statusText);
+        // });
+
         $scope.expandIcon = 'expand_less'
       }else{
         $scope.expandIcon = 'expand_more'
       }
     }
+    $scope.getListValue = function($event){
+      console.log($event.currentTarget.textContent)
+      $scope.newColumn = [{
+        field: "name",
+        type: "input",
+        dataType: 'input',
+        editable: true,
+      },
+      {
+        field: "phone",
+        type: "input",
+        dataType: 'input',
+        editable: true,
+      },
+      {
+        field: "email",
+        type: "input",
+        dataType: 'email',
+        editable: false,
+      },
+      {
+        field: "address",
+        type: "input",
+        dataType: 'text',
+        editable: true,
+      },
+      {
+        field: "postalZip",
+        type: "input",
+        dataType: 'input',
+        editable: true,
+      },
+     ]
+    //  $scope.column = $scope.newColumn
+
+    // $scope.columnList = $scope.newColumn.map(item => {
+    //   return item.field
+    // })
+
+    $scope.columnList = ['name', 'phone']
+
+    $scope.updatedColumn = []
+    $scope.column.forEach(column => {
+      if ($scope.columnList.includes(column.field)) {
+        $scope.updatedColumn.push(column)
+      }
+    });
+    $scope.column = $scope.updatedColumn
+  }
+    
+    
     }
   };
 });
