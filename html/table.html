@@ -116,8 +116,8 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="tab-icon" >
-         <span ng-click="filter_column = true">Filter</span>
-         <span ng-click="filter_column = false" >column</span>
+         <span ng-click="filter_column = true" ng-style="filter_column && {'background-color':'#337ab7'}">Filter</span>
+         <span ng-click="filter_column = false" ng-style="!filter_column && {'background-color':'#337ab7'}">column</span>
         </div>
        
         <div class="modal-body">
@@ -174,7 +174,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button ng-if="filter_column" type="button" class="btn btn-primary" ng-click="filterTable()"> filter</button>
+          <button ng-if="filter_column" type="button" class="btn btn-primary" ng-click="filterTable()" > filter</button>
           <button  ng-if="!filter_column" type="button" class="btn btn-primary" ng-click="viewTable()"> View</button>
         </div>
       </div>
