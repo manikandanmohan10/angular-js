@@ -114,16 +114,16 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <div class="tab-icon" >
-            <span >Filter</span>
-            <span >column</span>
-           </div> 
+        </div>
+        <div class="tab-icon" >
+         <span ng-click="filter_column = !filter_column">Filter</span>
+         <span ng-click="filter_column = !filter_column" >column</span>
         </div>
        
         <div class="modal-body">
           <form >
             <!-- Display existing formArray fields -->
-            <div ng-repeat="field in myForm.myFields" class="filterArray">
+            <div ng-repeat="field in myForm.myFields" class="filterArray"  ng-if="filter_column">
               <select ng-model="field.condition" ng-options="item for item in conditionDropdownItems">
                 <option value="">Select an option</option>
               </select>
@@ -142,7 +142,7 @@
             </div>
           
             <!-- Add new formArray field -->
-            <button class=" btn icon" ng-click="addField()"><span class="material-symbols-outlined filter-box-icon">
+            <button ng-if="filter_column" class=" btn icon" ng-click="addField()"><span class="material-symbols-outlined filter-box-icon">
               add
               </span></button>
           
@@ -150,11 +150,11 @@
             <!-- <button ng-click="submitForm()">Submit</button> -->
           </form>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" ng-if="!filter_column">
           <form >
             <div class="tab-icon">
               <input type="text" ng-model="searchItem" value=""/>
-              <button class=" btn icon" ng-click="getColumn(searchItem)"><span class="material-symbols-outlined filter-box-icon">
+              <button class="btn icon"><span style="background-color: none;" ng-click="getColumn(searchItem)" class="material-symbols-outlined filter-box-icon">
                 search 
                 </span>
               </button>
@@ -174,7 +174,8 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="filterTable()"> View</button>
+          <button ng-if="filter_column" type="button" class="btn btn-primary" ng-click="filterTable()"> filter</button>
+          <button  ng-if="!filter_column" type="button" class="btn btn-primary" ng-click="viewTable()"> View</button>
         </div>
       </div>
     </div>
@@ -289,7 +290,7 @@ data-toggle="modal" data-target="#exampleModal"
             <!-- </div> -->
 
          </th>
-          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
+          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-dblclick="freezeColumn($index,columns.field)">
             <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
               <div style="display: flex;gap: 20px;align-items: center;position: relative;">
 

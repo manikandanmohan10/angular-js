@@ -83,6 +83,7 @@ angular.module('myApp', [])
       setTimeout(()=>{
          $scope.hidingColumnArryList = [...$scope.column];
       },1000)
+      $scope.filter_column=true;
       $scope.conditionDropdownItems = ["WHERE", "AND", "OR"];
       $scope.expressionDropdownItems = ["EQUAL","NOT EQUAL", "LIKE", "NOT LIKE", "IN", "NOT IN", "IS"];
       $scope.myForm = {
@@ -312,21 +313,20 @@ angular.module('myApp', [])
          // console.log($scope.filterData)
        };
 
-       
+      $scope.viewTable =() =>{
+         if ($scope.getColumnList.length){
+          $scope.column = $scope.tableColumn.filter((item) => {
+            return $scope.getColumnList.includes(item.field);
+          });
+        }
+        else{      
+          $scope.column = $scope.tableColumn
+        }
+        
+
+      }
 
       $scope.filterTable= ()=>{
-        // column start
-        // if ($scope.getColumnList.length){
-        //   $scope.column = $scope.tableColumn.filter((item) => {
-        //     return $scope.getColumnList.includes(item.field);
-        //   });
-        // }
-        // else{
-          
-        //   $scope.column = $scope.tableColumn
-        // }
-        
-        // column end
         // Filter 
         console.log($scope.originalData)
           let filteredObjects = []
