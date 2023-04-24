@@ -476,7 +476,7 @@ data-toggle="modal" data-target="#exampleModal"
     <div class="page-selection">
       <ul class="pagination-list" style="display: flex; list-style: none;">
        
-        <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li" ng-if="curPage !== 1">
+        <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li" ng-if="numOfPages() !== 0 && curPage !== 1">
           <a class="btn-pagination" href="#" ng-click="prevPage()">Previous</a>
         </li>
         
@@ -486,9 +486,11 @@ data-toggle="modal" data-target="#exampleModal"
           </li>
           
         </div>
-        <li ng-class="{disabled: curPage === numOfPages()}" class="btn-pagination-li"  ng-if="curPage !== numOfPages()">
-          <a  class="btn-pagination" href="#" ng-click="nextPage()">Next</a>
-        </li>
+        <div  ngIf="!(curPage === numOfPages())">
+          <li ng-class="{disabled: curPage === numOfPages()}" class="btn-pagination-li">
+            <a  class="btn-pagination" href="#" ng-click="nextPage()">Next</a>
+          </li>
+        </div>
         
       </ul>
     </div>
