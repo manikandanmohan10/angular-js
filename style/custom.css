@@ -28,8 +28,6 @@ body{
   .popup-container {
     display: none;
     position: absolute;
-    /* top: 40px; */
-    /* right: 0; */
     background-color: #fff;
     width: max-content;
     font-size: 14px;
@@ -45,9 +43,26 @@ body{
     align-items: center;
     gap: 50px;
     justify-content: space-between;
+}
+.popup-content-header{
+  background-color: #009879;
+  padding: 20px;
 
+}
+.icon-text{
+  margin-left: 5px;
+}
+.card-header{
+  display: flex;
 
-} 
+}
+.custom{
+  overflow: auto;
+  height: 200px;
+}
+.option-val:hover{
+background-color: #ccc;
+}
 .icon-wrap{
   display: flex;
   align-items: center;
@@ -165,7 +180,8 @@ select{
   background-color: white;
   border: 1px solid black;
   padding: 20px;
-  z-index: 1;
+  z-index: 999;
+  width: 25%;
 }
 .popup.ng-show {
   display: block;
@@ -175,7 +191,7 @@ select{
   display: none;
 }
 
-.popup:before {
+/* .popup:before {
   content: '';
   position: absolute;
   top: -10px;
@@ -183,8 +199,8 @@ select{
   transform: translateX(-50%);
   border: 10px solid transparent;
   border-bottom-color: black;
-}
-
+} */
+/*
 .popup:after {
   content: '';
   position: absolute;
@@ -193,7 +209,7 @@ select{
   transform: translateX(-50%);
   border: 9px solid transparent;
   border-bottom-color: white;
-}
+} */
 
 .popup h1 {
   margin-top: 0;
@@ -230,13 +246,30 @@ display: inline-block;
   grid-template-columns: auto auto;
 }
 .sort-key{
-  
+  width: 50%;
+  padding-right: 20px;
 }
 .sort-value{
+  width: 40%;
 
 }
+.grid{
+  width: 100%;
+}
+.btn.icon{
+  float: right;
+}
+.card-btn{
+  float: right;
+}
+.btn-primary{
+  background-color: rgb(22, 22, 235);
 
+}
+.btn-primary:hover{
+  background-color: rgb(53, 53, 212);
 
+}
 
 /* Style the navigation menu */
 nav {
@@ -606,61 +639,4 @@ nav select {
   border-left-style: hidden;
   border-bottom-style: groove;
   background-color: #eee;
-}
-
-
-/* .table th.freeze,
-.table td.freeze {
-  position: sticky;
-  z-index: 1;
-}
-
-.table th.freeze {
-  left: 0;
-  background-color: #f2f2f2;
-}
-
-.table td.freeze {
-  left: 0;
-  background-color: #fff;
-}
-
-.table th.freeze.row,
-.table td.freeze.row {
-  top: 0;
-  background-color: #f2f2f2;
-}
-
-.table td.freeze.row {
-  top: 0;
-  background-color: #fff;
-}
-
-.selected {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.table::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 8px;
-  height: 100%;
-  background-color: #fff;
-  pointer-events: none;
-} */
-.freeze{
-  position: sticky !important;
-  left: 0px;
-  z-index: 1;
-  background-color: #009879;
-}
-
-.freeze-body{
-  position: sticky !important;
-  left: 0;
-  z-index: 1;
-  background-color: rgb(240, 240, 240);
 }

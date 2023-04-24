@@ -54,36 +54,57 @@
       </span> Group
   </div>
   <!-- Sort -->
-  <button ng-click="showSortPopup($event)">
     <div class="icon-content">
       
-      <span class="material-symbols-outlined icon-size" >
+      <span class="material-symbols-outlined icon-size" ng-click="showSortPopup($event); columnDatatype(); " >
         swap_vert
-        </span> Sort  
+        </span> Sort
         
     </div>
-</button> 
-<div class="popup" ng-show="sortPopupVisible" ng-style="popupPosition">
-  <h4>Sort Options</h4>
+<div  class="popup" ng-show="sortPopupVisible" ng-style="popupPosition">
+  <h4>
+    Sort by
+  </h4>
 
+  <hr/>
+  
   <div ng-repeat="(key, value) in sortedFieldDict" class="sort-list">
-    <span>
-      <span class="sort-key">{{ key }}</span>
-      <button class="sort-value" ng-click="updateAscDsc(key, value)">
-        <span ng-if="value">Asc</span>
-        <span ng-if="!value">Dsc</span>
-      </button>
-      <button class="btn icon" ng-click="removeSort(key)"><span class="material-symbols-outlined filter-box-icon">
+    <div class="grid">
+      <span class="sort-key">{{  key }}</span>
+      {{}}
+      <span class="sort-number" ng-if="columnDatatypeDict[key] === 'number'">
+        1-9
+      </span>
+      <span class="sort-letter"  ng-if="!(columnDatatypeDict[key] === 'number')">
+        A-Z
+      </span>
+      <span class="sort-value" ng-click="updateAscDsc(key, value)">
+        <span ng-if="value"><span class="material-symbols-outlined">
+          arrow_upward
+          </span></span>
+        <span ng-if="!value"><span class="material-symbols-outlined">
+          arrow_downward
+          </span></span>
+        </span>
+      <button type="button"  class="btn icon card-btn" ng-click="removeSort(key)"><span class="material-symbols-outlined filter-box-icon">
         delete
         </span></button>
-    </span>
+      </div>
     
   </div>
 
-  <select class="custom-select" ng-model="sortField" ng-change="updateMyObj()" id="exampleFormControlSelect2">
-    <option ng-repeat="col in column" value="{{col.field}}" ng-selected="col === SortColumn">{{col.field}}</option> 
-  </select>
-  <button ng-click="hideSortPopup()">Close Popup</button>
+  <div class="card-header " ng-click="showOptions = !showOptions" >
+      <span class="material-symbols-outlined" class="custom-select" ng-model="sortField" ng-change="updateMyObj()" >
+        add
+      </span>
+      <span class="icon-text">Add Another field </span>    
+  </div>
+  
+  <div class="custom" ng-model="sortField"  ng-show="showOptions"  id="exampleFormControlSelect2" > 
+    <h5>Find a Field</h5>
+    <div class="option-val" ng-repeat="col in column" value="{{col.field}}" ng-click="updateMyObj(col.field);">{{col.field}}</div> 
+  </div>
+  <button class="btn btn-primary  card-btn" ng-click="hideSortPopup()">Close Popup</button>
 </div>
 
 
@@ -279,17 +300,7 @@ data-toggle="modal" data-target="#exampleModal"
                 <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)"/>
                 <label for="" style="margin: 0;"> checkbox</label>
               </div>
-              <div ng-click="isHidden = sortBy(columns.field)">
-                <div style="display: flex;align-items: center;" ng-if="!isHidden">
-                  <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
-                </div>
-                <div style="display: flex;align-items: center;" ng-if="isHidden">
-                  <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
-                </div>
-              </div>
-              <div ng-click="sortByField(columns.field)">
-
-            </div> 
+              
 
               <!-- <div style="margin-top: 3px;">
               </div> -->
@@ -326,13 +337,14 @@ data-toggle="modal" data-target="#exampleModal"
                     </div>
                 </div>
               </div>
-              <div style="display: flex;align-items: center;"  ng-if="!isHidden">
-                <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+              <div ng-click="isHidden = sortBy(columns.field)">
+                <div style="display: flex;align-items: center;" ng-if="!isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+                </div>
+                <div style="display: flex;align-items: center;" ng-if="isHidden">
+                  <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
+                </div>
               </div>
-              <div ng-if="isHidden">
-                <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
-              </div>
-
             </div> 
           </th>
           <th>Checkbox</th>
