@@ -1057,6 +1057,18 @@ if (targetColumnIndex !== -1) {
       $scope.filterIcon = !$scope.filterIcon
     }
   
+
+    $scope.flagIcon = (index) => {
+      // $scope.myFlagCheckboxModel = !$scope.myFlagCheckboxModel
+      if(!$scope.checked.includes(index)){
+        checked.push(index)
+      }else{
+        var checkbox =$scope.checked.indeof(index)
+        $scope.checked.splice(checkbox,1)
+      }
+      console.log($scope.checked)
+    }
+    
     }
   };
 });
