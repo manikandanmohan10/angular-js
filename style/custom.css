@@ -597,55 +597,11 @@ nav select {
 }
 .disabled{
   display: block;
-}
-.disabled{
-  display: block;
+
 }
 
 
 
-/* .table th.freeze,
-.table td.freeze {
-  position: sticky;
-  z-index: 1;
-}
-
-.table th.freeze {
-  left: 0;
-  background-color: #f2f2f2;
-}
-
-.table td.freeze {
-  left: 0;
-  background-color: #fff;
-}
-
-.table th.freeze.row,
-.table td.freeze.row {
-  top: 0;
-  background-color: #f2f2f2;
-}
-
-.table td.freeze.row {
-  top: 0;
-  background-color: #fff;
-}
-
-.selected {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.table::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 8px;
-  height: 100%;
-  background-color: #fff;
-  pointer-events: none;
-} */
 .freeze{
   position: sticky !important;
   left: 0px;
