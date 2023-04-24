@@ -21,119 +21,139 @@ module.controller("exampleCtrl", function($scope) {
           type: "input",
           dataType: 'input',
           editable: true,
+          checked:false
         },
         {
           field: "phone",
           type: "input",
           dataType: 'input',
           editable: true,
+          checked:false
         },
         {
           field: "email",
           type: "input",
           dataType: 'email',
           editable: false,
+          checked:false
         },
         {
           field: "address",
           type: "input",
           dataType: 'text',
           editable: true,
+          checked:false
         },
         {
           field: "postalZip",
           type: "input",
           dataType: 'input',
           editable: true,
+          checked:false
         },
         {
           field: "region",
           type: "input",
           dataType: 'input',
           editable: true,
+          checked:false
         },
         {
           field: "country",
           type: "input",
           dataType: 'input',
           editable: true,
+          checked:false
         },
         {
           field: "list",
           type: "input",
           dataType: 'list',
           editable: true,
+          checked:false
         },
         {
           field: "text",
           type: "input",
           dataType: 'text',
           editable: true,
+          checked:false
         },
         {
           field: "numberrange",
           type: "input",
           dataType: "number",
           editable: true,
+          checked:false
         },
         {
             field: "alphanumeric",
             type: "input",
             editable: true,
+            checked:false
         },
         {
           field: "currency",
           type: "number",
           editable: true,
+          checked:false
         },
         {
           field: "date",
           type: "input",
           dataType: 'date',
           editable: true,
+          checked:false
         },
         {
           field: "constant",
           type: "input",
           dataType: 'input',
           editable: true,
+          checked:false
         },
         {
           field: "company",
           type: "input",
           dataType: 'input',
           editable: true,
+          checked:false
         },
         {
           field: "boolean",
           type: "input",
           dataType: 'boolean',
           editable: true,
+          checked:false
         },
         {
           field: "list1",
           type: "input",
           dataType: 'list',
           editable: true,
+          checked:false
         },
         {
           field: "guid",
           type: "input",
           dataType: 'input',
           editable: true,
+          checked:false
         },
         {
           field: "cvv",
           type: "input",
           dataType: 'number',
           editable: true,
+          checked:false
         },
         {
           field: "track2",
           type: "input",
           dataType: 'input',
           editable: true,
-        }
+          checked:false
+        },
       ],
 
       data: [

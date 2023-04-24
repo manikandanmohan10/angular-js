@@ -27,12 +27,16 @@
     <div class="icon-content"> 
       <span class="material-symbols-outlined icon-size" ng-click="callDropdown()">
         visibility_off
-        </span> {{}} Hidden fields
+        </span> <span ng-if="(hidingColumnArryList.length - column.length) >=1">{{hidingColumnArryList.length - column.length}}</span> Hidden fields
     </div>
-  <div class="hide-column-list" ng-if="viewHideColumn">
-          <ul  ng-repeat="col in hidingColumnArryList"  class="list-data">
+      <div class="hide-column-list" ng-if="viewHideColumn">
+          <div>
+            <input style="max-width: 135px;" placeholder="Filter" ng-model="FilterHidenList" type="serach" ng-change="hidenColumnFilter(FilterHidenList)" />
+            <span class="material-symbols-outlined">help</span>
+          </div>
+          <ul  ng-repeat="col in hidingColumnArryList" draggable="true" class="list-data">
             <li>{{col.field}}</li>
-            <input  type="checkbox" ng-click="hidingColumn(col.field, $event)"/>
+            <input  type="checkbox" ng-model="col.checked"  ng-click="hidingColumn(col.field, $event)"/>
           </ul>
       </div>
   </div>
