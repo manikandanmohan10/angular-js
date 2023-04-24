@@ -183,6 +183,7 @@ angular.module('myApp', [])
       $scope.filter_column=true;
       $scope.conditionDropdownItems = ["WHERE", "AND", "OR"];
       $scope.expressionDropdownItems = ["EQUAL","NOT EQUAL", "LIKE", "NOT LIKE", "IN", "NOT IN", "IS"];
+      $scope.checked=[]
       $scope.myForm = {
            myFields: [
              { condition: "WHERE", columnName: "", expression: "", value: "" },
