@@ -258,9 +258,6 @@ display: inline-block;
 .grid{
   width: 100%;
 }
-.btn.icon{
-  float: right;
-}
 .card-btn{
   float: right;
 }
