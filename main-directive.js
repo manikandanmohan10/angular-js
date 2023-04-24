@@ -913,8 +913,10 @@ if (targetColumnIndex !== -1) {
       $scope.sortPopupVisible = false;
     };
     $scope.generateArray = function(n) {
-
-      return Array(n-1).fill().map((_, index) => index + 1);
+      if (n){
+        return Array(n-1).fill().map((_, index) => index + 1);
+      }
+      return 0;
     };
     $scope.groupValue = 'No Views'
     $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data'];

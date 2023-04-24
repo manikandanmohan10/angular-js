@@ -567,6 +567,9 @@ nav select {
   background-color: transparent;
 
 }
+.disabled{
+  display: block;
+}
 
 
 
