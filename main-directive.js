@@ -83,6 +83,73 @@ angular.module('myApp', [])
       setTimeout(()=>{
          $scope.hidingColumnArryList = [...$scope.column];
       },1000)
+
+      setTimeout(() => {
+        var cells = document.getElementsByTagName("td");
+
+      // Loop through each cell
+      for (var i = 0; i < cells.length; i++) {
+        // Add event listener for mouseover event
+        cells[i].addEventListener("mouseover", function(event) {
+          // Check if mouse pointer is near the right or bottom edge of the cell
+          var rect = this.getBoundingClientRect();
+          var x = event.clientX;
+          var y = event.clientY;
+          var rightEdge = rect.right;
+          var bottomEdge = rect.bottom;
+          var leftEdge = rect.left;
+          var topEdge = rect.top;
+          if (x >= rightEdge - 5 || y >= bottomEdge - 5 ||x <=leftEdge +5 || y <= topEdge + 5) {
+            
+            console.log(rightEdge,x)
+            // Set cursor to "se-resize" to indicate resizing is possible
+            this.style.cursor = "cell";
+            // Add event listener for mousedown event
+            this.addEventListener("mousedown", startResize);
+          } else {
+            // Reset cursor to default
+            this.style.cursor = "default";
+            // Remove event listener for mousedown event
+            this.removeEventListener("mousedown", startResize);
+          }
+        });
+      }
+      
+      // Function to handle mousedown event for resizing
+      function startResize(event) {
+        var cell = this;
+        var originalWidth = cell.offsetWidth;
+        var originalHeight = cell.offsetHeight;
+        var originalX = event.clientX;
+        var originalY = event.clientY;
+      
+        // Add event listener for mousemove event
+        document.addEventListener("mousemove", resize);
+      
+        // Add event listener for mouseup event
+        document.addEventListener("mouseup", stopResize);
+      
+        // Function to handle mousemove event for resizing
+        function resize(event) {
+          console.log('ladkfjsal', cell.style)
+          var width = originalWidth + (event.clientX - originalX);
+          var height = originalHeight + (event.clientY - originalY);
+          cell.style.minWidth = width + "px";
+          cell.style.height = height + "px";
+          
+        }
+      
+        // Function to handle mouseup event to stop resizing
+        function stopResize() {
+          // Remove event listeners for mousemove and mouseup events
+          document.removeEventListener("mousemove", resize);
+          document.removeEventListener("mouseup", stopResize);
+        }
+      }
+      }, 1000);
+      
+      
+
       $scope.filter_column=true;
       $scope.conditionDropdownItems = ["WHERE", "AND", "OR"];
       $scope.expressionDropdownItems = ["EQUAL","NOT EQUAL", "LIKE", "NOT LIKE", "IN", "NOT IN", "IS"];
@@ -390,7 +457,8 @@ angular.module('myApp', [])
           filteredObjects = $scope.data;
         }
 
-  }
+      }
+
 
 
    $scope.queryCondition= (filterValue,data)=>{
