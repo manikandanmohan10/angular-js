@@ -609,6 +609,21 @@ nav select {
   background-color: #ddd;
 }
 
+.hide-column-list div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px solid rgb(123, 123, 123);
+  margin: 5px;
+}
+
+.hide-column-list input{
+
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
+}
 .freeze-body{
   position: sticky !important;
   left: 0;
