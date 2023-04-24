@@ -85,6 +85,26 @@ angular.module('myApp', [])
       },1000)
 
       setTimeout(() => {
+        var style = document.getElementById(`columns0`)
+        var colsHeadStyle = window.getComputedStyle(style)
+        var colsHeadWidth = colsHeadStyle.getPropertyValue("width");
+        console.log(colsHeadWidth,colsHeadStyle)
+      var colsHead = document.querySelector(`#myTable th:nth-child(2)`);
+      // const nextHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +3})`);
+      var cols = document.querySelectorAll(`#myTable tbody td:nth-child(2)`);
+        console.log(cols,colsHead)
+        cols.forEach(cell => {
+          cell.style.position='sticky';
+          cell.style.left = '128.85px'
+          cell.style.backgroundColor = '#f0f0f0'
+        });
+        // console.log(header,cells)
+        colsHead.style.position='sticky';
+        colsHead.style.left = '128.85px'
+        colsHead.style.backgroundColor = '#009879'
+        colsHead.style.zIndex = 2
+
+
         var cells = document.getElementsByTagName("td");
 
       // Loop through each cell
@@ -703,23 +723,98 @@ if (targetColumnIndex !== -1) {
     
 
     // Function to freeze a column based on user input
-    $scope.freezeColumn = function(index,field) {
+    $scope.freezeColumn = function(index,field,event) {
+     console.log(event.target)
+     const styleElement = document.createElement('style'); // create a new style element
+     document.head.appendChild(styleElement); // append the style element to the head of the document
      
+     const styleSheet = styleElement.sheet;
+     cell=event.target
+     if(cell.tagName == 'TH' || cell.tagName == 'TD'){
+      var cellLeft = cell.offsetLeft;
+      var cellHeight = cell.offsetHeight;
+      
+     }
       $scope.freezeColumnIndex = index
       console.log($scope.column)
       if ($scope.freezeColumnIndex !== null && $scope.freezeColumnIndex >= 0 && $scope.freezeColumnIndex < $scope.column.length) {
         
-        var forzenCount =0;
-        angular.forEach($scope.column, (col)=>{
-          if(col.field === field){
-              $scope.column[$scope.freezeColumnIndex].frozen = !$scope.column[$scope.freezeColumnIndex].frozen;
-            }
-            else{
-              col.frozen = false;
+        // var forzenCount =0;
+        // angular.forEach($scope.column, (col)=>{
+        //   if(col.field === field){
+        //     const cssRule = `.freeze{
+        //       position: sticky;
+        //       left: 0;
+        //       z-index: 1;
+        //       background-color: #009879;}`
+        //       // $scope.column[$scope.freezeColumnIndex].frozen = !$scope.column[$scope.freezeColumnIndex].frozen;
+        //       styleSheet.insertRule(cssRule,0)
+        //       cell.style.position='sticky';
+        //       cell.style.left = cellLeft+'px'
+        //       console.log(cell)
 
-            }
-        })
-        console.log($scope.column[$scope.freezeColumnIndex])
+        //     }
+        //     else{
+        //       // col.frozen = false;
+
+        //     }
+        // })
+
+        var frozenCount = 0;
+  angular.forEach($scope.column, (col) => {
+    if (col.field === field) {
+      var preHeader = document.getElementById(`columns${$scope.freezeColumnIndex-1}`)
+      var nextHeader = document.getElementById(`columns${$scope.freezeColumnIndex+1}`)
+      var nextHeaderStyle = window.getComputedStyle(nextHeader)
+      var nextHeaderPosition = nextHeaderStyle.getPropertyValue("position");
+      var preHeaderStyle = window.getComputedStyle(preHeader)
+      var preHeaderPosition = preHeaderStyle.getPropertyValue("position");
+      // console.log(width)
+      // Add the "freeze" CSS class to the header and cells of the selected column
+      // const preHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +1})`);
+      const header = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +2})`);
+      // const nextHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +3})`);
+      const cells = document.querySelectorAll(`#myTable tbody td:nth-child(${$scope.freezeColumnIndex + 2})`);
+      // header.classList.add('freeze');
+      console.log(preHeader.style,nextHeader.style)
+      if (preHeaderPosition === 'sticky' && header.style.position === 'sticky' && nextHeaderPosition === 'static'){
+        header.style.position = 'static'
+        header.style.backgroundColor='#f0f0f0'
+        cells.forEach(cell => {
+          cell.style.position='static';
+          cell.style.backgroundColor = '#ffff'
+        });
+        // header.style.left = (cellLeft-header.style.left)+'px'
+        console.log('hello',header.style)
+      }
+      else if(preHeaderPosition === 'sticky' && (header.style.position === 'static'|| header.style.position === '') && nextHeaderPosition === 'static'){
+
+        cells.forEach(cell => {
+          cell.style.position='sticky';
+          cell.style.left = cellLeft+'px'
+          cell.style.backgroundColor = '#f0f0f0'
+        });
+        console.log(header,cells)
+        header.style.position='sticky';
+        header.style.left = cellLeft+'px'
+        header.style.backgroundColor = '#009879'
+        header.style.zIndex = 2
+      }
+      else{
+
+      }
+      
+    } else {
+      // Remove the "freeze" CSS class from the header and cells of other columns
+      const header = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex + 1})`);
+      const cells = document.querySelectorAll(`#myTable tbody td:nth-child(${$scope.freezeColumnIndex + 1})`);
+      header.classList.remove('freeze');
+      cells.forEach(cell => {
+        cell.classList.remove('freeze');
+      });
+    }
+  });
+        
       }
      
     };

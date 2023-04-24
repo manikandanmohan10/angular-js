@@ -20,9 +20,6 @@ th, td {
   text-align: left;
   
 }
-td{
-  
-}
 
 body{
   margin: 20px;
@@ -115,7 +112,7 @@ select{
 }
 
 .sticky-column-head {
-    position: sticky;
+    position: relative;
     left: 0;
     z-index: 1;
     background-color: #009879;
@@ -130,8 +127,9 @@ select{
     width: 100%;
   }
   
-  .my-table th,
-  .my-table td {
+  .table th,
+  .table td {
+    position: static;
     border: 1px solid #ccc;
     padding: 5px;
   }
@@ -537,3 +535,60 @@ nav select {
 
 }
 
+
+
+/* .table th.freeze,
+.table td.freeze {
+  position: sticky;
+  z-index: 1;
+}
+
+.table th.freeze {
+  left: 0;
+  background-color: #f2f2f2;
+}
+
+.table td.freeze {
+  left: 0;
+  background-color: #fff;
+}
+
+.table th.freeze.row,
+.table td.freeze.row {
+  top: 0;
+  background-color: #f2f2f2;
+}
+
+.table td.freeze.row {
+  top: 0;
+  background-color: #fff;
+}
+
+.selected {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.table::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 100%;
+  background-color: #fff;
+  pointer-events: none;
+} */
+.freeze{
+  position: sticky !important;
+  left: 0px;
+  z-index: 1;
+  background-color: #009879;
+}
+
+.freeze-body{
+  position: sticky !important;
+  left: 0;
+  z-index: 1;
+  background-color: rgb(240, 240, 240);
+}

@@ -265,7 +265,7 @@ data-toggle="modal" data-target="#exampleModal"
             <th ng-if="toggleFirstColumn" class="sticky-column-head">
               MyViews
             </th>
-            <th>
+            <th  class="freeze">
             
 
             <div style="display:flex; gap: 10px; align-items: center; ">
@@ -292,7 +292,7 @@ data-toggle="modal" data-target="#exampleModal"
             <!-- </div> -->
 
          </th>
-          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-dblclick="freezeColumn($index,columns.field)">
+          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'freeze': columns.frozen}" ng-dblclick="freezeColumn($index,columns.field,$event)">
             <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
               <div style="display: flex;gap: 20px;align-items: center;position: relative;">
 
@@ -356,14 +356,14 @@ data-toggle="modal" data-target="#exampleModal"
           <td ng-if="toggleFirstColumn && i > 19" class="sticky-column-body my-select-td" style="border: none;">
             
         </td>    
-        <td>
+        <td class="freeze-body">
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>
           <td  
           ng-keyDown="keyPresses($event, i, j)"
             ng-dblclick="selectCols(i, j)"
             ng-repeat="(j, col) in column"  
-            ng-class="{cellColor : col.type == 'number', 'sticky-column-body': col.frozen  }"
+            ng-class="{cellColor : col.type == 'number', 'freeze': col.frozen  }"
             ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle "
             ng-if="!item.editable"
           >
