@@ -89,7 +89,6 @@ angular.module('myApp', [])
       $scope.filter_column=true;
       $scope.conditionDropdownItems = ["WHERE", "AND", "OR"];
       $scope.expressionDropdownItems = ["EQUAL","NOT EQUAL", "LIKE", "NOT LIKE", "IN", "NOT IN", "IS"];
-      $scope.checked=[]
       $scope.myForm = {
            myFields: [
              { condition: "WHERE", columnName: "", expression: "", value: "" },
@@ -852,18 +851,18 @@ if (targetColumnIndex !== -1) {
             })
         } 
     }
-
+    $scope.Checkchecked=[0];
     $scope.flagIcon = (index) => {
       // $scope.myFlagCheckboxModel = !$scope.myFlagCheckboxModel
-      if(!$scope.checked.includes(index)){
-        checked.push(index)
+      if(!$scope.Checkchecked.includes(index)){
+        $scope.Checkchecked.push(index)
       }else{
-        var checkbox =$scope.checked.indeof(index)
-        $scope.checked.splice(checkbox,1)
+        var checkbox =$scope.Checkchecked.indexOf(index)
+        $scope.Checkchecked.splice(checkbox,1)
       }
-      console.log($scope.checked)
-    }
-    
+      $scope.$apply();
+      console.log($scope.Checkchecked,"Checkchecked")
+    }  
     }
   };
 });
