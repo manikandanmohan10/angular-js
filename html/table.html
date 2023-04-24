@@ -114,16 +114,16 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">In this view, show records</h4>
         </div>
         <div class="tab-icon" >
-         <span >Filter</span>
-         <span >column</span>
+         <span ng-click="filter_column = true" ng-style="filter_column && {'background-color':'#337ab7'}">Filter</span>
+         <span ng-click="filter_column = false" ng-style="!filter_column && {'background-color':'#337ab7'}">column</span>
         </div>
+       
         <div class="modal-body">
           <form >
             <!-- Display existing formArray fields -->
-            <div ng-repeat="field in myForm.myFields" class="filterArray">
+            <div ng-repeat="field in myForm.myFields" class="filterArray"  ng-if="filter_column">
               <select ng-model="field.condition" ng-options="item for item in conditionDropdownItems">
                 <option value="">Select an option</option>
               </select>
@@ -142,7 +142,7 @@
             </div>
           
             <!-- Add new formArray field -->
-            <button class=" btn icon" ng-click="addField()"><span class="material-symbols-outlined filter-box-icon">
+            <button ng-if="filter_column" class=" btn icon" ng-click="addField()"><span class="material-symbols-outlined filter-box-icon">
               add
               </span></button>
           
@@ -150,11 +150,11 @@
             <!-- <button ng-click="submitForm()">Submit</button> -->
           </form>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" ng-if="!filter_column">
           <form >
             <div class="tab-icon">
               <input type="text" ng-model="searchItem" value=""/>
-              <button class=" btn icon" ng-click="getColumn(searchItem)"><span class="material-symbols-outlined filter-box-icon">
+              <button class="btn icon"><span style="background-color: none;" ng-click="getColumn(searchItem)" class="material-symbols-outlined filter-box-icon">
                 search 
                 </span>
               </button>
@@ -174,7 +174,8 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="filterTable()"> View</button>
+          <button ng-if="filter_column" type="button" class="btn btn-primary" ng-click="filterTable()" > filter</button>
+          <button  ng-if="!filter_column" type="button" class="btn btn-primary" ng-click="viewTable()"> View</button>
         </div>
       </div>
     </div>
@@ -291,7 +292,7 @@ data-toggle="modal" data-target="#exampleModal"
             <!-- </div> -->
 
          </th>
-          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-click="freezeColumn($index,columns.field)">
+          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-dblclick="freezeColumn($index,columns.field)">
             <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
               <div style="display: flex;gap: 20px;align-items: center;position: relative;">
 
@@ -305,21 +306,31 @@ data-toggle="modal" data-target="#exampleModal"
                                       <!-- Popup dropdown container -->
                       <div id="popup-{{$index}}" class="popup-container">
                         <!-- Popup dropdown items -->
-                        <div class="popup-item" ng-repeat="option in moreOptions" ng-click="closePopup($index);openColorPicker(option,$index)" >{{option}}</div>
+                        <div  ng-repeat="option in moreOptions track by $index"  ng-click="openColorPicker(option, $index )" >
+                          <div class="popup-item">
+                            {{option}} 
+                            <!-- <span  ng-if="$index !== 0 && $index !== 1 && !isColorOption" class="material-symbols-outlined">
+                                expand_more
+                                </span>
+                                <span  ng-if="$index !== 0 && $index !== 1 && isColorOption  " class="material-symbols-outlined">
+                                  expand_less
+                                  </span> -->
+                          </div> 
+                          <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && (option === 'Set Column Header Color' || option === 'Set Full Column Color')&& colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option,columns )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div>
+                          <!-- <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && option === 'Set Full Column Color' && colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div> -->
+                          
                     </div>
                 </div>
               </div>
-              <div ng-click="sortByField(columns.field)">
+              <div style="display: flex;align-items: center;"  ng-if="!isHidden">
+                <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
+              </div>
+              <div ng-if="isHidden">
+                <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
+              </div>
 
-                <div style="display: flex;align-items: center;" ng-if="findsortorder(columns.field)">
-                  <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
-                </div>
-                <div ng-if="!findsortorder(columns.field)">
-                  <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
-                </div>
-  
-              </div> 
-            </th>
+            </div> 
+          </th>
             <!-- <th>Update</th> -->
           </tr>
         </thead>
@@ -327,17 +338,17 @@ data-toggle="modal" data-target="#exampleModal"
           <tr  draggable="true" id="{{'rows'+i}}"
           ng-repeat="(i, item) in tableData| orderBy:sortedFieldList  track by $index" class="rows active-row dnd-moved">
           <td ng-if="toggleFirstColumn && i === 0" class="sticky-column-body my-select-td" style="border: none;" rowspan="20">
-            <div>
+            <div style="display: flex;justify-content: center;">
               <input type="search" placeholder="Search"> 
             </div>
-            <div class="view-title">
+            <div class="view-title" ng-click="viewlistFunc()">
 
-              <span class="material-symbols-outlined" ng-click="viewlistFunc()">
+              <span class="material-symbols-outlined" style="font-size: 22px;">
                 {{expandIcon}}
                 </span>My Views
             </div>
             <div ng-if="viewIcon">
-              <ul ng-repeat="data in listData" class="list-data">
+              <ul ng-repeat="data in listData" class="list-data" style="border-bottom: 1px solid lavender;">
                 <li class="view-value" ng-click="getListValue($event)">{{data}}</li>
               </ul>
             </div>

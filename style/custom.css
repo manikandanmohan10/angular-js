@@ -90,7 +90,12 @@ body{
   transform: translateY(-50%);
   pointer-events: none;
 }
-
+.modal-header{
+  border-bottom: none;
+}
+select{
+  height: 25px;
+}
 .custom-select:focus {
   outline: none;
 }
@@ -118,7 +123,6 @@ body{
   .sticky-column-body {
     position: sticky;
     left: 0;
-    z-index: 1;
     background-color: #f0f0f0;
   }
   .my-table {
@@ -418,14 +422,18 @@ nav select {
 }
 .tab-icon span{
   width: 49%;
-  background-color: #dcd9d9;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   height: 35px;
   margin: auto;
+  border: 1px solid lavender;
+  display: flex;
+  align-items: center;
 }
-
+.modal-content{
+  width: 704px;
+}
 /* table{
   width: 100%;
   border-collapse: collapse;
@@ -491,8 +499,14 @@ nav select {
 
 .view-title{
   display: flex;
-  margin: 20px;
-  font-size: 20px;
+  border: 1ps solid;
+  border: 1px solid;
+  margin: 20px 35px;
+  border-radius: 10px;
+  justify-content: center;
+  gap: 7px;
+  /* margin: 0 37px; */
+  background: aliceblue;
 }
 
 
