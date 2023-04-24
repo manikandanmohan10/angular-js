@@ -751,7 +751,7 @@ if (targetColumnIndex !== -1) {
       if (!$scope.sortedFieldDict) {
         $scope.sortedFieldDict = {};
       }
-      $scope.reverse = bolval;
+      $scope.reverse = !$scope.reverse;
       $scope.sortedFieldDict[field] = $scope.reverse
 
       $scope.updateSortList()
@@ -772,7 +772,10 @@ if (targetColumnIndex !== -1) {
             
           }
     }
-    $scope.updateMyObj = function() {
+    $scope.updateMyObj = function(value) {
+      if (value){
+        $scope.sortField = value
+      }
       if ($scope.sortField) {
         $scope.sortBy($scope.sortField)
       } 
@@ -786,7 +789,13 @@ if (targetColumnIndex !== -1) {
       }
       $scope.sortBy(key, val)
     };
-
+    $scope.columnDatatype = function(){
+      $scope.columnDatatypeDict = {}
+      for (let col in $scope.column){
+        c = $scope.column[col]
+        $scope.columnDatatypeDict[c.field] = c.dataType
+      }
+    }
     $scope.removeSort = function(key){
       delete $scope.sortedFieldDict[key];
       $scope.updateSortList()
@@ -800,7 +809,7 @@ if (targetColumnIndex !== -1) {
     $scope.showSortPopup = function(event) {
       $scope.sortPopupVisible = true;
       $scope.popupPosition = {
-        top: event.clientY + 'px',
+        top: (event.clientY+15) + 'px',
         left: event.clientX + 'px'
       };
 
