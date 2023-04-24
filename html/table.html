@@ -331,12 +331,23 @@ data-toggle="modal" data-target="#exampleModal"
 
             </div> 
           </th>
+          <th>Checkbox</th>
+          
+          
             <!-- <th>Update</th> -->
           </tr>
         </thead>
         <tbody >
           <tr  draggable="true" id="{{'rows'+i}}"
-          ng-repeat="(i, item) in tableData| orderBy:sortedFieldList  track by $index" class="rows active-row dnd-moved">
+          ng-repeat="(i, item) in tableData | orderBy:sortedFieldList  track by $index" class="rows active-row dnd-moved">
+          
+          <!-- <td ng-repeat="col in column" ng-if="col.dataType == 'checkbox'">
+            <input type="checkbox" name="" id="">
+            {{col}}
+            
+          </td> -->
+
+          
           <td ng-if="toggleFirstColumn && i === 0" class="sticky-column-body my-select-td" style="border: none;" rowspan="20">
             <div style="display: flex;justify-content: center;">
               <input type="search" placeholder="Search"> 
@@ -406,11 +417,24 @@ data-toggle="modal" data-target="#exampleModal"
               type="number"
               ng-model="item[col.field]"
             />
+            
+            
           </td>
+          
 
           <!-- <td>
             <button ng-click="editRow(item)">update</button>
           </td> -->
+          <td ng-if="!{{checked.includes(i)}}"> 
+            <input type="checkbox" id="myCheckbox" ng-click="flagIcon(i)">
+          </td>
+          <td ng-if="{checked.includes(i)}">
+            <span class="material-symbols-outlined" ng-click="flagIcon(i)">
+                flag
+                </span>
+            </label>
+          </td>
+
         </tr>
       </tbody>
       
