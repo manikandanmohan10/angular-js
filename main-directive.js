@@ -10,6 +10,7 @@ angular.module('myApp', [])
       sortBy: "&",
     },
     link: function (scope, element, attrs) {
+      scope.myFlagCheckboxModel = false;
       scope.toggleFirstColumn = false
       scope.message = attrs.type;
       let datas = JSON.parse(attrs.datasource);
@@ -77,6 +78,8 @@ angular.module('myApp', [])
         $(".table").dragableColumns(); //Initialize dragndropjs for column dragndrop
       // }, 0);
       scope.temp = scope.column;
+      console.log(scope.tableData)
+      scope.objectKeys = Object.keys(scope.tableData[0])
     },
     templateUrl: "html/table.html",
     controller: function ($scope) {
@@ -86,6 +89,7 @@ angular.module('myApp', [])
       $scope.filter_column=true;
       $scope.conditionDropdownItems = ["WHERE", "AND", "OR"];
       $scope.expressionDropdownItems = ["EQUAL","NOT EQUAL", "LIKE", "NOT LIKE", "IN", "NOT IN", "IS"];
+      $scope.checked=[]
       $scope.myForm = {
            myFields: [
              { condition: "WHERE", columnName: "", expression: "", value: "" },
@@ -737,7 +741,7 @@ if (targetColumnIndex !== -1) {
       return Array(n-1).fill().map((_, index) => index + 1);
     };
     $scope.groupValue = 'No Views'
-    $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data', 'Sixth Data', 'Seventh Data', 'Eighth Data', 'Ninth Data', 'Tenth Data'];
+    $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data'];
     
     $scope.viewIcon = false
     $scope.expandIcon = 'expand_more'
@@ -848,6 +852,18 @@ if (targetColumnIndex !== -1) {
             })
         } 
     }
+
+    $scope.flagIcon = (index) => {
+      // $scope.myFlagCheckboxModel = !$scope.myFlagCheckboxModel
+      if(!$scope.checked.includes(index)){
+        checked.push(index)
+      }else{
+        var checkbox =$scope.checked.indeof(index)
+        $scope.checked.splice(checkbox,1)
+      }
+      console.log($scope.checked)
+    }
+    
     }
   };
 });
