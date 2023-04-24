@@ -448,22 +448,15 @@ data-toggle="modal" data-target="#exampleModal"
           <!-- <td>
             <button ng-click="editRow(item)">update</button>
           </td> -->
-          <td > 
-            <div ng-if="!Checkchecked.includes(i)">
-                     <input type="checkbox" id="myCheckbox" ng-click="flagIcon(i)">
-            </div>
-            <div ng-if="Checkchecked.includes(i)">
-               <span class="material-symbols-outlined" ng-click="flagIcon(i)">
-                flag
-            </span>
-            </div>
-           
+          <td ng-if="!{{checked.includes(i)}}"> 
+            <input type="checkbox" id="myCheckbox" ng-click="flagIcon(i)">
           </td>
-          <!-- <td>
+          <td ng-if="{checked.includes(i)}">
             <span class="material-symbols-outlined" ng-click="flagIcon(i)">
                 flag
-            </span>
-          </td> -->
+                </span>
+            </label>
+          </td>
 
         </tr>
       </tbody>
