@@ -82,6 +82,7 @@ angular.module('myApp', [])
     controller: function ($scope) {
       setTimeout(()=>{
          $scope.hidingColumnArryList = [...$scope.column];
+         $scope.constColumnArryList =  [...$scope.column];
       },1000)
 
       setTimeout(() => {
@@ -427,10 +428,14 @@ angular.module('myApp', [])
              orderedFilterList.forEach((filterValue) => {
         
              if((filterValue.condition).toLowerCase() ==='and' || (filterValue.condition).toLowerCase() === 'where'){
-              if(orderedFilterList.indexOf(filterValue)==0){
-                 tempObject = $scope.originalData.filter((col) => {
+              if((orderedFilterList.indexOf(filterValue)==0)){
+                 $scope.originalData.filter((col) => {
                  return $scope.queryCondition(filterValue, col);
-               });
+               }). forEach((da)=>{
+                 if(!tempObject.includes(da)){
+                    tempObject.push(da);
+                 }
+               })
               }
               else{
                  tempObject = tempObject.filter((col) => {
@@ -898,6 +903,11 @@ if (targetColumnIndex !== -1) {
 
     $scope.hidingColumn=(event,item)=>{
       let checBox =item.target.checked
+    $scope.constColumnArryList.forEach((da)=>{
+      if(da['field']==event){
+        da['checked']=checBox
+      }
+    })
       console.log(item)
       if(checBox){
          $scope.column.forEach((da)=>{
@@ -915,6 +925,16 @@ if (targetColumnIndex !== -1) {
                }
             })
         } 
+    }
+    $scope.hidenColumnFilter = (event)=>{
+      console.log(event, "hidden columns filter")
+       $scope.hidingColumnArryList =$scope.constColumnArryList
+       $scope.hidingColumnArryList = $scope.hidingColumnArryList.filter((data)=>{
+       if( data["field"].includes(event)){
+        return true
+       }
+       return false
+      })
     }
     }
   };
