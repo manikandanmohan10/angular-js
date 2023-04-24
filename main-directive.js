@@ -1042,18 +1042,6 @@ if (targetColumnIndex !== -1) {
             })
         } 
     }
-    $scope.Checkchecked=[0];
-    $scope.flagIcon = (index) => {
-      // $scope.myFlagCheckboxModel = !$scope.myFlagCheckboxModel
-      if(!$scope.Checkchecked.includes(index)){
-        $scope.Checkchecked.push(index)
-      }else{
-        var checkbox =$scope.Checkchecked.indexOf(index)
-        $scope.Checkchecked.splice(checkbox,1)
-      }
-      $scope.$apply();
-      console.log($scope.Checkchecked,"Checkchecked")
-    }  
     $scope.hidenColumnFilter = (event)=>{
       console.log(event, "hidden columns filter")
        $scope.hidingColumnArryList =$scope.constColumnArryList
@@ -1064,11 +1052,6 @@ if (targetColumnIndex !== -1) {
        return false
       })
     }
-    $scope.filterIcon = false
-    $scope.toggleFilterPopup = function(){
-      $scope.filterIcon = !$scope.filterIcon
-    }
-  
     }
   };
 });

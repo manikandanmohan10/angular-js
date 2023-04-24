@@ -599,10 +599,21 @@ nav select {
   display: block;
 
 }
-.disabled{
-  display: block;
+
+.hide-column-list div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px solid rgb(123, 123, 123);
+  margin: 5px;
 }
 
+.hide-column-list input{
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
+}
 
 .freeze{
   position: sticky !important;
@@ -617,21 +628,7 @@ nav select {
   z-index: 1;
   background-color: white;
 }
-.hide-column-list div{
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px solid rgb(123, 123, 123);
-  margin: 5px;
-}
 
-.hide-column-list input{
-
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: groove;
-  background-color: #eee;
-}
 .addButton{
   width: 100%;
   margin-top: 10px;
