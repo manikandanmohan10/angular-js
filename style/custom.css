@@ -18,7 +18,12 @@ th, td {
   border: 1px solid #b3a2a2;
   padding: 8px;
   text-align: left;
+  
 }
+td{
+  
+}
+
 body{
   margin: 20px;
 }
@@ -476,6 +481,21 @@ nav select {
   column-span: 5;
   /* height: 300px; */
 
+.hide-column{
+  position:relative
+}
+.hide-column-list{
+  background-color:#ddd;
+   width:200px;
+    position: absolute;
+     z-index: 99;
+}
+.hide-column-list ul{
+  display:flex; 
+  justify-content:
+   space-between;
+   margin-right: 20px;
+}
 
 .view-title{
   display: flex;
@@ -488,6 +508,7 @@ nav select {
   /* margin: 0 37px; */
   background: aliceblue;
 }
+
 
 .hide-column{
   position:relative
@@ -513,4 +534,21 @@ nav select {
   border: 1px solid rgb(227 226 226);
   padding: 4px;
   background-color: transparent;
+
+}
+
+.hide-column-list div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px solid rgb(123, 123, 123);
+  margin: 5px;
+}
+
+.hide-column-list input{
+
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
 }

@@ -27,12 +27,16 @@
     <div class="icon-content"> 
       <span class="material-symbols-outlined icon-size" ng-click="callDropdown()">
         visibility_off
-        </span> {{}} Hidden fields
+        </span> <span ng-if="(hidingColumnArryList.length - column.length) >=1">{{hidingColumnArryList.length - column.length}}</span> Hidden fields
     </div>
-  <div class="hide-column-list" ng-if="viewHideColumn">
-          <ul  ng-repeat="col in hidingColumnArryList"  class="list-data">
+      <div class="hide-column-list" ng-if="viewHideColumn">
+          <div>
+            <input style="max-width: 135px;" placeholder="Filter" ng-model="FilterHidenList" type="serach" ng-change="hidenColumnFilter(FilterHidenList)" />
+            <span class="material-symbols-outlined">help</span>
+          </div>
+          <ul  ng-repeat="col in hidingColumnArryList" draggable="true" class="list-data">
             <li>{{col.field}}</li>
-            <input  type="checkbox" ng-click="hidingColumn(col.field, $event)"/>
+            <input  type="checkbox" ng-model="col.checked"  ng-click="hidingColumn(col.field, $event)"/>
           </ul>
       </div>
   </div>
@@ -269,7 +273,9 @@ data-toggle="modal" data-target="#exampleModal"
             
 
             <div style="display:flex; gap: 10px; align-items: center; ">
-              <div style="align-items: center">
+
+              <div style="align-items: center;">
+
                 <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)"/>
                 <label for="" style="margin: 0;"> checkbox</label>
               </div>
@@ -281,7 +287,7 @@ data-toggle="modal" data-target="#exampleModal"
                   <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
                 </div>
               </div>
-              
+              <div ng-click="sortByField(columns.field)">
 
             </div> 
 
@@ -368,11 +374,12 @@ data-toggle="modal" data-target="#exampleModal"
         <td>
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>
-          <td ng-keyDown="keyPresses($event, i, j)"
+          <td  
+          ng-keyDown="keyPresses($event, i, j)"
             ng-dblclick="selectCols(i, j)"
             ng-repeat="(j, col) in column"  
             ng-class="{cellColor : col.type == 'number', 'sticky-column-body': col.frozen  }"
-            ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle"
+            ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle "
             ng-if="!item.editable"
           >
             <p id="{{i+'-'+j}}">{{item[col.field]}}</p>
