@@ -637,3 +637,14 @@ nav select {
 .modal-footer{
   margin-top: 50px;
 }
+
+.group-container{
+  display: flex;
+  flex-wrap: nowrap;
+}
+.group-head{
+  min-width: 100px;
+  padding: 5px 5vh;
+  border: 1px solid black;
+  text-align: center;
+}

@@ -10,6 +10,7 @@ angular.module('myApp', [])
       sortBy: "&",
     },
     link: function (scope, element, attrs) {
+      scope.isGroup= false
       scope.isFreeze = JSON.parse(attrs.ngFreeze)
       scope.myFlagCheckboxModel = false;
       scope.toggleFirstColumn = false
@@ -1069,6 +1070,24 @@ if (targetColumnIndex !== -1) {
       }
       console.log($scope.checked)
     }
+      $scope.groupBy = ["list"]
+      grouped = {};
+      
+      setTimeout(()=>{
+        console.log($scope.data)
+        $scope.data.forEach(function (col) {
+          $scope.groupBy.reduce(function (o, g, i) {
+  
+            // console.log( g)// take existing object,
+  
+            o[col[g]] = o[col[g]] || (i + 1 === $scope.groupBy.length ? [] : {}); // or generate new obj, or
+            // console.log('dsghdf', grouped)
+            return o[col[g]];
+            // at last, then an array
+          }, grouped).push(col);
+        });
+        console.log(grouped)
+      },1000)
 
     }
   };
