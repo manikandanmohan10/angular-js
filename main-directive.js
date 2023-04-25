@@ -680,9 +680,23 @@ angular.module('myApp', [])
   // });
     // Function to set dynamic header cell color
   // Function to open color picker for selecting color
-   $scope.openColorPicker = (option,headerIndex) => {
+   $scope.openColorPicker = (option,headerIndex, column) => {
      $scope.isColorOption = ! $scope.isColorOption;
      $scope.colorPopupIndex = headerIndex
+
+     if (option.field == "Insert left" || option.field == "Insert right"){
+      $scope.addColumn(option, column)
+     }
+     else if (option.field == 'Delete field'){
+      $scope.deleteColumn(column)
+     }
+     else if (option.field == 'Duplicate field'){
+      $scope.generateDuplicateField(column)
+     }
+     else if (option.field == 'Filter by this field'){
+      $scope.filterByField(column)
+     }
+     
    
   }
 
@@ -1058,7 +1072,6 @@ if (targetColumnIndex !== -1) {
       $scope.filterIcon = !$scope.filterIcon
     }
 
-
     $scope.flagIcon = (index) => {
       // $scope.myFlagCheckboxModel = !$scope.myFlagCheckboxModel
       if(!$scope.checked.includes(index)){
@@ -1068,6 +1081,67 @@ if (targetColumnIndex !== -1) {
         $scope.checked.splice(checkbox,1)
       }
       console.log($scope.checked)
+    }
+
+    $scope.headerPopup = false
+    $scope.addColumn = (option, columnName) => {
+      console.log(columnName)
+      $scope.headerPopup = !$scope.headerPopup
+      columnIndex = $scope.column.indexOf(columnName)
+      data = {
+        field: "testing",
+        type: "input",
+        dataType: 'input',
+        editable: true,
+        checked:false
+      }
+      if (option.field == "Insert left"){
+        $scope.column.splice(columnIndex, 0, data)
+        $scope.isColorOption = ! $scope.isColorOption;
+      }
+      else if (option.field == "Insert right"){
+        $scope.column.splice(columnIndex + 1, 0, data)
+        $scope.isColorOption = ! $scope.isColorOption;
+      }
+    }
+
+    $scope.deleteColumn = (columnName) => {
+      columnIndex = $scope.column.indexOf(columnName)
+      $scope.column.splice(columnIndex, 1)
+    }
+
+    $scope.countNames = function(obj, name) {
+      let count = 0;
+      for (let prop in obj) {
+        if (prop.includes(name)) {
+          count++;
+        }
+      }
+      return count;
+    }
+    
+    $scope.generateDuplicateField = (columnName) => {
+      columnIndex = $scope.column.indexOf(columnName)
+      oldField = columnName.field
+      fieldCount = $scope.countNames($scope.data[0], oldField)
+      newField = `${columnName.field}${fieldCount}`
+      data = {
+        field: newField,
+        type: columnName.type,
+        dataType: columnName.dataType,
+        editable: true,
+        checked: columnName.checked
+      }
+      $scope.column.splice(columnIndex + 1, 0, data)
+      for(let i=0; i<$scope.data.length; i++){
+        $scope.data[i][newField] = $scope.data[i][columnName.field]
+      }
+    }
+    
+    $scope.fieldNameValue = true
+    $scope.filterByField = (columnName) => {
+      $scope.filterIcon = true
+      $scope.fieldName = columnName.field
     }
 
     }
