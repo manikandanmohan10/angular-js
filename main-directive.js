@@ -31,8 +31,8 @@ angular.module('myApp', [])
       let begin = ((scope.curPage - 1) * scope.itemsPerPage);
       let end = begin + scope.itemsPerPage;
       
-     scope.tableData = scope.data.slice(begin, end);
-     
+      scope.tableData = scope.data.slice(begin, end);
+    
       scope.numOfPages = function () {
         //
         scope.tableData = scope.data.slice(parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1)  * parseInt(scope.itemsPerPage))+parseInt(scope.itemsPerPage))
@@ -867,11 +867,21 @@ if (targetColumnIndex !== -1) {
       return  $scope.reverse
     };
 
-    $scope.sortBy = function(field, bolval=true){
+    $scope.sortBy = function(field, val){
+      $scope.sortedFieldDict = {}
+      if (val === 'Sort First -> last'){
+        bolval = true
+      }
+      if (val === 'Sort First -> first'){
+        bolval = false
+      }
       if (!$scope.sortedFieldDict) {
         $scope.sortedFieldDict = {};
       }
-      $scope.reverse = !$scope.reverse;
+      if (val === "add"){
+        
+      }
+      $scope.reverse = bolval;
       $scope.sortedFieldDict[field] = $scope.reverse
 
       $scope.updateSortList()
@@ -897,7 +907,7 @@ if (targetColumnIndex !== -1) {
         $scope.sortField = value
       }
       if ($scope.sortField) {
-        $scope.sortBy($scope.sortField)
+        $scope.sortBy($scope.sortField, "add")
       } 
     };
     $scope.updateAscDsc = function(key, val){
@@ -933,6 +943,14 @@ if (targetColumnIndex !== -1) {
         left: event.clientX + 'px'
       };
 
+    };
+    $scope.showPagination = function(event){
+      if ( $scope.numOfPages() > 0 &&  $scope.tableData.length !== 0){
+        $scope.pagination_details = true;
+      }
+      else{
+        $scope.pagination_details = false;
+      }
     };
     $scope.hideSortPopup = function() {
       $scope.sortPopupVisible = false;
