@@ -75,7 +75,7 @@ angular.module('myApp', [])
       // setTimeout(function () {
       //   $("#mytable").DataTable(); // Initialize DataTables plugin after AngularJS data is populated
       //   $("#mytable").tableDnD(); // Initialize TableDnD plugin for row drag-and-drop
-        $(".table").dragableColumns(); //Initialize dragndropjs for column dragndrop
+        // $(".table").dragableColumns(); //Initialize dragndropjs for column dragndrop
       // }, 0);
       scope.temp = scope.column;
       console.log(scope.tableData)
@@ -105,7 +105,7 @@ angular.module('myApp', [])
           var topEdge = rect.top;
           if (x >= rightEdge - 5 || y >= bottomEdge - 5 ||x <=leftEdge +5 || y <= topEdge + 5) {
             
-            console.log(rightEdge,x)
+            // console.log(rightEdge,x)
             // Set cursor to "se-resize" to indicate resizing is possible
             this.style.cursor = "cell";
             // Add event listener for mousedown event
@@ -964,7 +964,11 @@ if (targetColumnIndex !== -1) {
        return false
       })
     }
-
+    $scope.filterIcon = false
+    $scope.toggleFilterPopup = function(){
+      $scope.filterIcon = !$scope.filterIcon
+    }
+  
     }
   };
 });

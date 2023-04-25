@@ -5,15 +5,15 @@ module.controller("exampleCtrl", function($scope) {
     $scope.sortedFieldDict = [];
 
     $scope.name = 'MM';
-  $("#my-select").select2({
-    dropdownCssClass: "custom-dropdown",
-    containerCssClass: "custom-container",
-  });
+  // $("#my-select").select2({
+  //   dropdownCssClass: "custom-dropdown",
+  //   containerCssClass: "custom-container",
+  // });
     $scope.updateDatas = ($event) => {
        console.log(`------${$event}`);
     },
     $scope.headerColorOptions = ["red", "black","yellow","green","orange","blue"]
-   $scope.moreOptions = ["Wrap Text", "Clip Text", "Set Column Header Color","Set Full Column Color","Set Conditional Colours"]
+    $scope.moreOptions = ["Wrap Text", "Clip Text", "Set Column Header Color","Set Full Column Color","Set Conditional Colours"]
     $scope.dataSource = {
       column: [
         {
