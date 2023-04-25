@@ -1,10 +1,10 @@
 var module = angular.module("myApp");
 
-module.controller("exampleCtrl", function($scope) {
-    $scope.searchItem='';
-    $scope.sortedFieldDict = [];
+module.controller("exampleCtrl", function ($scope) {
+  $scope.searchItem = '';
+  $scope.sortedFieldDict = [];
 
-    $scope.name = 'MM';
+  $scope.name = 'MM';
   $("#my-select").select2({
     dropdownCssClass: "custom-dropdown",
     containerCssClass: "custom-container",
@@ -13,7 +13,7 @@ module.controller("exampleCtrl", function($scope) {
        console.log(`------${$event}`);
     },
     $scope.headerColorOptions = ["red", "black","yellow","green","orange","blue"]
-   $scope.moreOptions = ["Wrap Text", "Clip Text", "Set Column Header Color","Set Full Column Color","Set Conditional Colours"]
+    $scope.moreOptions = [{ field: "Edit field", icon: "edit" }, { field: "Duplicate field", icon: "content_copy" },{ field: "Insert left", icon: "arrow_back" },{ field: "Insert right", icon: "arrow_forward" },{ field: "Copy field URL", icon: "link" }, { field:"Edit field description", icon: "info" }, { field:"Edit field permissions", icon: "lock" }, { field:"Sort First -> last", icon: "keyboard_double_arrow_down" }, { field:"Sort First -> first", icon: "keyboard_double_arrow_up" },{ field: "Filter by this field", icon: "filter_list" },{ field: "Group by this field", icon: "list_alt" },{ field: "Hide field", icon: "visibility_off" }, { field:"Set Column Header Color", icon: "format_color_fill" },{ field: "Set Full Column Color", icon: "format_color_fill" },{ field: "Set Conditional Colours", icon: "format_color_fill" },{ field: "Delete field", icon: "delete" }]
     $scope.dataSource = {
       column: [
         {
