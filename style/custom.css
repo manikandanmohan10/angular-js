@@ -20,9 +20,6 @@ th, td {
   text-align: left;
   
 }
-td{
-  
-}
 
 body{
   margin: 20px;
@@ -130,7 +127,7 @@ select{
 }
 
 .sticky-column-head {
-    position: sticky;
+    position: relative;
     left: 0;
     z-index: 1;
     background-color: #009879;
@@ -145,8 +142,9 @@ select{
     width: 100%;
   }
   
-  .my-table th,
-  .my-table td {
+  .table th,
+  .table td {
+    position: static;
     border: 1px solid #ccc;
     padding: 5px;
   }
@@ -257,6 +255,9 @@ display: inline-block;
 }
 .grid{
   width: 100%;
+}
+.btn.icon{
+  float: right;
 }
 .card-btn{
   float: right;
@@ -595,20 +596,44 @@ nav select {
   gap: 30px;
 }
 
+
+.hide-column-list div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px solid rgb(123, 123, 123);
+  margin: 5px;
+}
+
+.hide-column-list input{
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
+}
+
+.freeze{
+  position: sticky !important;
+  left: 0px;
+  z-index: 1;
+  background-color: #ddd;
+}
+
+.freeze-body{
+  position: sticky !important;
+  left: 0;
+  z-index: 1;
+  background-color: white;
+}
+
 .addButton{
   width: 100%;
   margin-top: 10px;
   padding: 5px;
 }
-
 .modal-body{
   margin-top: 20px;
 }
 .modal-footer{
   margin-top: 50px;
 }
-
-.disabled{
-  display: block;
-}
-

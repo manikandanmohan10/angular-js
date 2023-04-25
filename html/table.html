@@ -297,7 +297,7 @@ data-toggle="modal" data-target="#exampleModal"
             <th ng-if="toggleFirstColumn" class="sticky-column-head">
               MyViews
             </th>
-            <th>
+            <th  ng-class="{'freeze':isFreeze}">
             
 
             <div style="display:flex; gap: 10px; align-items: center; ">
@@ -314,7 +314,7 @@ data-toggle="modal" data-target="#exampleModal"
             <!-- </div> -->
 
          </th>
-          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'sticky-column-head': columns.frozen}" ng-dblclick="freezeColumn($index,columns.field)">
+          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'freeze': columns.frozen}" ng-dblclick="freezeColumn($index,columns.field,$event)">
             <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
               <div style="display: flex;gap: 20px;align-items: center;position: relative;">
 
@@ -392,14 +392,14 @@ data-toggle="modal" data-target="#exampleModal"
           <td ng-if="toggleFirstColumn && i > 19" class="sticky-column-body my-select-td" style="border: none;">
             
         </td>    
-        <td>
+        <td  ng-class="{'freeze-body':isFreeze}">
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>
           <td  
           ng-keyDown="keyPresses($event, i, j)"
             ng-dblclick="selectCols(i, j)"
             ng-repeat="(j, col) in column"  
-            ng-class="{cellColor : col.type == 'number', 'sticky-column-body': col.frozen  }"
+            ng-class="{cellColor : col.type == 'number', 'freeze': col.frozen  }"
             ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle "
             ng-if="!item.editable"
           >
@@ -452,22 +452,16 @@ data-toggle="modal" data-target="#exampleModal"
           <!-- <td>
             <button ng-click="editRow(item)">update</button>
           </td> -->
-          <td > 
-            <div ng-if="!Checkchecked.includes(i)">
-                     <input type="checkbox" id="myCheckbox" ng-click="flagIcon(i)">
-            </div>
-            <div ng-if="Checkchecked.includes(i)">
-               <span class="material-symbols-outlined" ng-click="flagIcon(i)">
-                flag
-            </span>
-            </div>
-           
+          <td ng-if="!{{checked.includes(i)}}"> 
+            <input type="checkbox" id="myCheckbox" ng-click="flagIcon(i)">
           </td>
-          <!-- <td>
+          <td ng-if="{checked.includes(i)}">
             <span class="material-symbols-outlined" ng-click="flagIcon(i)">
                 flag
-            </span>
-          </td> -->
+                </span>
+            </label>
+          </td>
+
 
         </tr>
       </tbody>
@@ -487,6 +481,7 @@ data-toggle="modal" data-target="#exampleModal"
     <div class="page-selection">
       <ul class="pagination-list" style="display: flex; list-style: none;">
        
+
         <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li" ng-if="curPage !== 1">
           <a class="btn-pagination" href="#" ng-click="prevPage()">Previous</a>
         </li>
@@ -497,6 +492,7 @@ data-toggle="modal" data-target="#exampleModal"
           </li>
           
         </div>
+
         <li ng-class="{disabled: curPage === numOfPages()}" class="btn-pagination-li"  ng-if="curPage !== numOfPages()">
           <a  class="btn-pagination" href="#" ng-click="nextPage()">Next</a>
         </li>
