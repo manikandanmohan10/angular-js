@@ -4,11 +4,11 @@ module.controller("exampleCtrl", function ($scope) {
   $scope.searchItem = '';
   $scope.sortedFieldDict = [];
 
-  $scope.name = 'MM';
-  $("#my-select").select2({
-    dropdownCssClass: "custom-dropdown",
-    containerCssClass: "custom-container",
-  });
+    $scope.name = 'MM';
+  // $("#my-select").select2({
+  //   dropdownCssClass: "custom-dropdown",
+  //   containerCssClass: "custom-container",
+  // });
     $scope.updateDatas = ($event) => {
        console.log(`------${$event}`);
     },
