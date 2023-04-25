@@ -473,7 +473,7 @@ data-toggle="modal" data-target="#exampleModal"
     <!-- Pagination UI markup -->
     <!-- Pagination UI markup with select field and next/previous buttons -->
 <div class="pagination" style="display: flex;">
-  <div class="page-size">
+  <div class="page-size" ng-if = "numOfPages() !== 0  && tableData.length !== 0 ">
     <label>Page</label>
     <select ng-model="itemsPerPage" ng-change="updateItemsPerPage()">
       <option value="5" selected>5</option>
@@ -482,11 +482,10 @@ data-toggle="modal" data-target="#exampleModal"
     </select>
     <div class="page-selection">
       <ul class="pagination-list" style="display: flex; list-style: none;">
-        <div ngIf="!(curPage === 1)">
-          <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li" ngIf="!(curPage === 1)">
-            <a class="btn-pagination" href="#" ng-click="prevPage()">Previous</a>
-          </li>
-        </div>
+       
+        <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li" ng-if="curPage !== 1">
+          <a class="btn-pagination" href="#" ng-click="prevPage()">Previous</a>
+        </li>
         
         <div ng-class="{disabled: curPage === numOfPages()}" ng-repeat="i in generateArray(numOfPages()) track by $index" ng-if="$index >= curPage - 3 && $index <= curPage + 1">
           <li class="btn-pagination-li">
@@ -494,11 +493,9 @@ data-toggle="modal" data-target="#exampleModal"
           </li>
           
         </div>
-        <div  ngIf="!(curPage === numOfPages())">
-          <li ng-class="{disabled: curPage === numOfPages()}" class="btn-pagination-li">
-            <a  class="btn-pagination" href="#" ng-click="nextPage()">Next</a>
-          </li>
-        </div>
+        <li ng-class="{disabled: curPage === numOfPages()}" class="btn-pagination-li"  ng-if="curPage !== numOfPages()">
+          <a  class="btn-pagination" href="#" ng-click="nextPage()">Next</a>
+        </li>
         
       </ul>
     </div>

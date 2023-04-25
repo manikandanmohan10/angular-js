@@ -258,9 +258,6 @@ display: inline-block;
 .grid{
   width: 100%;
 }
-.btn.icon{
-  float: right;
-}
 .card-btn{
   float: right;
 }
@@ -610,3 +607,8 @@ nav select {
 .modal-footer{
   margin-top: 50px;
 }
+
+.disabled{
+  display: block;
+}
+
