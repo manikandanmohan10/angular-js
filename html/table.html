@@ -320,10 +320,10 @@ data-toggle="modal" data-target="#exampleModal"
             <div style="display: flex;gap: 20px;align-items: center;position: relative;">
 
               <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
-              {{columns.field}} 
-              
+              {{columns.field}}
+
               <div style="position: relative;">
-                
+
 
                 <span class="icon material-symbols-outlined list-icon" ng-click="togglePopup($index)">
                   menu
@@ -331,21 +331,21 @@ data-toggle="modal" data-target="#exampleModal"
                                     <!-- Popup dropdown container -->
                     <div id="popup-{{$index}}" class="popup-container">
                       <!-- Popup dropdown items -->
-                      <div  ng-repeat="option in moreOptions track by $index"  ng-click="openColorPicker(option, $index )" >
+                      <div  ng-repeat="option in moreOptions track by $index"  ng-click="openColorPicker(option, $index );sortBy(columns.field, option.field);" >
                         <div class="popup-item" ng-style="option.field == 'Delete field' && {'color':'red'}">
                           <span style="font-size: initial;" class="material-symbols-outlined" >{{option.icon}}</span>
-                          {{option.field}} 
+                          {{option.field}}
                           <!-- <span  ng-if="$index !== 0 && $index !== 1 && !isColorOption" class="material-symbols-outlined">
                               expand_more
                               </span>
                               <span  ng-if="$index !== 0 && $index !== 1 && isColorOption  " class="material-symbols-outlined">
                                 expand_less
                                 </span> -->
-                            
-                        </div> 
+
+                        </div>
                         <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && (option.field === 'Set Column Header Color' || option.field === 'Set Full Column Color')&& colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option.field,columns )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div>
                         <!-- <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && option === 'Set Full Column Color' && colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div> -->
-                        
+
                   </div>
               </div>
               <div style="position: relative; padding-right:15px;" ng-if="isFreeze" ng-click="freezeColumn($index,columns.field,$event)">
@@ -362,7 +362,7 @@ data-toggle="modal" data-target="#exampleModal"
                 <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
               </div>
             </div>
-          </div> 
+          </div>
         </th>
           <th>Checkbox</th>
           
@@ -478,10 +478,10 @@ data-toggle="modal" data-target="#exampleModal"
     <!-- <div data-pagination="" data-num-pages="numOfPages()" data-current-page="curPage" data-max-size="maxSize" data-boundary-links="true"></div> -->
     <!-- Pagination UI markup -->
     <!-- Pagination UI markup with select field and next/previous buttons -->
-<div class="pagination" style="display: flex;">
-  <div class="page-size" ng-if = "numOfPages() !== 0  && tableData.length !== 0 ">
+    <div class="pagination" style="display: flex;" ng-show = "pagination_details" >
+  <div class="page-size" ng-class="showPagination()">
     <label>Page</label>
-    <select ng-model="itemsPerPage" ng-change="updateItemsPerPage()">
+    <select ng-model="itemsPerPage" ng-change="updateItemsPerPage(); showPagination();">
       <option value="5" selected>5</option>
       <option value="10">10</option>
       <option value="20">20</option>
