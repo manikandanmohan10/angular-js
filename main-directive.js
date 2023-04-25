@@ -102,13 +102,13 @@ angular.module('myApp', [])
           console.log(cols,colsHead)
           cols.forEach(cell => {
             cell.style.position='sticky';
-            cell.style.left = '80px'
+            cell.style.left = '75px'
             cell.style.backgroundColor = 'white'
             cell.style.zIndex = 3 
         });
           // console.log(header,cells)
           colsHead.style.position='sticky';
-          colsHead.style.left = '80px'
+          colsHead.style.left = '75px'
           colsHead.style.backgroundColor = '#ddd'
           colsHead.style.zIndex = 2
         }
@@ -806,12 +806,12 @@ if (targetColumnIndex !== -1) {
 
         cells.forEach(cell => {
           cell.style.position='sticky';
-          cell.style.left = (cellLeft-20)+'px'
+          cell.style.left = (cellLeft)+'px'
           cell.style.backgroundColor = 'white'
         });
         console.log(header,cells)
         header.style.position='sticky';
-        header.style.left = (cellLeft-20)+'px'
+        header.style.left = (cellLeft)+'px'
         header.style.backgroundColor = '#ddd'
         header.style.zIndex = 2
       }

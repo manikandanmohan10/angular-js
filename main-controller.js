@@ -5,10 +5,10 @@ module.controller("exampleCtrl", function($scope) {
     $scope.sortedFieldDict = [];
 
     $scope.name = 'MM';
-  $("#my-select").select2({
-    dropdownCssClass: "custom-dropdown",
-    containerCssClass: "custom-container",
-  });
+  // $("#my-select").select2({
+  //   dropdownCssClass: "custom-dropdown",
+  //   containerCssClass: "custom-container",
+  // });
     $scope.updateDatas = ($event) => {
        console.log(`------${$event}`);
     },
@@ -225,7 +225,6 @@ module.controller("exampleCtrl", function($scope) {
           cvv: 289,
           track2: "%B8526553364746616=73047125187?7",
           checked: true
-          checked: true
         },
         {
           name: "Hedda Lambert",
@@ -248,7 +247,6 @@ module.controller("exampleCtrl", function($scope) {
           guid: "B2D3D859-E8B8-1817-C37C-9E0D9475BCAE",
           cvv: 206,
           track2: "%B2375778335194364=5005198550?1",
-          checked: true
           checked: true
         },
         {
@@ -273,7 +271,6 @@ module.controller("exampleCtrl", function($scope) {
           cvv: 325,
           track2: "%B1144674424920018=8609943481?5",
           checked: true
-          checked: true
         },
         {
           name: "Amos Pitts",
@@ -296,7 +293,6 @@ module.controller("exampleCtrl", function($scope) {
           guid: "145B1486-D6CB-5128-A962-89ED08433C86",
           cvv: 378,
           track2: "%B9237316608114238=94105781264?2",
-          checked: true
           checked: true
         },
         {
@@ -321,7 +317,6 @@ module.controller("exampleCtrl", function($scope) {
           cvv: 201,
           track2: "%B4830726058262256=7505528801?4",
           checked: true
-          checked: true
         },
         {
           name: "Olympia Kramer",
@@ -344,7 +339,6 @@ module.controller("exampleCtrl", function($scope) {
           guid: "F6D4F74D-9A1D-28C2-EC10-B752521D9989",
           cvv: 509,
           track2: "%B4232546112516367=6210227637?8",
-          checked: true
           checked: true
         },
         {
@@ -369,7 +363,6 @@ module.controller("exampleCtrl", function($scope) {
           cvv: 300,
           track2: "%B8238345560444483=5210512676?1",
           checked: true
-          checked: true
         },
         {
           name: "Cassandra Gilliam",
@@ -392,7 +385,6 @@ module.controller("exampleCtrl", function($scope) {
           guid: "4293D973-A224-53A9-5424-182D6459084E",
           cvv: 507,
           track2: "%B5880625857767842=5101436823?2",
-          checked: true
           checked: true
         },
         {
@@ -417,7 +409,6 @@ module.controller("exampleCtrl", function($scope) {
           cvv: 126,
           track2: "%B8598186334423831=6905546512?7",
           checked: true
-          checked: true
         },
         {
           name: "Laurel Spencer",
@@ -440,7 +431,6 @@ module.controller("exampleCtrl", function($scope) {
           guid: "2C2AD59C-E527-1281-E34A-99840FB5EAE0",
           cvv: 942,
           track2: "%B7013477781342351=20072962467?4",
-          checked: true
           checked: true
         },
         {
@@ -465,7 +455,6 @@ module.controller("exampleCtrl", function($scope) {
           cvv: 362,
           track2: "%B7763208267446119=27021526626?4",
           checked: true
-          checked: true
         },
         {
           name: "Alice French",
@@ -488,7 +477,6 @@ module.controller("exampleCtrl", function($scope) {
           guid: "8621BE2D-4DF4-7EDF-1E0B-AE759194AC4B",
           cvv: 895,
           track2: "%B5067914465116543=7201627350?3",
-          checked: true
           checked: true
         },
         {
@@ -513,7 +501,6 @@ module.controller("exampleCtrl", function($scope) {
           cvv: 424,
           track2: "%B8568934423627623=7909667362?3",
           checked: true
-          checked: true
         },
         {
           name: "Giacomo Elliott",
@@ -536,7 +523,6 @@ module.controller("exampleCtrl", function($scope) {
           guid: "2513CBA8-549B-7FC2-E38F-6EAAEC7B3D8F",
           cvv: 493,
           track2: "%B5478443284685273=06066764?2",
-          checked: true
           checked: true
         },
         {
@@ -561,7 +547,6 @@ module.controller("exampleCtrl", function($scope) {
           cvv: 187,
           track2: "%B9116412737105237=7109120442?3",
           checked: true
-          checked: true
         },
         {
           name: "Ginger Bean",
@@ -584,7 +569,6 @@ module.controller("exampleCtrl", function($scope) {
           guid: "7F5694C6-F6A2-B94E-92E7-1DBE77E9F6B1",
           cvv: 201,
           track2: "%B5175858656852175=26093631?3",
-          checked: true
           checked: true
         },
         {
