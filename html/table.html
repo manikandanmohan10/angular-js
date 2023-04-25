@@ -42,7 +42,7 @@
   </div>
 
   <div class="icon-content">
-      <span class="material-symbols-outlined icon-size" data-target="#filterModal" data-toggle="modal">
+      <span class="material-symbols-outlined icon-size" data-target="#filterModal" data-toggle="modal" ng-click="toggleFilterPopup()">
         filter_list
       </span>
    
@@ -128,7 +128,7 @@
 
 <!-- <script src="pagenation.js"></script> -->
 <!-- <pagination items="data" items-per-page="10" on-page-change="onPageChange(pageItems)"></pagination> -->
-<div ng-if="true" ng-click="keyPresses($event, 0, 0)">
+<div class="filterPopup" ng-if="filterIcon" ng-click="keyPresses($event, 0, 0)">
   <!-- <span style="cursor: pointer;" class="material-symbols-outlined" class="btn btn-primary" data-toggle="modal"
     data-target="#exampleModal">
     group
@@ -138,7 +138,7 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button ng-click="toggleFilterPopup()" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="tab-icon" >
          <span ng-click="filter_column = true" ng-style="filter_column && {'background-color':'#337ab7'}">Filter</span>
@@ -149,27 +149,34 @@
           <form >
             <!-- Display existing formArray fields -->
             <div ng-repeat="field in myForm.myFields" class="filterArray"  ng-if="filter_column">
-              <select ng-model="field.condition" ng-options="item for item in conditionDropdownItems">
-                <option value="">Select an option</option>
-              </select>
-              <select ng-model="field.columnName" ng-options="item.field for item in column">
-                <option value="">Select an option</option>
-              </select>
-              <select ng-model="field.expression" ng-options="item for item in expressionDropdownItems">
-                <option value="">Select an option</option>
-              </select>
-              
-              <input type="text" ng-model="field.value">
-              
-              <button class="btn icon" ng-click="removeField($index)"><span class="material-symbols-outlined filter-box-icon">
-                delete
-                </span></button>
+              <div>
+                <select ng-model="field.condition" ng-options="item for item in conditionDropdownItems">
+                  <option value="">Select an option</option>
+                </select>
+                <select ng-model="field.columnName" ng-options="item.field for item in column">
+                  <option value="">Select an option</option>
+                </select>
+                <select ng-model="field.expression" ng-options="item for item in expressionDropdownItems">
+                  <option value="">Select an option</option>
+                </select>
+                
+                <input type="text" ng-model="field.value">
+              </div>
+              <div>
+                <button class="btn icon" ng-click="removeField($index)"><span class="material-symbols-outlined filter-box-icon">
+                  delete
+                  </span></button>
+              </div>
             </div>
+              
           
             <!-- Add new formArray field -->
-            <button ng-if="filter_column" class=" btn icon" ng-click="addField()"><span class="material-symbols-outlined filter-box-icon">
+            <button ng-if="filter_column" class="btn icon addButton" ng-click="addField()">
+              <!-- <span class="material-symbols-outlined filter-box-icon">
               add
-              </span></button>
+              </span> -->
+              Add
+            </button>
           
             <!-- Submit form data -->
             <!-- <button ng-click="submitForm()">Submit</button> -->
@@ -206,7 +213,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -219,7 +226,7 @@
         <div class="custom-select-wrapper">
           <label for="exampleFormControlSelect2">Select Column</label>
           <select class="custom-select" ng-model="selectedValue" id="exampleFormControlSelect2">
-            <!-- <option selected>Open this select menu</option> -->
+            <option selected>Open this select menu</option>
             <option value="{{columns.field}}" ng-repeat="columns in column " ng-selected="columns === column[0]">
               {{columns.field}}
             </option>
@@ -231,7 +238,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 
@@ -499,9 +506,6 @@ data-toggle="modal" data-target="#exampleModal"
   </div>
 
 </div>
-
-
-   
   </div>
 </div>
 
