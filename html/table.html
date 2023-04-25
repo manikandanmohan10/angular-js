@@ -335,9 +335,9 @@ data-toggle="modal" data-target="#exampleModal"
                                       <!-- Popup dropdown container -->
                       <div id="popup-{{$index}}" class="popup-container">
                         <!-- Popup dropdown items -->
-                        <div  ng-repeat="option in moreOptions track by $index"  ng-click="openColorPicker(option, $index )" >
+                        <div  ng-repeat="option in moreOptions track by $index"  ng-click="openColorPicker(option, $index, columns)" >
                           <div class="popup-item" ng-style="option.field == 'Delete field' && {'color':'red'}">
-                            <span style="font-size: initial;" class="material-symbols-outlined" >{{option.icon}}</span>
+                            <span style="font-size: initial;" class="material-symbols-outlined">{{option.icon}}</span>
                             {{option.field}} 
                             <!-- <span  ng-if="$index !== 0 && $index !== 1 && !isColorOption" class="material-symbols-outlined">
                                 expand_more
@@ -349,7 +349,7 @@ data-toggle="modal" data-target="#exampleModal"
                           </div> 
                           <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && (option.field === 'Set Column Header Color' || option.field === 'Set Full Column Color')&& colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option.field,columns )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div>
                           <!-- <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && option === 'Set Full Column Color' && colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div> -->
-                          
+                        
                     </div>
                 </div>
                 <div style="position: relative; padding-right:15px;" ng-click="freezeColumn($index,columns.field,$event)">
