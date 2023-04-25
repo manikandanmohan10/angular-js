@@ -37,12 +37,12 @@ body{
 
 /* Style for popup dropdown items */
 .popup-item {
+  font-size: 12px;
   cursor: pointer;
-    padding: 5px;
+    padding: 10px 5px;
     display: flex;
     align-items: center;
-    gap: 50px;
-    justify-content: space-between;
+    gap: 30px;
 }
 .popup-content-header{
   background-color: #009879;

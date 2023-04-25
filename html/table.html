@@ -329,16 +329,18 @@ data-toggle="modal" data-target="#exampleModal"
                       <div id="popup-{{$index}}" class="popup-container">
                         <!-- Popup dropdown items -->
                         <div  ng-repeat="option in moreOptions track by $index"  ng-click="openColorPicker(option, $index )" >
-                          <div class="popup-item">
-                            {{option}} 
+                          <div class="popup-item" ng-style="option.field == 'Delete field' && {'color':'red'}">
+                            <span style="font-size: initial;" class="material-symbols-outlined" >{{option.icon}}</span>
+                            {{option.field}} 
                             <!-- <span  ng-if="$index !== 0 && $index !== 1 && !isColorOption" class="material-symbols-outlined">
                                 expand_more
                                 </span>
                                 <span  ng-if="$index !== 0 && $index !== 1 && isColorOption  " class="material-symbols-outlined">
                                   expand_less
                                   </span> -->
+                              
                           </div> 
-                          <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && (option === 'Set Column Header Color' || option === 'Set Full Column Color')&& colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option,columns )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div>
+                          <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && (option.field === 'Set Column Header Color' || option.field === 'Set Full Column Color')&& colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option.field,columns )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div>
                           <!-- <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && option === 'Set Full Column Color' && colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div> -->
                           
                     </div>
@@ -402,16 +404,18 @@ data-toggle="modal" data-target="#exampleModal"
             ng-if="!item.editable"
           >
             <p id="{{i+'-'+j}}">{{item[col.field]}}</p>
+           
             <input id="{{i+'-'+j+'-index'}}" ng-style="{'display': 'none'}"
               ng-if="(col.type === 'input' || col.type === 'email')"
               type="{{col.dataType ? col.dataType : 'text'}}"
               ng-model="item[col.field]"
             />
-            <select
+            <select ng-style="{'display': 'none'}" id="{{i+'-'+j+'-index'}}"
               ng-if="col.type === 'select'"
               ng-model="item[col.field]"
               ng-options="x for x in col.dropdowndata"
             ></select>
+          
           </td>
           <td 
             ng-repeat="col in column"
