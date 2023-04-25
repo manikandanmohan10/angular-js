@@ -104,8 +104,8 @@ angular.module('myApp', [])
           cols.forEach(cell => {
             cell.style.position='sticky';
             cell.style.left = '75px'
-            cell.style.backgroundColor = 'white'
-            cell.style.zIndex = 3 
+            cell.style.backgroundColor = 'white'  
+            cell.style.zIndex = 0 
         });
           // console.log(header,cells)
           colsHead.style.position='sticky';
@@ -759,10 +759,12 @@ if (targetColumnIndex !== -1) {
      document.head.appendChild(styleElement); // append the style element to the head of the document
      
      const styleSheet = styleElement.sheet;
-     cell=event.target
+     cell=event.currentTarget.parentElement.parentElement.parentElement
+     console.log(cell)
      if(cell.tagName == 'TH' || cell.tagName == 'TD'){
       var cellLeft = cell.offsetLeft;
       var cellHeight = cell.offsetHeight;
+      console.log(cellLeft,cellHeight)
       
      }
       $scope.freezeColumnIndex = index
@@ -824,11 +826,12 @@ if (targetColumnIndex !== -1) {
           cell.style.left = (cellLeft)+'px'
           cell.style.backgroundColor = 'white'
         });
-        console.log(header,cells)
         header.style.position='sticky';
         header.style.left = (cellLeft)+'px'
         header.style.backgroundColor = '#ddd'
         header.style.zIndex = 2
+        console.log('=====>',header.style,cells.style)
+        
       }
       else{
 
