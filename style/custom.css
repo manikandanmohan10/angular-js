@@ -616,14 +616,14 @@ nav select {
   position: sticky !important;
   left: 0px;
   z-index: 1;
-  background-color: #009879;
+  background-color: #ddd;
 }
 
 .freeze-body{
   position: sticky !important;
   left: 0;
   z-index: 1;
-  background-color: rgb(240, 240, 240);
+  background-color: white;
 }
 .hide-column-list div{
   display: flex;

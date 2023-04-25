@@ -10,6 +10,7 @@ angular.module('myApp', [])
       sortBy: "&",
     },
     link: function (scope, element, attrs) {
+      scope.isFreeze = JSON.parse(attrs.ngFreeze)
       scope.myFlagCheckboxModel = false;
       scope.toggleFirstColumn = false
       scope.message = attrs.type;
@@ -25,7 +26,6 @@ angular.module('myApp', [])
       scope.maxSize = 5;
       // scope.tableData = [...datas.data];
       scope.originalData = scope.data
-      
       this.items = scope.data;
       let begin = ((scope.curPage - 1) * scope.itemsPerPage);
       let end = begin + scope.itemsPerPage;
@@ -89,24 +89,30 @@ angular.module('myApp', [])
       },1000)
 
       setTimeout(() => {
-        var style = document.getElementById(`columns0`)
-        var colsHeadStyle = window.getComputedStyle(style)
-        var colsHeadWidth = colsHeadStyle.getPropertyValue("width");
-        console.log(colsHeadWidth,colsHeadStyle)
-      var colsHead = document.querySelector(`#myTable th:nth-child(2)`);
-      // const nextHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +3})`);
-      var cols = document.querySelectorAll(`#myTable tbody td:nth-child(2)`);
-        console.log(cols,colsHead)
-        cols.forEach(cell => {
-          cell.style.position='sticky';
-          cell.style.left = '128.85px'
-          cell.style.backgroundColor = '#f0f0f0'
+        console.log(typeof $scope.isFreeze)
+        if($scope.isFreeze === true){
+          console.log("lskdjfalkjfalkfjlajflakfjl")
+          var style = document.getElementById(`columns0`)
+          var colsHeadStyle = window.getComputedStyle(style)
+          var colsHeadWidth = colsHeadStyle.getPropertyValue("width");
+          console.log(colsHeadWidth,colsHeadStyle)
+        var colsHead = document.querySelector(`#myTable th:nth-child(2)`);
+        // const nextHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +3})`);
+        var cols = document.querySelectorAll(`#myTable tbody td:nth-child(2)`);
+          console.log(cols,colsHead)
+          cols.forEach(cell => {
+            cell.style.position='sticky';
+            cell.style.left = '80px'
+            cell.style.backgroundColor = 'white'
+            cell.style.zIndex = 3 
         });
-        // console.log(header,cells)
-        colsHead.style.position='sticky';
-        colsHead.style.left = '128.85px'
-        colsHead.style.backgroundColor = '#009879'
-        colsHead.style.zIndex = 2
+          // console.log(header,cells)
+          colsHead.style.position='sticky';
+          colsHead.style.left = '80px'
+          colsHead.style.backgroundColor = '#ddd'
+          colsHead.style.zIndex = 2
+        }
+        
 
 
         var cells = document.getElementsByTagName("td");
@@ -787,10 +793,10 @@ if (targetColumnIndex !== -1) {
       console.log(preHeader.style,nextHeader.style)
       if (preHeaderPosition === 'sticky' && header.style.position === 'sticky' && nextHeaderPosition === 'static'){
         header.style.position = 'static'
-        header.style.backgroundColor='#f0f0f0'
+        header.style.backgroundColor='#ddd'
         cells.forEach(cell => {
           cell.style.position='static';
-          cell.style.backgroundColor = '#ffff'
+          cell.style.backgroundColor = 'white'
         });
         // header.style.left = (cellLeft-header.style.left)+'px'
         console.log('hello',header.style)
@@ -799,13 +805,13 @@ if (targetColumnIndex !== -1) {
 
         cells.forEach(cell => {
           cell.style.position='sticky';
-          cell.style.left = cellLeft+'px'
-          cell.style.backgroundColor = '#f0f0f0'
+          cell.style.left = (cellLeft-20)+'px'
+          cell.style.backgroundColor = 'white'
         });
         console.log(header,cells)
         header.style.position='sticky';
-        header.style.left = cellLeft+'px'
-        header.style.backgroundColor = '#009879'
+        header.style.left = (cellLeft-20)+'px'
+        header.style.backgroundColor = '#ddd'
         header.style.zIndex = 2
       }
       else{

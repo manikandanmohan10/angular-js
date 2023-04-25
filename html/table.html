@@ -290,7 +290,7 @@ data-toggle="modal" data-target="#exampleModal"
             <th ng-if="toggleFirstColumn" class="sticky-column-head">
               MyViews
             </th>
-            <th  class="freeze">
+            <th  ng-class="{'freeze':isFreeze}">
             
 
             <div style="display:flex; gap: 10px; align-items: center; ">
@@ -383,7 +383,7 @@ data-toggle="modal" data-target="#exampleModal"
           <td ng-if="toggleFirstColumn && i > 19" class="sticky-column-body my-select-td" style="border: none;">
             
         </td>    
-        <td class="freeze-body">
+        <td  ng-class="{'freeze-body':isFreeze}">
             <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)"/>
           </td>
           <td  
