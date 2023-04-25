@@ -1042,6 +1042,7 @@ if (targetColumnIndex !== -1) {
             })
         } 
     }
+
     $scope.hidenColumnFilter = (event)=>{
       console.log(event, "hidden columns filter")
        $scope.hidingColumnArryList =$scope.constColumnArryList
@@ -1056,7 +1057,7 @@ if (targetColumnIndex !== -1) {
     $scope.toggleFilterPopup = function(){
       $scope.filterIcon = !$scope.filterIcon
     }
-  
+
 
     $scope.flagIcon = (index) => {
       // $scope.myFlagCheckboxModel = !$scope.myFlagCheckboxModel
@@ -1068,7 +1069,7 @@ if (targetColumnIndex !== -1) {
       }
       console.log($scope.checked)
     }
-    
+
     }
   };
 });

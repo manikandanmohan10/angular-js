@@ -596,11 +596,6 @@ nav select {
   gap: 30px;
 }
 
-.addButton{
-  width: 100%;
-  margin-top: 10px;
-  padding: 5px;
-}
 
 .hide-column-list div{
   display: flex;
