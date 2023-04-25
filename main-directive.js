@@ -1052,6 +1052,11 @@ if (targetColumnIndex !== -1) {
        return false
       })
     }
+    $scope.filterIcon = false
+    $scope.toggleFilterPopup = function(){
+      $scope.filterIcon = !$scope.filterIcon
+    }
+  
     }
   };
 });
