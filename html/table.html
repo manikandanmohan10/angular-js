@@ -284,7 +284,7 @@ data-toggle="modal" data-target="#exampleModal"
   </div>
 </div>
   </div>
-  <div ng-if="!isGroup">
+    <div ng-if="!isGroup">
 
       <table 
         id="mytable"
@@ -332,7 +332,7 @@ data-toggle="modal" data-target="#exampleModal"
                                     <!-- Popup dropdown container -->
                     <div id="popup-{{$index}}" class="popup-container">
                       <!-- Popup dropdown items -->
-                      <div  ng-repeat="option in moreOptions track by $index"  ng-click="openColorPicker(option, $index, columns );sortBy(columns.field, option.field);" >
+                      <div  ng-repeat="option in moreOptions track by $index"  ng-click="popupFunction(option, $index, columns, $event)" >
                         <div class="popup-item" ng-style="option.field == 'Delete field' && {'color':'red'}">
                           <span style="font-size: initial;" class="material-symbols-outlined" >{{option.icon}}</span>
                           {{option.field}}
@@ -355,14 +355,14 @@ data-toggle="modal" data-target="#exampleModal"
                   </span>
               </div>
             </div>
-            <div style="position: relative;  padding-top: 3px;" ng-click="isHidden = sortBy(columns.field)">
+            <!-- <div style="position: relative;  padding-top: 3px;" ng-click="isHidden = sortBy(columns.field)">
               <div style="display: flex;align-items: center;" ng-if="!isHidden">
                 <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
               </div>
               <div style="display: flex;align-items: center;" ng-if="isHidden">
                 <span style="font-size: large;" class="material-symbols-outlined" >expand_less</span>
               </div>
-            </div>
+            </div> -->
           </div>
         </th>
           <th>Checkbox</th>
