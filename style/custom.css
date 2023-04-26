@@ -600,10 +600,11 @@ nav select {
   top: 7%;
   left: 25%;
   /* transform: translate(-50%, -50%); */
-  background-color: #ccc;
+  background-color: white;
   padding: 20px;
   border-radius: 5px;
   z-index: 999;
+  border: black solid 1px;
 }
 
 .filterArray{
