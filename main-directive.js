@@ -20,6 +20,7 @@ angular.module('myApp', [])
       scope.moreOptions =  JSON.parse(attrs.moreoptions);
       scope.data = datas.data;
       scope.column = datas.column;
+      scope.columnData = datas.column;
       scope.tableData = [];
       scope.tableColumn = scope.column
       scope.curPage = 1,
@@ -964,7 +965,7 @@ if (targetColumnIndex !== -1) {
       return 0;
     };
     $scope.groupValue = 'No Views'
-    $scope.listData = ['First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data'];
+    $scope.listData = ['Default', 'First Data', 'Second Data', 'Third Data', 'Fourth Data', 'Fifth Data'];
     
     $scope.viewIcon = false
     $scope.expandIcon = 'expand_more'
@@ -997,7 +998,11 @@ if (targetColumnIndex !== -1) {
 
     $scope.getListValue = function($event){
       console.log($event.currentTarget.textContent)
-      $scope.groupValue = $event.currentTarget.textContent
+      if ($event.currentTarget.textContent == 'Default'){
+        $scope.column = $scope.columnData
+      }
+      else{
+        $scope.groupValue = $event.currentTarget.textContent
       $scope.newColumn = [{
         field: "name",
         type: "input",
@@ -1047,7 +1052,8 @@ if (targetColumnIndex !== -1) {
     $scope.searchButton = $event => {
       console.log($event)
     }
-  }
+      }
+    }
     
     
     $scope.viewHideColumn = false;
