@@ -332,7 +332,7 @@ data-toggle="modal" data-target="#exampleModal"
                                     <!-- Popup dropdown container -->
                     <div id="popup-{{$index}}" class="popup-container">
                       <!-- Popup dropdown items -->
-                      <div  ng-repeat="option in moreOptions track by $index"  ng-click="openColorPicker(option, $index );sortBy(columns.field, option.field);" >
+                      <div  ng-repeat="option in moreOptions track by $index"  ng-click="openColorPicker(option, $index, columns );sortBy(columns.field, option.field);" >
                         <div class="popup-item" ng-style="option.field == 'Delete field' && {'color':'red'}">
                           <span style="font-size: initial;" class="material-symbols-outlined" >{{option.icon}}</span>
                           {{option.field}}
