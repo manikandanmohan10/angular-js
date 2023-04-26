@@ -248,10 +248,22 @@ display: inline-block;
 .sort-key{
   width: 50%;
   padding-right: 20px;
+  vertical-align: middle;
 }
 .sort-value{
-  width: 40%;
-
+  padding: 2px 0px;
+  cursor: pointer;
+}
+.grid{
+  display: flex;
+}
+.sort-number{
+  margin: 2px 0px;
+  padding: 2px 0px;
+}
+.sort-letter{
+  margin: 2px 0px;
+  padding: 2px 0px;
 }
 .grid{
   width: 100%;
@@ -264,7 +276,10 @@ display: inline-block;
 }
 .btn-primary{
   background-color: rgb(22, 22, 235);
-
+  color: white;
+  padding: 5px;
+  border: 1px solid rgb(22, 22, 235);
+  
 }
 .btn-primary:hover{
   background-color: rgb(53, 53, 212);
