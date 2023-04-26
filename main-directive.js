@@ -868,18 +868,20 @@ if (targetColumnIndex !== -1) {
     };
 
     $scope.sortBy = function(field, val){
-      $scope.sortedFieldDict = {}
+
       if (val === 'Sort First -> last'){
         bolval = true
+        $scope.sortedFieldDict = {}
       }
       if (val === 'Sort First -> first'){
         bolval = false
+        $scope.sortedFieldDict = {}
+      }
+      if (val === 'add'){
+        bolval = !$scope.reverse
       }
       if (!$scope.sortedFieldDict) {
         $scope.sortedFieldDict = {};
-      }
-      if (val === "add"){
-        
       }
       $scope.reverse = bolval;
       $scope.sortedFieldDict[field] = $scope.reverse
@@ -917,7 +919,7 @@ if (targetColumnIndex !== -1) {
       else{
         val = true
       }
-      $scope.sortBy(key, val)
+      $scope.sortBy(key, "add")
     };
     $scope.columnDatatype = function(){
       $scope.columnDatatypeDict = {}
