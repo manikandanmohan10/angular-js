@@ -42,6 +42,7 @@
   </div>
 
   <div class="icon-content">
+    
       <span class="material-symbols-outlined icon-size" data-target="#filterModal" data-toggle="modal" ng-click="toggleFilterPopup()">
         filter_list
       </span>
@@ -283,7 +284,7 @@ data-toggle="modal" data-target="#exampleModal"
   </div>
 </div>
   </div>
-  <div>
+  <div ng-if="!isGroup">
 
       <table 
         id="mytable"
@@ -315,9 +316,9 @@ data-toggle="modal" data-target="#exampleModal"
             <!-- </div> -->
 
          </th>
-         <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'freeze': columns.frozen}">
-          <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
-            <div style="display: flex;gap: 20px;align-items: center;position: relative;">
+          <th  draggable="true" class="columns" id="{{'columns'+$index}}" ng-repeat="columns in column track by $index" ng-class="{'freeze': columns.frozen}">
+            <div style="display: flex;padding: 0 20px; position: relative;justify-content: space-around;">
+              <div style="display: flex;gap: 20px;align-items: center;position: relative;">
 
               <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
               {{columns.field}}
@@ -460,10 +461,10 @@ data-toggle="modal" data-target="#exampleModal"
           <!-- <td>
             <button ng-click="editRow(item)">update</button>
           </td> -->
-          <td ng-if="!{{checked.includes(i)}}"> 
+          <td ng-if="{{!checked.includes(i)}}"> 
             <input type="checkbox" id="myCheckbox" ng-click="flagIcon(i)">
           </td>
-          <td ng-if="{checked.includes(i)}">
+          <td ng-if="{{checked.includes(i)}}">
             <span class="material-symbols-outlined" ng-click="flagIcon(i)">
                 flag
                 </span>
@@ -511,6 +512,21 @@ data-toggle="modal" data-target="#exampleModal"
   </div>
 
 </div>
+  </div>
+
+  <div ng-if="isGroup">
+    <div class="group-container">
+      <div class="group-head" ng-repeat="col in column">
+        <div>
+          {{col.field}}
+        </div>
+      </div>
+      <div class="body">
+        <div >
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
