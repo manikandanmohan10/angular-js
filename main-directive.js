@@ -852,6 +852,19 @@ if (targetColumnIndex !== -1) {
       }
      
     };
+
+    // popup function
+    $scope.popupFunction = function(option, idx, column, event){
+      $scope.openColorPicker(option, idx );
+      if (option.field == "Sort First -> last" || option.field == "Sort First -> first"){
+        $scope.sortBy(column.field, option.field);
+      }
+      
+      if (option.field === "Hide field"){
+        $scope.hidingColumn(column.field, event, true)
+      }
+      
+    }
     // sort
 
     $scope.sortByField = function(field){
@@ -1061,8 +1074,13 @@ if (targetColumnIndex !== -1) {
       $scope.viewHideColumn = !$scope.viewHideColumn
     }
 
-    $scope.hidingColumn=(event,item)=>{
-      let checBox =item.target.checked
+    $scope.hidingColumn=(event,item, checked=false)=>{
+      if (!checked){
+        checBox =item.target.checked
+      }
+      else{
+        checBox = checked
+      }
     $scope.constColumnArryList.forEach((da)=>{
       if(da['field']==event){
         da['checked']=checBox
