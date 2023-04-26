@@ -1208,8 +1208,16 @@ if (targetColumnIndex !== -1) {
     $scope.filterByField = (columnName) => {
       $scope.filterIcon = true
       $scope.fieldName = columnName.field
-    }
+    };
 
+    $scope.grouping = function(){
+      if (!$scope.isGroup){
+        $scope.grouping = true
+      }
+      else{
+        $scope.grouping = false
+      }
+    }
     }
   };
 });
