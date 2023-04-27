@@ -450,7 +450,7 @@ nav select {
 }
 
 .grid-view{
-  display: grid;  
+  display: grid;
   grid-auto-flow: column;
   grid-template-columns: 10%;
 } */
@@ -481,6 +481,7 @@ nav select {
   flex-direction: column;
   gap: 15px !important;
 }
+
 
 .popup-content {
   position: absolute;
@@ -612,7 +613,7 @@ nav select {
 }
 
 .grid-view{
-  display: grid;  
+  display: grid;
   grid-auto-flow: column;
   grid-template-columns: 10%;
 } */
@@ -635,6 +636,7 @@ nav select {
 
 .hide-column {
   position: relative
+
 }
 
 .hide-column-list {
@@ -669,7 +671,9 @@ nav select {
 }
 
 .hide-column-list {
-  background-color: #ddd;
+  border: black solid 1px;
+  background-color: white;
+
   width: 200px;
   position: absolute;
   z-index: 99;
