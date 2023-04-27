@@ -720,7 +720,6 @@ angular.module('myApp', [])
             // });
             // colorPicker.click();
             document.getElementById("columns" + index).style.backgroundColor = color;
-
           } else if (option === "Set Full Column Color") {
             var targetHeaderText = column.field;
 
@@ -1084,8 +1083,13 @@ angular.module('myApp', [])
           $scope.viewHideColumn = !$scope.viewHideColumn
         }
 
-        $scope.hidingColumn = (event, item) => {
-          let checBox = item.target.checked
+        $scope.hidingColumn = (event, item, checked = false) => {
+          if (!checked) {
+            checBox = item.target.checked
+          }
+          else {
+            checBox = checked
+          }
           $scope.constColumnArryList.forEach((da) => {
             if (da['field'] == event) {
               da['checked'] = checBox
