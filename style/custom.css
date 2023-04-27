@@ -482,6 +482,7 @@ nav select {
   gap: 15px !important;
 }
 
+
 .popup-content {
   position: absolute;
   top: 50%;
@@ -635,6 +636,21 @@ nav select {
 
 .hide-column {
   position: relative
+
+}
+
+.hide-column-list {
+  background-color: #ddd;
+  width: 200px;
+  position: absolute;
+  z-index: 99;
+}
+
+.hide-column-list ul {
+  display: flex;
+  justify-content:
+    space-between;
+  margin-right: 20px;
 }
 
 .view-title {
@@ -657,6 +673,7 @@ nav select {
 .hide-column-list {
   border: black solid 1px;
   background-color: white;
+
   width: 200px;
   position: absolute;
   z-index: 99;

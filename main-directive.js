@@ -10,6 +10,7 @@ angular.module('myApp', [])
         sortBy: "&",
       },
       link: function (scope, element, attrs) {
+        scope.card = "Daniel"
         scope.isGroup = false
         scope.isFreeze = JSON.parse(attrs.ngFreeze)
         scope.myFlagCheckboxModel = false;
@@ -1110,6 +1111,19 @@ angular.module('myApp', [])
               }
             })
           }
+        }
+
+        $scope.Checkchecked = [];
+        $scope.flagIcon = (index) => {
+          // $scope.myFlagCheckboxModel = !$scope.myFlagCheckboxModel
+          if (!$scope.Checkchecked.includes(index)) {
+            $scope.Checkchecked.push(index)
+          } else {
+            var checkbox = $scope.Checkchecked.indexOf(index)
+            $scope.Checkchecked.splice(checkbox, 1)
+          }
+          $scope.$apply();
+          console.log($scope.Checkchecked, "Checkchecked")
         }
 
         $scope.hidenColumnFilter = (event) => {

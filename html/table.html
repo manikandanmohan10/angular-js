@@ -44,7 +44,6 @@
   </div>
 
   <div class="icon-content">
-
     <span class="material-symbols-outlined icon-size" data-target="#filterModal" data-toggle="modal"
       ng-click="toggleFilterPopup()">
       filter_list
@@ -348,12 +347,130 @@ data-toggle="modal" data-target="#exampleModal"
                   <!-- Popup dropdown items -->
                   <div ng-repeat="option in moreOptions track by $index"
                     ng-click="popupFunction(option, $index,columns, $event )">
+
                     <div class="popup-item" ng-style="option.field == 'Delete field' && {'color':'red'}"
                       ng-if="!editPopup">
                       <span style="font-size: initial;" class="material-symbols-outlined">{{option.icon}}</span>
                       {{option.field}}
 
 
+                    </div>
+
+                    <div class="popup-item" ng-repeat="color in HeaderColorOptions"
+                      ng-if="isColorOption && (option.field === 'Set Column Header Color' || option.field === 'Set Full Column Color')&& colorPopupIndex === $parent.$index;"
+                      ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option.field,columns )"
+                      style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div>
+                  </div>
+                  <div ng-if="editPopup" class="popup-item edit-popup">
+                    <!-- <div  > -->
+                    <div class="field-wrap">{{columns.field}}</div>
+                    <!-- <div> -->
+                    <div>
+
+                      <select name="" id="" style=" width: 405px;
+                      border-radius: 5px; height: 25px;">
+                        <option value="1">Single select</option>
+                        <option value="2">Multi select</option>
+                      </select>
+                    </div>
+                    <div class="popup-lable-content">
+                      <span>
+                        Select one predefined option from a list
+                      </span>
+                    </div>
+                    <div class="switch-container">
+                      <div>
+                        <label class="switch">
+                          <input type="checkbox" checked>
+                          <span class="slider round"></span>
+                        </label><span style="position: relative; top: 6px; right: 13px;">Color-code option</span>
+                      </div>
+                      <div><span class="material-symbols-outlined">
+                          sort
+                        </span>
+                        <span class="add-text">Alphabetize</span>
+                      </div>
+                    </div>
+                    <div class="card-container">
+                      <div>
+                        <div class="card" draggable="true">
+                          <span class="drag-icon material-symbols-outlined">
+                            drag_indicator
+                          </span>
+                          <span class="align-icon material-symbols-outlined">
+                            expand_circle_down
+                          </span>
+                          <div class="card-input">
+                            <input type="text" class="card-input" ng-model="card">
+                          </div>
+                          <span class=" drag-icon material-symbols-outlined">
+                            close
+                          </span>
+                        </div>
+                        <div class="card" draggable="true">
+                          <span class="drag-icon material-symbols-outlined">
+                            drag_indicator
+                          </span>
+                          <span class="align-icon material-symbols-outlined">
+                            expand_circle_down
+                          </span>
+                          <div class="card-input">
+                            <input type="text" class="card-input" ng-model="card">
+                          </div>
+                          <span class=" drag-icon material-symbols-outlined">
+                            close
+                          </span>
+                        </div>
+                        <div class="card" draggable="true">
+                          <span class="drag-icon material-symbols-outlined">
+                            drag_indicator
+                          </span>
+                          <span class="align-icon material-symbols-outlined">
+                            expand_circle_down
+                          </span>
+                          <div class="card-input">
+                            <input type="text" class="card-input" ng-model="card">
+                          </div>
+                          <span class=" drag-icon material-symbols-outlined">
+                            close
+                          </span>
+                        </div>
+                        <div>
+                          <span class="add-icon material-symbols-outlined">
+                            add_circle
+                          </span><span class="add-text">Add option</span>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div style="width: 100%; color: #929597;">
+                      <label for="">
+                        Default option
+                      </label>
+                      <select style="width: 100%;" name="" id="">
+                        <option value="">option 1</option>
+                        <option value="">option 2</option>
+                        <option value="">option 3</option>
+                      </select>
+                    </div>
+                    <div class="switch-container">
+                      <div>
+                        <span class="material-symbols-outlined">
+                          add
+                        </span>
+                        <span class="add-text">Add description</span>
+                      </div>
+                      <div>
+                        <button class="btn-secondary">Cancel</button>
+                        <button class="btn-primary">Save</button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <!-- <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                      </label> -->
                     </div>
 
                     <div class="popup-item" ng-repeat="color in HeaderColorOptions"
@@ -484,6 +601,8 @@ data-toggle="modal" data-target="#exampleModal"
                   ac_unit
                 </span>
               </div>
+              <!-- <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && option === 'Set Full Column Color' && colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div> -->
+
             </div>
 
             <!-- <div style="position: relative;  padding-top: 3px;" ng-click="isHidden = sortBy(columns.field)">
