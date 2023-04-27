@@ -85,7 +85,44 @@ angular.module('myApp', [])
         scope.objectKeys = Object.keys(scope.tableData[0])
       },
       templateUrl: "html/table.html",
-      controller: function ($scope) {
+      controller: function ($scope, $document) {
+        
+        $document.on('click', function(event) {
+          var isClickedElementChildOfPopup = event.target.closest("#closePopup")
+          var isClickedElementTriggerButton = event.target.matches('#triggerClosePopup');
+          if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
+            var isClickedElementGChildofPop = event.target.matches(".sortPopup")
+            if (!isClickedElementGChildofPop){
+              $scope.sortPopupVisible = false;
+              $scope.$apply(function() {
+                $scope.sortPopupVisible = false;
+              });
+            }
+            
+            $scope.filterIcon = false
+            $scope.viewHideColumn = false 
+            $scope.$apply()
+            
+          };
+
+          var isClickedElementChildOfPopup = event.target.closest(".popup-container")
+          if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
+            $scope.$apply(function(){
+              $scope.popup.style.display = "none";
+            })
+          }
+          
+//           var isClickedElementChildOfPopup = event.target.closest("#filterModal")
+//           var isClickedElementTriggerButton = event.target.matches('#triggerPopup');
+//           if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
+//             $scope.filterIcon = false
+//             console.log(event.target.closest("#filterModal"))
+//             // console.log("true")
+//           }
+          
+// }
+
+        });
         setTimeout(() => {
           $scope.hidingColumnArryList = [...$scope.column];
           $scope.constColumnArryList = [...$scope.column];
