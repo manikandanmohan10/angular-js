@@ -18,7 +18,7 @@ th, td {
   border: 1px solid #b3a2a2;
   padding: 8px;
   text-align: left;
-  
+
 }
 
 body{
@@ -141,30 +141,30 @@ select{
     table-layout: fixed;
     width: 100%;
   }
-  
+
   .table th,
   .table td {
     position: static;
     border: 1px solid #ccc;
     padding: 5px;
   }
-  
+
   .my-table thead th {
     background-color: #dddddd;
   }
-  
+
   .my-table tbody {
     display: block;
     max-height: 200px;
     overflow-y: scroll;
   }
-  
-  
+
+
   .arrow-icon {
     font-size: 24px;
     transition: transform 0.2s ease-in-out;
   }
-  
+
   .arrow-icon--up {
     transform: rotate(180deg);
   }
@@ -279,7 +279,7 @@ display: inline-block;
   color: white;
   padding: 5px;
   border: 1px solid rgb(22, 22, 235);
-  
+
 }
 .btn-primary:hover{
   background-color: rgb(53, 53, 212);
@@ -384,7 +384,7 @@ nav select {
 }
 
 .grid-view{
-  display: grid;  
+  display: grid;
   grid-auto-flow: column;
   grid-template-columns: 10%;
 } */
@@ -507,7 +507,7 @@ nav select {
 }
 
 .grid-view{
-  display: grid;  
+  display: grid;
   grid-auto-flow: column;
   grid-template-columns: 10%;
 } */
@@ -537,7 +537,7 @@ nav select {
      z-index: 99;
 }
 .hide-column-list ul{
-  display:flex; 
+  display:flex;
   justify-content:
    space-between;
    margin-right: 20px;
@@ -566,7 +566,7 @@ nav select {
      z-index: 99;
 }
 .hide-column-list ul{
-  display:flex; 
+  display:flex;
   justify-content:
    space-between;
    margin-right: 20px;
@@ -608,7 +608,7 @@ nav select {
 }
 
 .filterArray{
-  display: flex; 
+  display: flex;
   gap: 30px;
 }
 
@@ -663,4 +663,7 @@ nav select {
   padding: 5px 5vh;
   border: 1px solid black;
   text-align: center;
+}
+.close {
+  margin-bottom: 10px;
 }

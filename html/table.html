@@ -217,7 +217,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button ng-click="toggleFilterPopup()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button ng-if="filter_column" type="button" class="btn btn-primary" ng-click="filterTable()"> filter</button>
           <button ng-if="!filter_column" type="button" class="btn btn-primary" ng-click="viewTable()"> View</button>
         </div>
@@ -409,7 +409,7 @@ data-toggle="modal" data-target="#exampleModal"
         <!-- <td ng-repeat="col in column" ng-if="col.dataType == 'checkbox'">
             <input type="checkbox" name="" id="">
             {{col}}
-            
+
           </td> -->
 
 
@@ -560,13 +560,13 @@ data-toggle="modal" data-target="#exampleModal"
     <th>Parent Name</th>
     <th>age</th>
   </tr>
-  
-  <tbody ng-repeat="parent in parents"> 
+
+  <tbody ng-repeat="parent in parents">
     <tr>
     <td>{{parent.name}}</td>
     <td>{{parent.age}}</td>
     <div  ng-include="'nested-tables.html'"></div>
   </tr>
-  
+
 </tbody>
 </table> -->
