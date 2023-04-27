@@ -89,9 +89,10 @@ body {
   display: flex;
   align-items: center;
   /* justify-content: space-evenly; */
-  width: 50%;
+  width: fit-content;
   justify-content: space-around;
   margin: 10px;
+  gap: 20px;
 }
 
 .icon-size {
@@ -715,7 +716,7 @@ nav select {
   left: 25%;
   /* transform: translate(-50%, -50%); */
   background-color: white;
-  padding: 20px;
+  padding: 25px;
   border-radius: 5px;
   z-index: 999;
   border: black solid 1px;

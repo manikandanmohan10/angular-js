@@ -143,8 +143,8 @@
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button ng-click="toggleFilterPopup()" type="button" class="close" data-dismiss="modal"
-            aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <!-- <button ng-click="toggleFilterPopup()" type="button" class="close" data-dismiss="modal"
+            aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
         </div>
         <div class="tab-icon">
           <span ng-click="filter_column = true" ng-style="filter_column && {'background-color':'#337ab7'}">Filter</span>
@@ -315,7 +315,9 @@ data-toggle="modal" data-target="#exampleModal"
 
           <div style="display:flex; gap: 10px; align-items: center; ">
 
-            <div style="align-items: center;">
+            <div style="align-items: center;align-items: center;
+            display: flex;
+            gap: 11px;">
 
               <input type="checkbox" style="margin: 0;" ng-click="checkBoxchanges($event)" />
               <label for="" style="margin: 0;"> checkbox</label>

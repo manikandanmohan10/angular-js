@@ -1192,6 +1192,7 @@ angular.module('myApp', [])
           }
           if (option.field == "Insert left") {
             $scope.column.splice(columnIndex, 0, data)
+            $scope.hidingColumnArryList=$scope.column;
             $scope.isColorOption = !$scope.isColorOption;
           }
           else if (option.field == "Insert right") {
@@ -1205,6 +1206,7 @@ angular.module('myApp', [])
           $scope.isVisible = window.getComputedStyle($scope.popup).getPropertyValue("display") === "none";
           columnIndex = $scope.column.indexOf($scope.columnNamee)
           $scope.column.splice(columnIndex, 1)
+          $scope.hidingColumnArryList=$scope.column;
         }
 
         $scope.countNames = function (obj, name) {
@@ -1230,6 +1232,7 @@ angular.module('myApp', [])
             checked: columnName.checked
           }
           $scope.column.splice(columnIndex + 1, 0, data)
+          $scope.hidingColumnArryList=$scope.column;
           for (let i = 0; i < $scope.data.length; i++) {
             $scope.data[i][newField] = $scope.data[i][columnName.field]
           }
