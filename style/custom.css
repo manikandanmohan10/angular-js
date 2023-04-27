@@ -49,11 +49,18 @@ body{
   padding: 20px;
 
 }
+.popup-lable-content{
+  position: relative;
+  right: 103px;
+  color: #929597;
+}
 .icon-text{
   margin-left: 5px;
 }
 .card-header{
   display: flex;
+  align-items: center;
+  cursor: pointer;
 
 }
 .custom{
@@ -242,7 +249,6 @@ display: inline-block;
 }
 .sort-list{
   padding: 10px;
-  display: grid;
   grid-template-columns: auto auto;
 }
 .sort-key{
@@ -267,6 +273,9 @@ display: inline-block;
 }
 .grid{
   width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .btn.icon{
   float: right;
@@ -275,15 +284,28 @@ display: inline-block;
   float: right;
 }
 .btn-primary{
-  background-color: rgb(22, 22, 235);
-  color: white;
+  min-width: 100px;
   padding: 5px;
-  border: 1px solid rgb(22, 22, 235);
+  border-radius: 5px;
+  color: white;
+  background-color: #2196F3;
+  border: 1px solid #1a90f0;
   
 }
 .btn-primary:hover{
-  background-color: rgb(53, 53, 212);
+  background-color: #2e9af1;
 
+}
+.btn-secondary{
+  min-width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  background-color: #d6d6d6;
+  border: 1px solid #818181;
+}
+.btn-secondary:hover{
+  background-color: #bbbbbb;
 }
 
 /* Style the navigation menu */
@@ -389,7 +411,40 @@ nav select {
   grid-template-columns: 10%;
 } */
 
+.popup-edit {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.field-wrap{
+  border: 1px solid #929597;
+  border-radius: 5px;
+  width: 100%;
+  height: 25px;
+  padding:4px;
+  display: flex;
+  align-items: center
 
+}
+.edit-popup{
+  width: 400px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 15px !important;
+}
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
 
 /* Style the navigation menu */
 nav {
@@ -662,4 +717,128 @@ nav select {
   padding: 5px 5vh;
   border: 1px solid black;
   text-align: center;
+}
+.switch-container{
+  position: relative;
+  display: flex;
+  top: 4px;
+  right: 0px;
+  width: 100%;
+  justify-content: space-between;
+  font-weight: 500;
+  font-family: serif;
+  font-size: medium;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 37px;
+  height: 10px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 16px;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: -1px;
+  bottom: -1px;
+  border: 1px solid green;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #018b08;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(10px);
+  -ms-transform: translateX(10px);
+  transform: translateX(10px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.card-container{
+  background: white;
+  width: 100%;
+  border-top: 1px solid rgb(168, 168, 168);
+  border-bottom: 1px solid rgb(168, 168, 168);
+  padding: 5px;
+}
+.drag-icon{
+  padding: 12px 0;
+  font-size: 15px;
+  color: #929597;
+}
+.drag-icon:hover{
+  box-shadow: 1px 1px 5px black;
+  transition: 500ms;
+}
+.align-icon{
+  padding: 7px 5px;
+}
+.card-input{
+  padding:2px 0;
+  width: 90%;
+  height: 35px;
+  background: transparent;
+  outline: none ;
+  border: none ;
+}
+.card-input:focus{
+  border: 2px solid #2196F3;
+  border-radius: 5px;
+}
+.card{
+  display:flex;
+  justify-content: flex-start;
+}
+.card:hover{
+  cursor: pointer;
+  box-shadow: 1px 1px 5px black;
+  transition: 2s;
+  transition-property: linear;
+}
+.add-icon{
+  font-size: 21px;
+}
+.add-text{
+  font-weight: 500;
+  font-family: serif;
+  font-size: medium;
+  bottom: 5px;
+  position: relative;
+  padding: 10px; ;
 }
