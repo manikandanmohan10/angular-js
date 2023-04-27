@@ -18,7 +18,9 @@ th, td {
   border: 1px solid #b3a2a2;
   padding: 8px;
   text-align: left;
+  
 }
+
 body{
   margin: 20px;
 }
@@ -26,8 +28,6 @@ body{
   .popup-container {
     display: none;
     position: absolute;
-    /* top: 40px; */
-    /* right: 0; */
     background-color: #fff;
     width: max-content;
     font-size: 14px;
@@ -37,9 +37,39 @@ body{
 
 /* Style for popup dropdown items */
 .popup-item {
+  font-size: 12px;
   cursor: pointer;
-    padding: 5px;
-} 
+    padding: 10px 5px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.popup-content-header{
+  background-color: #009879;
+  padding: 20px;
+
+}
+.popup-lable-content{
+  position: relative;
+  right: 103px;
+  color: #929597;
+}
+.icon-text{
+  margin-left: 5px;
+}
+.card-header{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+}
+.custom{
+  overflow: auto;
+  height: 200px;
+}
+.option-val:hover{
+background-color: #ccc;
+}
 .icon-wrap{
   display: flex;
   align-items: center;
@@ -79,7 +109,12 @@ body{
   transform: translateY(-50%);
   pointer-events: none;
 }
-
+.modal-header{
+  border-bottom: none;
+}
+select{
+  height: 25px;
+}
 .custom-select:focus {
   outline: none;
 }
@@ -99,7 +134,7 @@ body{
 }
 
 .sticky-column-head {
-    position: sticky;
+    position: relative;
     left: 0;
     z-index: 1;
     background-color: #009879;
@@ -107,7 +142,6 @@ body{
   .sticky-column-body {
     position: sticky;
     left: 0;
-    z-index: 1;
     background-color: #f0f0f0;
   }
   .my-table {
@@ -115,8 +149,9 @@ body{
     width: 100%;
   }
   
-  .my-table th,
-  .my-table td {
+  .table th,
+  .table td {
+    position: static;
     border: 1px solid #ccc;
     padding: 5px;
   }
@@ -145,4 +180,669 @@ body{
  /* Style for popup dropdown items on hover */
  .popup-item:hover {
   background-color: #f2f2f2;
+}
+
+.popup {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  padding: 20px;
+  z-index: 999;
+  width: 25%;
+}
+.popup.ng-show {
+  display: block;
+}
+
+.popup.ng-hide {
+  display: none;
+}
+
+/* .popup:before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10px solid transparent;
+  border-bottom-color: black;
+} */
+/*
+.popup:after {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 9px solid transparent;
+  border-bottom-color: white;
+} */
+
+.popup h1 {
+  margin-top: 0;
+}
+
+
+.pagination{
+  float: left;
+  margin: 20px;
+  display: flex;
+  width: 30%;
+}
+.page-selection{
+display: inline-block;
+}
+.page-size{
+  margin: 2%;
+
+}
+.active{
+  background-color: rgb(40, 40, 182);
+  color: white;
+}
+.btn-pagination{
+  text-decoration: none;
+
+}
+.btn-pagination-li{
+  padding: 2px;
+}
+.sort-list{
+  padding: 10px;
+  grid-template-columns: auto auto;
+}
+.sort-key{
+  width: 50%;
+  padding-right: 20px;
+  vertical-align: middle;
+}
+.sort-value{
+  padding: 2px 0px;
+  cursor: pointer;
+}
+.grid{
+  display: flex;
+}
+.sort-number{
+  margin: 2px 0px;
+  padding: 2px 0px;
+}
+.sort-letter{
+  margin: 2px 0px;
+  padding: 2px 0px;
+}
+.grid{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn.icon{
+  float: right;
+}
+.card-btn{
+  float: right;
+}
+.btn-primary{
+  min-width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: #2196F3;
+  border: 1px solid #1a90f0;
+  
+}
+.btn-primary:hover{
+  background-color: #2e9af1;
+
+}
+.btn-secondary{
+  min-width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  background-color: #d6d6d6;
+  border: 1px solid #818181;
+}
+.btn-secondary:hover{
+  background-color: #bbbbbb;
+}
+
+/* Style the navigation menu */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #fcfcfc;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+nav select {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  appearance: none;
+}
+
+/* Style the open button */
+#openNav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+/* Style the side navigation menu */
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  right: -250px;
+  background-color: #f1f7f7;
+  padding-top: 60px;
+  transition: all 0.3s ease;
+}
+
+.sidenav select {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 16px;
+  color: #9b0606;
+  background-color: transparent;
+  border: none;
+  appearance: none;
+  margin-bottom: 10px;
+}
+
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Show the side navigation menu when the open button is clicked */
+.show-nav {
+  left: 0;
+}
+
+/* table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.side-nav {
+  position: absolute;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100vh;
+  background-color: #f1f1f1;
+  transition: left 0.3s ease-in-out;
+}
+
+.side-nav--open {
+  left: 0;
+}
+.side-nav--close{
+  width: 0;
+}
+
+.sidenavv{
+  background-color: #9b0606;
+}
+
+.grid-view{
+  display: grid;  
+  grid-auto-flow: column;
+  grid-template-columns: 10%;
+} */
+
+.popup-edit {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.field-wrap{
+  border: 1px solid #929597;
+  border-radius: 5px;
+  width: 100%;
+  height: 25px;
+  padding:4px;
+  display: flex;
+  align-items: center
+
+}
+.edit-popup{
+  width: 400px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 15px !important;
+}
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Style the navigation menu */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #fcfcfc;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+nav select {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  appearance: none;
+}
+
+/* Style the open button */
+#openNav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+/* Style the side navigation menu */
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  right: -250px;
+  background-color: #f1f7f7;
+  padding-top: 60px;
+  transition: all 0.3s ease;
+}
+
+.sidenav select {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 16px;
+  color: #9b0606;
+  background-color: transparent;
+  border: none;
+  appearance: none;
+  margin-bottom: 10px;
+}
+
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Show the side navigation menu when the open button is clicked */
+.show-nav {
+  left: 0;
+}
+.tab-icon{
+  display: flex;
+  width: 100%;
+  gap: 1%;
+}
+.tab-icon span{
+  width: 49%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  height: 35px;
+  margin: auto;
+  border: 1px solid lavender;
+  display: flex;
+  align-items: center;
+}
+.modal-content{
+  width: 704px;
+}
+/* table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.side-nav {
+  position: absolute;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100vh;
+  background-color: #f1f1f1;
+  transition: left 0.3s ease-in-out;
+}
+
+.side-nav--open {
+  left: 0;
+}
+.side-nav--close{
+  width: 0;
+}
+
+.sidenavv{
+  background-color: #9b0606;
+}
+
+.grid-view{
+  display: grid;  
+  grid-auto-flow: column;
+  grid-template-columns: 10%;
+} */
+.my-select-td {
+  /* height: 300px; */
+  border: none;
+  min-width: 300px;
+  width: 300px;
+  /* rowspan: "5"; */
+}
+.list-data{
+  list-style: none;
+}
+
+/* table tr:first-child td:first-child {
+  vertical-align: top;
+  column-span: 5;
+  /* height: 300px; */
+
+.hide-column{
+  position:relative
+}
+.hide-column-list{
+  background-color:#ddd;
+   width:200px;
+    position: absolute;
+     z-index: 99;
+}
+.hide-column-list ul{
+  display:flex; 
+  justify-content:
+   space-between;
+   margin-right: 20px;
+}
+
+.view-title{
+  display: flex;
+  border: 1ps solid;
+  border: 1px solid;
+  margin: 20px 35px;
+  border-radius: 10px;
+  justify-content: center;
+  gap: 7px;
+  /* margin: 0 37px; */
+  background: aliceblue;
+}
+
+
+.hide-column{
+  position:relative
+}
+.hide-column-list{
+  background-color:#ddd;
+   width:200px;
+    position: absolute;
+     z-index: 99;
+}
+.hide-column-list ul{
+  display:flex; 
+  justify-content:
+   space-between;
+   margin-right: 20px;
+}
+
+.view-value{
+  cursor: pointer;
+}
+
+.second-icon{
+  border: 1px solid rgb(227 226 226);
+  padding: 4px;
+  background-color: transparent;
+}
+
+/* .parentPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  z-index: -1;
+  transition: opacity 0.3s ease-in-out;
+} */
+
+.filterPopup{
+  position: absolute;
+  top: 7%;
+  left: 25%;
+  /* transform: translate(-50%, -50%); */
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 999;
+  border: black solid 1px;
+}
+
+.filterArray{
+  display: flex; 
+  gap: 30px;
+}
+
+
+.hide-column-list div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px solid rgb(123, 123, 123);
+  margin: 5px;
+}
+
+.hide-column-list input{
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  background-color: #eee;
+}
+
+.freeze{
+  position: sticky !important;
+  left: 0px;
+  z-index: 1;
+  background-color: #ddd;
+}
+
+.freeze-body{
+  position: sticky !important;
+  left: 0;
+  z-index: 1;
+  background-color: white;
+}
+
+.addButton{
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+}
+.modal-body{
+  margin-top: 20px;
+}
+.modal-footer{
+  margin-top: 50px;
+}
+
+.group-container{
+  display: flex;
+  flex-wrap: nowrap;
+}
+.group-head{
+  min-width: 100px;
+  padding: 5px 5vh;
+  border: 1px solid black;
+  text-align: center;
+}
+.switch-container{
+  position: relative;
+  display: flex;
+  top: 4px;
+  right: 0px;
+  width: 100%;
+  justify-content: space-between;
+  font-weight: 500;
+  font-family: serif;
+  font-size: medium;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 37px;
+  height: 10px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 16px;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: -1px;
+  bottom: -1px;
+  border: 1px solid green;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #018b08;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(10px);
+  -ms-transform: translateX(10px);
+  transform: translateX(10px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.card-container{
+  background: white;
+  width: 100%;
+  border-top: 1px solid rgb(168, 168, 168);
+  border-bottom: 1px solid rgb(168, 168, 168);
+  padding: 5px;
+}
+.drag-icon{
+  padding: 12px 0;
+  font-size: 15px;
+  color: #929597;
+}
+.drag-icon:hover{
+  box-shadow: 1px 1px 5px black;
+  transition: 500ms;
+}
+.align-icon{
+  padding: 7px 5px;
+}
+.card-input{
+  padding:2px 0;
+  width: 90%;
+  height: 35px;
+  background: transparent;
+  outline: none ;
+  border: none ;
+}
+.card-input:focus{
+  border: 2px solid #2196F3;
+  border-radius: 5px;
+}
+.card{
+  display:flex;
+  justify-content: flex-start;
+}
+.card:hover{
+  cursor: pointer;
+  box-shadow: 1px 1px 5px black;
+  transition: 2s;
+  transition-property: linear;
+}
+.add-icon{
+  font-size: 21px;
+}
+.add-text{
+  font-weight: 500;
+  font-family: serif;
+  font-size: medium;
+  bottom: 5px;
+  position: relative;
+  padding: 10px; ;
+}
+.close{
+  margin-bottom: 10px;
 }
