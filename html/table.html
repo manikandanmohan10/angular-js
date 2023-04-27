@@ -25,12 +25,12 @@
   </div>
   <div class="hide-column">
     <div class="icon-content">
-      <span class="material-symbols-outlined icon-size" ng-click="callDropdown()">
+      <span class="material-symbols-outlined icon-size" ng-click="callDropdown()" id="triggerClosePopup">
         visibility_off
       </span> <span ng-if="(hidingColumnArryList.length - column.length) >=1">{{hidingColumnArryList.length -
         column.length}}</span> Hidden fields
     </div>
-    <div class="hide-column-list" ng-if="viewHideColumn">
+    <div  id="closePopup" class="hide-column-list " ng-if="viewHideColumn">
       <div>
         <input style="max-width: 135px;" placeholder="Filter" ng-model="FilterHidenList" type="serach"
           ng-change="hidenColumnFilter(FilterHidenList)" />
@@ -44,7 +44,7 @@
   </div>
 
   <div class="icon-content">
-    <span class="material-symbols-outlined icon-size" data-target="#filterModal" data-toggle="modal"
+    <span id="triggerClosePopup" class="material-symbols-outlined icon-size triggerPopup" data-target="#filterModal" data-toggle="modal"
       ng-click="toggleFilterPopup()">
       filter_list
     </span>
@@ -59,12 +59,12 @@
   <!-- Sort -->
   <div class="icon-content">
 
-    <span class="material-symbols-outlined icon-size" ng-click="showSortPopup($event); columnDatatype(); ">
+    <span class="material-symbols-outlined icon-size" id="triggerClosePopup" ng-click="showSortPopup($event); columnDatatype(); ">
       swap_vert
     </span> Sort
 
   </div>
-  <div class="popup" ng-show="sortPopupVisible" ng-style="popupPosition">
+  <div id="closePopup" class="popup"  ng-show="sortPopupVisible" ng-style="popupPosition">
     <h4>
       Sort by
     </h4>
@@ -82,15 +82,15 @@
           A-Z
         </span>
         <span class="sort-value" ng-click="updateAscDsc(key, value)">
-          <span ng-if="value"><span class="material-symbols-outlined">
+          <span ng-if="value" ><span class="material-symbols-outlined sortpopup">
               arrow_upward
             </span></span>
-          <span ng-if="!value"><span class="material-symbols-outlined">
+          <span ng-if="!value"><span class="material-symbols-outlined sortpopup">
               arrow_downward
             </span></span>
         </span>
-        <button type="button" class="btn icon card-btn" ng-click="removeSort(key)"><span
-            class="material-symbols-outlined filter-box-icon">
+        <button type="button" class=" btn icon card-btn" ng-click="removeSort(key)"><span
+            class="sortPopup material-symbols-outlined filter-box-icon">
             delete
           </span></button>
       </div>
@@ -133,7 +133,7 @@
 
 <!-- <script src="pagenation.js"></script> -->
 <!-- <pagination items="data" items-per-page="10" on-page-change="onPageChange(pageItems)"></pagination> -->
-<div class="filterPopup" ng-if="filterIcon" ng-click="keyPresses($event, 0, 0)">
+<div id = "closePopup" class="filterPopup" ng-if="filterIcon" ng-click="keyPresses($event, 0, 0)" id="popup filter">
   <!-- <span style="cursor: pointer;" class="material-symbols-outlined" class="btn btn-primary" data-toggle="modal"
     data-target="#exampleModal">
     group
@@ -170,7 +170,7 @@
 
                 <input type="text" ng-model="field.value">
               </div>
-              <div>
+              <div id="closePopup">
                 <button class="btn icon" ng-click="removeField($index)"><span
                     class="material-symbols-outlined filter-box-icon">
                     delete
@@ -340,7 +340,7 @@ data-toggle="modal" data-target="#exampleModal"
 
 
 
-                <span class="icon material-symbols-outlined list-icon" ng-click="togglePopup($index)">
+                <span id ="triggerClosePopup"class=" icon material-symbols-outlined list-icon" ng-click="togglePopup($index)">
                   menu
                 </span>
 
@@ -604,7 +604,7 @@ data-toggle="modal" data-target="#exampleModal"
   <div class="pagination" style="display: flex;" ng-show="pagination_details">
     <div class="page-size" ng-class="showPagination()">
       <label>Page</label>
-      <select ng-model="itemsPerPage" ng-change="updateItemsPerPage(); showPagination();">
+      <select ng-model="itemsPerPage" ng-change="updateItemsPerPage()">
         <option value="5" selected>5</option>
         <option value="10">10</option>
         <option value="20">20</option>
