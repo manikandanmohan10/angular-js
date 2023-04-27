@@ -370,80 +370,80 @@ data-toggle="modal" data-target="#exampleModal"
                         <div class="field-wrap">{{columns.field}}</div>
                         <div>
 
-                          <select name="" id="" style=" width: 405px;
-                          border-radius: 5px; height: 25px;">
-                            <option value="1">Single select</option>
-                            <option value="2">Multi select</option>
-                          </select>
-                        </div>
-                        <div class="popup-lable-content">
-                          <span>
-                            Select one predefined option from a list
+                      <select name="" id="" style=" width: 405px;
+                      border-radius: 5px; height: 25px;">
+                        <option value="1">Single select</option>
+                        <option value="2">Multi select</option>
+                      </select>
+                    </div>
+                    <div class="popup-lable-content">
+                      <span>
+                        Select one predefined option from a list
+                      </span>
+                    </div>
+                    <div class="switch-container">
+                      <div>
+                        <label class="switch">
+                          <input type="checkbox" checked>
+                          <span class="slider round"></span>
+                        </label><span style="position: relative; top: 6px; right: 13px;">Color-code option</span>
+                      </div>
+                      <div><span class="material-symbols-outlined">
+                          sort
+                        </span>
+                        <span class="add-text">Alphabetize</span>
+                      </div>
+                    </div>
+                    <div class="card-container">
+                      <div>
+                        <div class="card" draggable="true">
+                          <span class="drag-icon material-symbols-outlined">
+                            drag_indicator
+                          </span>
+                          <span class="align-icon material-symbols-outlined">
+                            expand_circle_down
+                          </span>
+                          <div class="card-input">
+                            <input type="text" class="card-input" ng-model="card">
+                          </div>
+                          <span class=" drag-icon material-symbols-outlined">
+                            close
                           </span>
                         </div>
-                        <div class="switch-container">
-                          <div>
-                            <label class="switch">
-                              <input type="checkbox" checked>
-                              <span class="slider round"></span>
-                            </label><span style="position: relative; top: 6px; right: 13px;">Color-code option</span>
+                        <div class="card" draggable="true">
+                          <span class="drag-icon material-symbols-outlined">
+                            drag_indicator
+                          </span>
+                          <span class="align-icon material-symbols-outlined">
+                            expand_circle_down
+                          </span>
+                          <div class="card-input">
+                            <input type="text" class="card-input" ng-model="card">
                           </div>
-                          <div><span class="material-symbols-outlined">
-                              sort
-                            </span>
-                            <span class="add-text">Alphabetize</span>
-                          </div>
+                          <span class=" drag-icon material-symbols-outlined">
+                            close
+                          </span>
                         </div>
-                        <div class="card-container">
-                          <div>
-                            <div class="card" draggable="true">
-                              <span class="drag-icon material-symbols-outlined">
-                                drag_indicator
-                              </span>
-                              <span class="align-icon material-symbols-outlined">
-                                expand_circle_down
-                              </span>
-                              <div class="card-input">
-                                <input type="text" class="card-input" ng-model="card">
-                              </div>
-                              <span class=" drag-icon material-symbols-outlined">
-                                close
-                              </span>
-                            </div>
-                            <div class="card" draggable="true">
-                              <span class="drag-icon material-symbols-outlined">
-                                drag_indicator
-                              </span>
-                              <span class="align-icon material-symbols-outlined">
-                                expand_circle_down
-                              </span>
-                              <div class="card-input">
-                                <input type="text" class="card-input" ng-model="card">
-                              </div>
-                              <span class=" drag-icon material-symbols-outlined">
-                                close
-                              </span>
-                            </div>
-                            <div class="card" draggable="true">
-                              <span class="drag-icon material-symbols-outlined">
-                                drag_indicator
-                              </span>
-                              <span class="align-icon material-symbols-outlined">
-                                expand_circle_down
-                              </span>
-                              <div class="card-input">
-                                <input type="text" class="card-input" ng-model="card">
-                              </div>
-                              <span class=" drag-icon material-symbols-outlined">
-                                close
-                              </span>
-                            </div>
-                            <div>
-                              <span class="add-icon material-symbols-outlined">
-                                add_circle
-                              </span><span class="add-text">Add option</span>
-                            </div>
+                        <div class="card" draggable="true">
+                          <span class="drag-icon material-symbols-outlined">
+                            drag_indicator
+                          </span>
+                          <span class="align-icon material-symbols-outlined">
+                            expand_circle_down
+                          </span>
+                          <div class="card-input">
+                            <input type="text" class="card-input" ng-model="card">
                           </div>
+                          <span class=" drag-icon material-symbols-outlined">
+                            close
+                          </span>
+                        </div>
+                        <div>
+                          <span class="add-icon material-symbols-outlined">
+                            add_circle
+                          </span><span class="add-text">Add option</span>
+                        </div>
+                      </div>
 
                         </div>
                         <div style="width: 100%; color: #929597;">
@@ -486,7 +486,7 @@ data-toggle="modal" data-target="#exampleModal"
 
 
               <div style="position: relative; padding-right:15px;" ng-if="isFreeze"
-                ng-click="freezeColumn($index,columns.field,$event)">
+                ng-click="freezeColumn($index,columns.field,'columns'+$index)">
                 <span style="font-size: 15px;" class="material-symbols-outlined">
                   ac_unit
                 </span>
@@ -554,7 +554,7 @@ data-toggle="modal" data-target="#exampleModal"
         <td ng-class="{'freeze-body':isFreeze}">
           <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)" />
         </td>
-        <td ng-keyDown="keyPresses($event, i, j)" ng-dblclick="selectCols(i, j)" ng-repeat="(j, col) in column"
+        <td id="{{'columns'+$index}}" ng-keyDown="keyPresses($event, i, j)" ng-dblclick="selectCols(i, j)" ng-repeat="(j, col) in column track by $index"
           ng-class="{cellColor : col.type == 'number', 'freeze': col.frozen  }"
           ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle "
           ng-if="!item.editable">
