@@ -1016,11 +1016,11 @@ angular.module('myApp', [])
 
         $scope.getListValue = function ($event) {
           console.log($event.currentTarget.textContent)
+          $scope.groupValue = $event.currentTarget.textContent
           if ($event.currentTarget.textContent == 'Default') {
             $scope.column = $scope.columnData
           }
           else {
-            $scope.groupValue = $event.currentTarget.textContent
             $scope.newColumn = [{
               field: "name",
               type: "input",
