@@ -253,6 +253,12 @@
 </div>
 
 
+<div ng-if="deleteIcon" class="filterPopup">
+  Are you sure?
+  &nbsp
+  
+  <button ng-click="deleteColumn()">Yes</button>
+</div>
 
 <div ng-if="false">
   <!-- <span
@@ -490,6 +496,7 @@ data-toggle="modal" data-target="#exampleModal"
               </div> -->
             </div>
           </div>
+          
         </th>
         <th>Checkbox</th>
 

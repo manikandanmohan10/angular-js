@@ -652,23 +652,23 @@ angular.module('myApp', [])
 
     $scope.togglePopup = (headerIndex) => {
       console.log(headerIndex)
-      var popup = document.getElementById("popup-" + headerIndex);
-      var allPopups = document.getElementsByClassName("popup-container");
-      var isVisible = window.getComputedStyle(popup).getPropertyValue("display") === "block";
+      $scope.popup = document.getElementById("popup-" + headerIndex);
+      $scope.allPopups = document.getElementsByClassName("popup-container");
+      $scope.isVisible = window.getComputedStyle($scope.popup).getPropertyValue("display") === "block";
     //   if (isVisible) {
     //     popup.style.display = "none";
     // } else {
     //     popup.style.display = "block";
     // }
-      for (var i = 0; i < allPopups.length; i++) {
-        if (allPopups[i] !== popup ) {
-            allPopups[i].style.display = "none";
+      for (var i = 0; i < $scope.allPopups.length; i++) {
+        if ($scope.allPopups[i] !== $scope.popup ) {
+          $scope.allPopups[i].style.display = "none";
         }
     }
-    if (popup.style.display === "none" || !isVisible) {
-        popup.style.display = "block";
+    if ($scope.popup.style.display === "none" || !$scope.isVisible) {
+      $scope.popup.style.display = "block";
     } else {
-        popup.style.display = "none";
+      $scope.popup.style.display = "none";
     }
     }
      // Add click event listener on document to close popup when clicked outside
@@ -682,15 +682,21 @@ angular.module('myApp', [])
   // });
     // Function to set dynamic header cell color
   // Function to open color picker for selecting color
-   $scope.openColorPicker = (option,headerIndex, column) => {
+    $scope.deleteIcon = false
+    $scope.openColorPicker = (option,headerIndex, column) => {
      $scope.isColorOption = ! $scope.isColorOption;
      $scope.colorPopupIndex = headerIndex
 
      if (option.field == "Insert left" || option.field == "Insert right"){
-      $scope.addColumn(option, column)
+        $scope.optionForAddColumn = option
+        $scope.columnForAddColumn = column
+        $scope.addFieldPopup = true
+        // $scope.addColumn(option, column)
      }
      else if (option.field == 'Delete field'){
-      $scope.deleteColumn(column)
+      // $scope.deleteColumn(column)
+      $scope.columnNamee = column
+      $scope.deleteIcon = true
      }
      else if (option.field == 'Duplicate field'){
       $scope.generateDuplicateField(column)
@@ -859,7 +865,7 @@ angular.module('myApp', [])
 
     // popup function
     $scope.popupFunction = function(option, idx, column, event){
-      $scope.openColorPicker(option, idx );
+      $scope.openColorPicker(option, idx, column);
       if (option.field == "Sort First -> last" || option.field == "Sort First -> first"){
         $scope.sortBy(column.field, option.field);
       }
@@ -1161,13 +1167,21 @@ angular.module('myApp', [])
         console.log(grouped)
       },1000)
 
+    $scope.addFieldPopup = false
+    $scope.toggleaddFieldPopup = (headerName) => {
+      // $scope.addFieldPopup = !$scope.addFieldPopup
+      // $scope.headerName = headerName
+      $scope.addFieldPopup = false
+      $scope.addColumn(headerName, $scope.optionForAddColumn, $scope.columnForAddColumn)
+    }
+
     $scope.headerPopup = false
-    $scope.addColumn = (option, columnName) => {
-      console.log(columnName)
+    $scope.addColumn = (header, option, columnName) => {
       $scope.headerPopup = !$scope.headerPopup
       columnIndex = $scope.column.indexOf(columnName)
       data = {
-        field: "testing",
+        // field: $scope.headerName ? $scope.headerName : 'TEST',
+        field: header ? header : 'TEST',
         type: "input",
         dataType: 'input',
         editable: true,
@@ -1183,8 +1197,10 @@ angular.module('myApp', [])
       }
     }
 
-    $scope.deleteColumn = (columnName) => {
-      columnIndex = $scope.column.indexOf(columnName)
+    $scope.deleteColumn = () => {
+      $scope.deleteIcon = !$scope.deleteIcon
+      $scope.isVisible = window.getComputedStyle($scope.popup).getPropertyValue("display") === "none";
+      columnIndex = $scope.column.indexOf($scope.columnNamee)
       $scope.column.splice(columnIndex, 1)
     }
 
@@ -1197,8 +1213,8 @@ angular.module('myApp', [])
       }
       return count;
     }
-    
-    $scope.generateDuplicateField = (columnName) => {
+
+    $scope.generateDuplicateField = (columnName) => {      
       columnIndex = $scope.column.indexOf(columnName)
       oldField = columnName.field
       fieldCount = $scope.countNames($scope.data[0], oldField)
