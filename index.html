@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <!-- <script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
     <script src="bower_components/font-awesome/css/fontawesome.min.css"></script>
@@ -9,38 +10,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="style/custom.css">
 
-    
-    
-    
-    
 
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
 
 </head>
-<body ng-app="myApp" >
 
-<!-- <div ng-app="example" ng-controller="exampleCtrl">
+<body ng-app="myApp">
+
+    <!-- <div ng-app="example" ng-controller="exampleCtrl">
      <p ng-bind='data' ></p>
     <div ag-grid="gridOptions" class="ag-fresh" style="height: 100%;"  rowDrag ondragover="onDragOver(event)">
      
     </div>
     
 </div> -->
-<div ng-app="myApp" ng-controller="exampleCtrl">
-    <my-directive ng-freeze=true  type="text" on-button-click="updateDatas($event)" datasource="{{dataSource}}" moreOptions = "{{moreOptions}}" headercoloroptions = "{{headerColorOptions}}"></my-directive>
-    
-</div>
+    <div ng-app="myApp" ng-controller="exampleCtrl">
+        <my-directive ng-freeze=true type="text" on-button-click="updateDatas($event)" datasource="{{dataSource}}"
+            moreOptions="{{moreOptions}}" headercoloroptions="{{headerColorOptions}}"></my-directive>
+
+    </div>
 
 
-<script src="main-directive.js"></script>
-<script src="main-controller.js"></script>
+    <script src="main-directive.js"></script>
+    <script src="main-controller.js"></script>
 
 </body>
+
 </html>
