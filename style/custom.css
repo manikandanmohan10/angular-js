@@ -43,6 +43,16 @@ body {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
+.popup-container-1 {
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  width: max-content;
+  font-size: 14px;
+  padding: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
 /* Style for popup dropdown items */
 .popup-item {
   font-size: 12px;
@@ -637,7 +647,6 @@ nav select {
 
 .hide-column {
   position: relative
-
 }
 
 .hide-column-list {

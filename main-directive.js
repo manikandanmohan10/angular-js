@@ -86,41 +86,41 @@ angular.module('myApp', [])
       },
       templateUrl: "html/table.html",
       controller: function ($scope, $document) {
-        
-        $document.on('click', function(event) {
+
+        $document.on('click', function (event) {
           var isClickedElementChildOfPopup = event.target.closest("#closePopup")
           var isClickedElementTriggerButton = event.target.matches('#triggerClosePopup');
           if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
             var isClickedElementGChildofPop = event.target.matches(".sortPopup")
-            if (!isClickedElementGChildofPop){
+            if (!isClickedElementGChildofPop) {
               $scope.sortPopupVisible = false;
-              $scope.$apply(function() {
+              $scope.$apply(function () {
                 $scope.sortPopupVisible = false;
               });
             }
-            
+
             $scope.filterIcon = false
-            $scope.viewHideColumn = false 
+            $scope.viewHideColumn = false
             $scope.$apply()
-            
+
           };
 
           var isClickedElementChildOfPopup = event.target.closest(".popup-container")
           if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
-            $scope.$apply(function(){
+            $scope.$apply(function () {
               $scope.popup.style.display = "none";
             })
           }
-          
-//           var isClickedElementChildOfPopup = event.target.closest("#filterModal")
-//           var isClickedElementTriggerButton = event.target.matches('#triggerPopup');
-//           if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
-//             $scope.filterIcon = false
-//             console.log(event.target.closest("#filterModal"))
-//             // console.log("true")
-//           }
-          
-// }
+
+          //           var isClickedElementChildOfPopup = event.target.closest("#filterModal")
+          //           var isClickedElementTriggerButton = event.target.matches('#triggerPopup');
+          //           if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
+          //             $scope.filterIcon = false
+          //             console.log(event.target.closest("#filterModal"))
+          //             // console.log("true")
+          //           }
+
+          // }
 
         });
         setTimeout(() => {
@@ -688,6 +688,7 @@ angular.module('myApp', [])
         }
 
         $scope.togglePopup = (headerIndex) => {
+          $scope.editPopup = false
           console.log(headerIndex)
           $scope.popup = document.getElementById("popup-" + headerIndex);
           $scope.allPopups = document.getElementsByClassName("popup-container");
@@ -1229,7 +1230,7 @@ angular.module('myApp', [])
           }
           if (option.field == "Insert left") {
             $scope.column.splice(columnIndex, 0, data)
-            $scope.hidingColumnArryList=$scope.column;
+            $scope.hidingColumnArryList = $scope.column;
             $scope.isColorOption = !$scope.isColorOption;
           }
           else if (option.field == "Insert right") {
@@ -1243,7 +1244,7 @@ angular.module('myApp', [])
           $scope.isVisible = window.getComputedStyle($scope.popup).getPropertyValue("display") === "none";
           columnIndex = $scope.column.indexOf($scope.columnNamee)
           $scope.column.splice(columnIndex, 1)
-          $scope.hidingColumnArryList=$scope.column;
+          $scope.hidingColumnArryList = $scope.column;
         }
 
         $scope.countNames = function (obj, name) {
@@ -1269,7 +1270,7 @@ angular.module('myApp', [])
             checked: columnName.checked
           }
           $scope.column.splice(columnIndex + 1, 0, data)
-          $scope.hidingColumnArryList=$scope.column;
+          $scope.hidingColumnArryList = $scope.column;
           for (let i = 0; i < $scope.data.length; i++) {
             $scope.data[i][newField] = $scope.data[i][columnName.field]
           }
