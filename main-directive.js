@@ -703,7 +703,9 @@ angular.module('myApp', [])
           else if (option.field == 'Filter by this field') {
             $scope.filterByField(column)
           }
-
+          else if (option.field == 'Edit field') {
+            $scope.editPopup = true
+          }
 
         }
 
