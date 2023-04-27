@@ -688,7 +688,10 @@ angular.module('myApp', [])
      $scope.colorPopupIndex = headerIndex
 
      if (option.field == "Insert left" || option.field == "Insert right"){
-        $scope.addColumn(option, column)
+        $scope.optionForAddColumn = option
+        $scope.columnForAddColumn = column
+        $scope.addFieldPopup = true
+        // $scope.addColumn(option, column)
      }
      else if (option.field == 'Delete field'){
       // $scope.deleteColumn(column)
@@ -1154,20 +1157,19 @@ if (targetColumnIndex !== -1) {
 
     $scope.addFieldPopup = false
     $scope.toggleaddFieldPopup = (headerName) => {
-      $scope.addFieldPopup = !$scope.addFieldPopup
-      $scope.headerName = headerName
+      // $scope.addFieldPopup = !$scope.addFieldPopup
+      // $scope.headerName = headerName
+      $scope.addFieldPopup = false
+      $scope.addColumn(headerName, $scope.optionForAddColumn, $scope.columnForAddColumn)
     }
 
     $scope.headerPopup = false
-    $scope.addColumn = async (option, columnName) => {
-      $scope.addFieldPopup = true
-      // setInterval(() => {}, 2000)
-      await $scope.headerName
-      console.log(columnName)
+    $scope.addColumn = (header, option, columnName) => {
       $scope.headerPopup = !$scope.headerPopup
       columnIndex = $scope.column.indexOf(columnName)
       data = {
-        field: $scope.headerName ? $scope.headerName : 'TEST',
+        // field: $scope.headerName ? $scope.headerName : 'TEST',
+        field: header ? header : 'TEST',
         type: "input",
         dataType: 'input',
         editable: true,

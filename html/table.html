@@ -242,14 +242,7 @@
     </div>
   </div> -->
 </div>
-<div ng-if="addFieldPopup" class="filterPopup">
-  <label for="">Header Name: </label>
-  <input type="text" ng-model="headerName">
-  <div style="margin-top: 10px;">
-    <button ng-click="toggleaddFieldPopup(headerName)">Submit</button>
-  </div>
-  
-</div>
+
 
 <div ng-if="deleteIcon" class="filterPopup">
   Are you sure?
@@ -357,17 +350,21 @@ data-toggle="modal" data-target="#exampleModal"
                                 </span> -->
 
                         </div>
+                        
                         <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && (option.field === 'Set Column Header Color' || option.field === 'Set Full Column Color')&& colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option.field,columns )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div>
                         <!-- <div class="popup-item" ng-repeat="color in HeaderColorOptions" ng-if="isColorOption && option === 'Set Full Column Color' && colorPopupIndex === $parent.$index;" ng-click="closePopup($parent.$parent.$parent.$index);headerColor($parent.$parent.$parent.$index,color,option )"  style="    border-bottom: 1px solid rgb(126, 126, 123);">{{color}} </div></div> -->
 
                   </div>
+                  
               </div>
+              
               <div style="position: relative; padding-right:15px;" ng-if="isFreeze" ng-click="freezeColumn($index,columns.field,$event)">
                 <span style="font-size: 15px;" class="material-symbols-outlined">
                   ac_unit
                   </span>
               </div>
             </div>
+            
             <!-- <div style="position: relative;  padding-top: 3px;" ng-click="isHidden = sortBy(columns.field)">
               <div style="display: flex;align-items: center;" ng-if="!isHidden">
                 <span style="font-size: large;" class="material-symbols-outlined">expand_more</span>
@@ -377,12 +374,21 @@ data-toggle="modal" data-target="#exampleModal"
               </div>
             </div> -->
           </div>
+          
         </th>
           <th>Checkbox</th>
           
           
             <!-- <th>Update</th> -->
           </tr>
+          <div ng-if="addFieldPopup" class="filterPopup">
+            <label for="">Header Name: </label>
+            <input required type="text" ng-model="headerName">
+            <div style="margin-top: 10px;">
+              <button ng-click="toggleaddFieldPopup(headerName)">Submit</button>
+            </div>
+            
+          </div>
         </thead>
         <tbody >
           <tr  draggable="true" id="{{'rows'+i}}"
