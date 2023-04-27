@@ -216,9 +216,10 @@
         </div>
 
         <div class="modal-footer">
-          <button ng-click="toggleFilterPopup()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button ng-if="filter_column" type="button" class="btn btn-primary" ng-click="filterTable()" > filter</button>
-          <button  ng-if="!filter_column" type="button" class="btn btn-primary" ng-click="viewTable()"> View</button>
+          <button ng-click="toggleFilterPopup()" type="button" class="btn btn-default"
+            data-dismiss="modal">Close</button>
+          <button ng-if="filter_column" type="button" class="btn btn-primary" ng-click="filterTable()"> filter</button>
+          <button ng-if="!filter_column" type="button" class="btn btn-primary" ng-click="viewTable()"> View</button>
         </div>
       </div>
     </div>
@@ -256,7 +257,7 @@
 <div ng-if="deleteIcon" class="filterPopup">
   Are you sure?
   &nbsp
-  
+
   <button ng-click="deleteColumn()">Yes</button>
 </div>
 
@@ -383,7 +384,7 @@ data-toggle="modal" data-target="#exampleModal"
                         <label class="switch">
                           <input type="checkbox" checked>
                           <span class="slider round"></span>
-                        </label><span style="position: relative; top: 6px; right: 13px;" >Color-code option</span>
+                        </label><span style="position: relative; top: 6px; right: 13px;">Color-code option</span>
                       </div>
                       <div><span class="material-symbols-outlined">
                           sort
@@ -435,7 +436,7 @@ data-toggle="modal" data-target="#exampleModal"
                             close
                           </span>
                         </div>
-                        <div >
+                        <div>
                           <span class="add-icon material-symbols-outlined">
                             add_circle
                           </span><span class="add-text">Add option</span>
@@ -447,7 +448,7 @@ data-toggle="modal" data-target="#exampleModal"
                       <label for="">
                         Default option
                       </label>
-                      <select style="width: 100%;"name="" id="">
+                      <select style="width: 100%;" name="" id="">
                         <option value="">option 1</option>
                         <option value="">option 2</option>
                         <option value="">option 3</option>
@@ -480,8 +481,7 @@ data-toggle="modal" data-target="#exampleModal"
 
             </div>
             <div style="position: relative; padding-right:15px;display: flex;
-            align-items: center;" ng-if="isFreeze"
-              ng-click="freezeColumn($index,columns.field,$event)">
+            align-items: center;" ng-if="isFreeze" ng-click="freezeColumn($index,columns.field,$event)">
               <span style="font-size: 15px;" class="material-symbols-outlined">
                 ac_unit
               </span>
@@ -496,7 +496,7 @@ data-toggle="modal" data-target="#exampleModal"
               </div> -->
             </div>
           </div>
-          
+
         </th>
         <th>Checkbox</th>
 
