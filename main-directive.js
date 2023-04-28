@@ -754,6 +754,7 @@ angular.module('myApp', [])
           $scope.colorPopupIndex = headerIndex
 
           $scope.optionForAddColumn = option
+          $scope.curOption = option
           $scope.columnForAddColumn = column
 
           if (option.field == "Insert left" || option.field == "Insert right") {
@@ -1242,7 +1243,7 @@ angular.module('myApp', [])
           // $scope.addFieldPopup = !$scope.addFieldPopup
           // $scope.headerName = headerName
           $scope.addFieldPopup = false
-          $scope.addColumn(headerName, $scope.optionForAddColumn, $scope.columnForAddColumn)
+          $scope.addColumn(headerName, $scope.curOption, $scope.columnForAddColumn)
         }
 
         $scope.headerPopup = false
