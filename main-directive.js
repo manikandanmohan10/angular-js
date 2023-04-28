@@ -74,7 +74,7 @@ angular.module('myApp', [])
           //                               var begin = ((scope.curPage - 1) * scope.itemsPerPage),
           // end = begin + scope.itemsPerPage;
 
-          // scope.tableData = scope.data.slice(begin, end);       
+          // scope.tableData = scope.data.slice(begin, end);
         });
         scope.pages = Array.from({ length: scope.numOfPages() }, (_, i) => i + 1);
         // setTimeout(function () {
@@ -101,14 +101,30 @@ angular.module('myApp', [])
               });
             }
 
-            $scope.filterIcon = false
+            if ($scope.optionForAddColumn){
+              filterPop = $scope.optionForAddColumn.field
+              if (filterPop == 'Filter by this field'){
+              // $scope.filterIcon = true
+                $scope.filterByField($scope.columnForAddColumn)
+                $scope.optionForAddColumn = undefined
+                $scope.columnForAddColumn = undefined
+            }
+            }
+
+            else{
+              $scope.filterIcon = false
+            }
+            // $scope.filterIcon = !$scope.filterIcon
             $scope.viewHideColumn = false
             $scope.$apply()
 
           };
 
           var isClickedElementChildOfPopup = event.target.closest(".popup-container")
-          if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
+          var t = event.target.closest("#closeSidePopup")
+          if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton && !t) {
+            $scope.addFieldPopup = false
+            $scope.deleteIcon = false
             $scope.$apply(function () {
               $scope.popup.style.display = "none";
             })
@@ -314,7 +330,7 @@ angular.module('myApp', [])
           $scope.selectedCell = $scope.selectedCell.filter(data => (existData[0] === data[0] && existData[0] === data[0]))
         }
         $scope.toggleSidenav = () => {
-          // const sideNav = document.querySelector('.side-nav');        
+          // const sideNav = document.querySelector('.side-nav');
           // sideNav.classList.toggle('side-nav--open');
           // document.getElementById("mySidenav").classList.add("show-nav");
 
@@ -469,7 +485,7 @@ angular.module('myApp', [])
         }
 
         $scope.filterTable = () => {
-          // Filter 
+          // Filter
           console.log($scope.originalData)
           let filteredObjects = []
           let checkConditions = false;
@@ -730,9 +746,10 @@ angular.module('myApp', [])
           $scope.isColorOption = !$scope.isColorOption;
           $scope.colorPopupIndex = headerIndex
 
+          $scope.optionForAddColumn = option
+          $scope.columnForAddColumn = column
+
           if (option.field == "Insert left" || option.field == "Insert right") {
-            $scope.optionForAddColumn = option
-            $scope.columnForAddColumn = column
             $scope.addFieldPopup = true
             // $scope.addColumn(option, column)
           }
