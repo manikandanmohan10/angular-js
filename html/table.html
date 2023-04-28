@@ -255,7 +255,7 @@
 </div>
 
 
-<div ng-if="deleteIcon" class="filterPopup">
+<div id="closeSidePopup" ng-if="deleteIcon" class="filterPopup">
   Are you sure?
   &nbsp
 
@@ -350,7 +350,7 @@ data-toggle="modal" data-target="#exampleModal"
                 <div id="popup-{{$index}}" class="popup-container">
                   <!-- Popup dropdown items -->
                   <div ng-repeat="option in moreOptions track by $index"
-                    ng-click="popupFunction(option, $index,columns, $event )">
+                    ng-click="popupFunction(option, $index,columns, $event )" id="triggerClosePopup">
 
                     <div class="popup-item" ng-style="option.field == 'Delete field' && {'color':'red'}">
                       <span style="font-size: initial;" class="material-symbols-outlined">{{option.icon}}</span>
@@ -511,7 +511,7 @@ data-toggle="modal" data-target="#exampleModal"
 
         <!-- <th>Update</th> -->
       </tr>
-      <div ng-if="addFieldPopup" class="filterPopup">
+      <div id="closeSidePopup" ng-if="addFieldPopup" class="filterPopup">
         <label for="">Header Name: </label>
         <input required type="text" ng-model="headerName">
         <div style="margin-top: 10px;">
