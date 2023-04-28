@@ -113,6 +113,7 @@ angular.module('myApp', [])
             }
 
             else {
+
               $scope.filterIcon = false
             }
             // $scope.filterIcon = !$scope.filterIcon
