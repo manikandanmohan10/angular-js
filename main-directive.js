@@ -1424,6 +1424,10 @@ angular.module('myApp', [])
             $scope.grouping = false
           }
         }
+        setTimeout(function() {
+          $scope.itemsPerPage = '5'
+          $scope.$apply()
+        },1000);
       }
     };
   });
