@@ -371,7 +371,7 @@ data-toggle="modal" data-target="#exampleModal"
                         <div>
 
                           <select name="" id="" style=" width: 405px;
-                          border-radius: 5px; height: 25px;">
+                      border-radius: 5px; height: 25px;">
                             <option value="1">Single select</option>
                             <option value="2">Multi select</option>
                           </select>
@@ -486,7 +486,7 @@ data-toggle="modal" data-target="#exampleModal"
 
 
               <div style="position: relative; padding-right:15px;" ng-if="isFreeze"
-                ng-click="freezeColumn($index,columns.field,$event)">
+                ng-click="freezeColumn($index,'columns'+$index)">
                 <span style="font-size: 15px;" class="material-symbols-outlined">
                   ac_unit
                 </span>
@@ -554,7 +554,8 @@ data-toggle="modal" data-target="#exampleModal"
         <td ng-class="{'freeze-body':isFreeze}">
           <input type="checkbox" class="myCheck" ng-click="format(item,i, $event)" />
         </td>
-        <td ng-keyDown="keyPresses($event, i, j)" ng-dblclick="selectCols(i, j)" ng-repeat="(j, col) in column"
+        <td id="{{'columns'+$index}}" ng-keyDown="keyPresses($event, i, j)" ng-dblclick="selectCols(i, j)"
+          ng-repeat="(j, col) in column track by $index"
           ng-class="{cellColor : col.type == 'number', 'freeze': col.frozen  }"
           ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle "
           ng-if="!item.editable">
