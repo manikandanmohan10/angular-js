@@ -124,15 +124,15 @@ angular.module('myApp', [])
           var isClickedElementChildOfPopup = event.target.closest(".popup-container")
           var t = event.target.closest("#closeSidePopup")
           let wantedFields = ['Set Column Header Color', 'Set Full Column Color', 'Set Conditional Colours']
-          if ($scope.optionForAddColumn){
+          if ($scope.optionForAddColumn) {
             filterPop = $scope.optionForAddColumn.field
-            if (!wantedFields.includes(filterPop)){
-            // $scope.filterIcon = true
-            $scope.$apply(function () {
-              $scope.popup.style.display = "none";
-            })
-          }
-          $scope.optionForAddColumn = undefined
+            if (!wantedFields.includes(filterPop)) {
+              // $scope.filterIcon = true
+              $scope.$apply(function () {
+                $scope.popup.style.display = "none";
+              })
+            }
+            $scope.optionForAddColumn = undefined
           }
           if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton && !t) {
 
@@ -940,17 +940,17 @@ angular.module('myApp', [])
         // $scope.initialFreezeColumn()
         $scope.initialFreezeColumn = () => {
           var ths = document.querySelectorAll('th[id*="columns"]');
-          for(var i = 0; i < ths.length; i++){
+          for (var i = 0; i < ths.length; i++) {
             $scope.head = ths[i];
-            $scope.cols = document.querySelectorAll('td#columns'+i);
+            $scope.cols = document.querySelectorAll('td#columns' + i);
             var style = getComputedStyle(ths[i])
             var colStyle = getComputedStyle($scope.cols[0])
             var position = style.getPropertyValue('position')
             // var width = colStyle.getPropertyValue('width')
             // width = parseInt(width,10)
             width = 100
-            if(position == 'sticky'){
-              $scope.freezeCondition('sticky', 'static', 'static',i,width)
+            if (position == 'sticky') {
+              $scope.freezeCondition('sticky', 'static', 'static', i, width)
             }
 
           }
@@ -972,28 +972,28 @@ angular.module('myApp', [])
           headWidth = parseInt(headWidth, 10)
           if (a > 0) {
             var prehead = getComputedStyle(document.querySelector('th#columns' + (a - 1)))
-            
+
             var preHeaderPosition = prehead.getPropertyValue('position');
-            
-            var nexthead = getComputedStyle(document.querySelector('th#columns'+(a+1)))
+
+            var nexthead = getComputedStyle(document.querySelector('th#columns' + (a + 1)))
             var nextHeaderPosition = nexthead.getPropertyValue('position')
-            $scope.freezeCondition(preHeaderPosition,headPosition,nextHeaderPosition,a,headWidth)
-            
+            $scope.freezeCondition(preHeaderPosition, headPosition, nextHeaderPosition, a, headWidth)
+
           }
-          else if (a==0){
-            var nexthead = getComputedStyle(document.querySelector('th#columns'+(a+1)))
+          else if (a == 0) {
+            var nexthead = getComputedStyle(document.querySelector('th#columns' + (a + 1)))
             var nextHeaderPosition = nexthead.getPropertyValue('position')
-            $scope.freezeCondition('sticky',headPosition,nextHeaderPosition, a, headWidth)
+            $scope.freezeCondition('sticky', headPosition, nextHeaderPosition, a, headWidth)
           }
 
 
 
 
         }
-        $scope.freezeCondition = (pre,present,next,index,headWidth) => {
+        $scope.freezeCondition = (pre, present, next, index, headWidth) => {
           if (pre == 'sticky' && present === 'static' && next == 'static') {
             $scope.head.style.position = 'sticky'
-            $scope.head.style.left = 200*(index)
+            $scope.head.style.left = 200 * (index)
             $scope.head.style.backgroundColor = '#ddd'
             $scope.head.style.zIndex = 1
             $scope.cols.forEach((td) => {
