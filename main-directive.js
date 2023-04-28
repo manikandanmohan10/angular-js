@@ -40,6 +40,7 @@ angular.module('myApp', [])
           scope.tableData = scope.data.slice(parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
           var noOfPages = Math.ceil(scope.data.length / scope.itemsPerPage);
           // scope.freezeInitialied()
+          scope.initialFreezeColumn()
           return noOfPages
 
         };
@@ -101,17 +102,17 @@ angular.module('myApp', [])
               });
             }
 
-            if ($scope.optionForAddColumn){
+            if ($scope.optionForAddColumn) {
               filterPop = $scope.optionForAddColumn.field
-              if (filterPop == 'Filter by this field'){
-              // $scope.filterIcon = true
+              if (filterPop == 'Filter by this field') {
+                // $scope.filterIcon = true
                 $scope.filterByField($scope.columnForAddColumn)
                 $scope.optionForAddColumn = undefined
                 $scope.columnForAddColumn = undefined
-            }
+              }
             }
 
-            else{
+            else {
               $scope.filterIcon = false
             }
             // $scope.filterIcon = !$scope.filterIcon
@@ -603,6 +604,8 @@ angular.module('myApp', [])
         }
 
         setTimeout(() => {
+          $scope.initialFreezeColumn()
+
           var rows = document.querySelectorAll('.rows');
           var columns = document.querySelectorAll('.columns');
           columns.forEach(function (row) {
@@ -921,33 +924,98 @@ angular.module('myApp', [])
 
         // };
         // freeze function
-        $scope.freezeColumn = (a, b, c) => {
-          var head = document.querySelector('th#' + c)
-          var cols = document.querySelectorAll('td#' + c);
-          var headStyle = getComputedStyle(head)
+        // $scope.initialFreezeColumn()
+        $scope.initialFreezeColumn = () => {
+          var ths = document.querySelectorAll('th[id*="columns"]');
+          for(var i = 0; i < ths.length; i++){
+            $scope.head = ths[i];
+            $scope.cols = document.querySelectorAll('td#columns'+i);
+            var style = getComputedStyle(ths[i])
+            var colStyle = getComputedStyle($scope.cols[0])
+            var position = style.getPropertyValue('position')
+            // var width = colStyle.getPropertyValue('width')
+            // width = parseInt(width,10)
+            width = 100
+            if(position == 'sticky'){
+              $scope.freezeCondition('sticky', 'static', 'static',i,width)
+            }
+
+          }
+          // ths.forEach((th)=>{
+          //   var style = getComputedStyle(th)
+          //   var position = style.getPropertyValue('position')
+          //   if(position === 'sticky')
+          //   $scope.freezeCondition('sticky','static','static') 
+
+          // })
+        }
+        $scope.freezeColumn = (a, c) => {
+          console.log(a, c)
+          $scope.head = document.querySelector('th#' + c)
+          $scope.cols = document.querySelectorAll('td#' + c);
+          var headStyle = getComputedStyle($scope.head)
           var headPosition = headStyle.getPropertyValue('position')
           var headWidth = headStyle.getPropertyValue('width')
           headWidth = parseInt(headWidth, 10)
-          if (headPosition === 'static') {
-            head.style.position = 'sticky'
-            head.style.left = (headWidth) * a + 95
-            head.style.backgroundColor = '#ddd'
-            head.style.zIndex = 1
+          if (a > 0) {
+            var prehead = getComputedStyle(document.querySelector('th#columns' + (a - 1)))
+            
+            var preHeaderPosition = prehead.getPropertyValue('position');
+            
+            var nexthead = getComputedStyle(document.querySelector('th#columns'+(a+1)))
+            var nextHeaderPosition = nexthead.getPropertyValue('position')
+            $scope.freezeCondition(preHeaderPosition,headPosition,nextHeaderPosition,a,headWidth)
+            
           }
-          cols.forEach((td) => {
-            var style = getComputedStyle(td)
-            var position = style.getPropertyValue('position')
-            var width = style.getPropertyValue('width')
-            width = parseInt(width, 10)
-            console.log(position, width, a, c)
-            if (position === 'static') {
-              td.style.position = 'sticky'
-              td.style.left = (width) * a + 95
-              td.style.backgroundColor = 'white'
-            }
+          else if (a==0){
+            var nexthead = getComputedStyle(document.querySelector('th#columns'+(a+1)))
+            var nextHeaderPosition = nexthead.getPropertyValue('position')
+            $scope.freezeCondition('sticky',headPosition,nextHeaderPosition, a, headWidth)
+          }
 
-          })
 
+
+
+        }
+        $scope.freezeCondition = (pre,present,next,index,headWidth) => {
+          if (pre == 'sticky' && present === 'static' && next == 'static') {
+            $scope.head.style.position = 'sticky'
+            $scope.head.style.left = 200*(index)
+            $scope.head.style.backgroundColor = '#ddd'
+            $scope.head.style.zIndex = 1
+            $scope.cols.forEach((td) => {
+              var style = getComputedStyle(td)
+              var position = style.getPropertyValue('position')
+              var width = style.getPropertyValue('width')
+              width = parseInt(width, 10)
+              console.log(position, width, index)
+              if (position === 'static') {
+                td.style.position = 'sticky'
+                td.style.left = 200 * index
+                td.style.backgroundColor = 'white'
+              }
+            })
+          }
+
+          else if (pre == 'sticky' && present === 'sticky' && next == 'static') {
+            $scope.head.style.position = 'static'
+            $scope.head.style.left = 100 * index
+            $scope.head.style.backgroundColor = '#ddd'
+            $scope.head.style.zIndex = 1
+            $scope.cols.forEach((td) => {
+              var style = getComputedStyle(td)
+              var position = style.getPropertyValue('position')
+              var width = style.getPropertyValue('width')
+              width = parseInt(width, 10)
+              console.log(position, width, index)
+              if (position === 'sticky') {
+                td.style.position = 'static'
+                td.style.left = (width) * index + 95
+                td.style.backgroundColor = 'white'
+              }
+
+            })
+          }
         }
 
 
