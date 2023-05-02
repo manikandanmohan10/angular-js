@@ -97,9 +97,7 @@ angular.module('myApp', [])
             var isClickedElementGChildofPop = event.target.matches(".sortPopup")
             if (!isClickedElementGChildofPop) {
               $scope.sortPopupVisible = false;
-              $scope.$apply(function () {
-                $scope.sortPopupVisible = false;
-              });
+              $scope.$apply();
             }
 
             if ($scope.optionForAddColumn) {
@@ -124,7 +122,7 @@ angular.module('myApp', [])
 
           var isClickedElementChildOfPopup = event.target.closest(".popup-container")
           var t = event.target.closest("#closeSidePopup")
-          let wantedFields = ['Set Column Header Color', 'Set Full Column Color', 'Set Conditional Colours']
+          let wantedFields = ['Edit field','Set Column Header Color', 'Set Full Column Color', 'Set Conditional Colours']
           if ($scope.optionForAddColumn) {
             filterPop = $scope.optionForAddColumn.field
             if (!wantedFields.includes(filterPop)) {
