@@ -939,9 +939,16 @@ input:checked+.slider:before {
 .close {
   margin-bottom: 10px;
 }
-/* .searchinp{
-  width: 40%;
+
+.addColumnFil{
+  display: flex;
 }
-.icon{
-  width:20px;
-} */
+
+.addColumnFil > input{
+  height: 28px;
+  width: 300px;
+}
+
+.searchIcon{
+  margin: auto;
+}
