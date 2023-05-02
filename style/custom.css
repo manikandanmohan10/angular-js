@@ -896,6 +896,11 @@ input:checked+.slider:before {
   padding: 7px 5px;
 }
 
+.resize-icon{
+display: flex;
+justify-content: end;
+}
+
 .card-input {
   padding: 2px 0;
   width: 90%;

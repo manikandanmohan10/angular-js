@@ -213,7 +213,7 @@ angular.module('myApp', [])
                 // Reset cursor to default
                 this.style.cursor = "default";
                 // Remove event listener for mousedown event
-                this.removeEventListener("mousedown", startResize);
+                // this.removeEventListener("mousedown", startResize);
               }
             });
           }

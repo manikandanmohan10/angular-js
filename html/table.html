@@ -569,7 +569,9 @@ data-toggle="modal" data-target="#exampleModal"
           ng-class="{cellColor : col.type == 'number', 'freeze': col.frozen  }"
           ng-style="item[col.field] >=5 &&  col.type == 'number' && item[col.field] <=20 && {'background-color':'#f54225'} || item[col.field] <5 && col.type == 'number' && {'background-color':'#7bdaff'} || item[col.field] >20 && col.type == 'number' && {'background-color':'#84e784'} || col.field ==  selectedValue && myStyle "
           ng-if="!item.editable">
-          <p id="{{i+'-'+j}}">{{item[col.field]}}</p>
+          <p id="{{i+'-'+j}}">{{item[col.field]}}</p><span class="resize-icon material-symbols-outlined">
+            open_in_full
+            </span>
 
           <input id="{{i+'-'+j+'-index'}}" ng-style="{'display': 'none'}"
             ng-if="(col.type === 'input' || col.type === 'email')" type="{{col.dataType ? col.dataType : 'text'}}"
