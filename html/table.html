@@ -195,14 +195,18 @@
         <div class="modal-body" ng-if="!filter_column">
           <form>
             <div class="tab-icon">
-              <input type="text" ng-model="searchItem" value="" />
-              <button class="btn icon"><span style="background-color: none;" ng-click="getColumn(searchItem)"
-                  class="material-symbols-outlined filter-box-icon">
-                  search
-                </span>
-              </button>
+              <div class="searchinp">
+                <div style="background-color: none;" ng-click="getColumn(searchItem)"
+                class="material-symbols-outlined icon">
+                search
+                <input type="text" ng-model="searchItem" class="inp" ng-change="hidenColumnFilter(searchItem)" />
+              </div>
+            
+            
+              </div>
+             
             </div>
-
+            
             <div ng-repeat="name in getColumnList" class="tab-icon">
               <div>{{name}}
                 <button class="btn icon" ng-click="removeColumn(name)"><span
@@ -214,6 +218,9 @@
             </div>
 
           </form>
+          <ul ng-if="(searchItem)" ng-repeat="col in hidingColumnArryList" class="list-data">
+            <li ng-click="getColumn(col.field)">{{col.field}}</li>
+          </ul>
         </div>
 
         <div class="modal-footer">
@@ -221,6 +228,9 @@
             data-dismiss="modal">Close</button>
           <button ng-if="filter_column" type="button" class="btn btn-primary" ng-click="filterTable()"> filter</button>
           <button ng-if="!filter_column" type="button" class="btn btn-primary" ng-click="viewTable()"> View</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" ng-click="saveChanges()">Save changes</button>
         </div>
       </div>
     </div>

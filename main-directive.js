@@ -437,6 +437,9 @@ angular.module('myApp', [])
         $scope.removeField = function (index) {
           $scope.myForm.myFields.splice(index, 1);
         };
+        $scope.saveChanges = function () {
+          $scope.colList.push($scope.getColumnList)
+        };
         $scope.getColumn = function (index) {
           if (!index) {
             return

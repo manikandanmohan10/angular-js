@@ -344,6 +344,14 @@ select {
   border: 1px solid #1a90f0;
 
 }
+.btn-success{
+  min-width: 100px;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: #0a7525;
+  border: 1px solid  #0a7525;
+}
 
 .btn-primary:hover {
   background-color: #2e9af1;
@@ -931,3 +939,9 @@ input:checked+.slider:before {
 .close {
   margin-bottom: 10px;
 }
+/* .searchinp{
+  width: 40%;
+}
+.icon{
+  width:20px;
+} */
