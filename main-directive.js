@@ -10,6 +10,7 @@ angular.module('myApp', [])
         sortBy: "&",
       },
       link: function (scope, element, attrs) {
+        scope.colList = new Array();
         scope.card = "Daniel"
         scope.isGroup = false
         scope.isFreeze = JSON.parse(attrs.ngFreeze)
@@ -437,6 +438,7 @@ angular.module('myApp', [])
         $scope.removeField = function (index) {
           $scope.myForm.myFields.splice(index, 1);
         };
+        
         $scope.saveChanges = function () {
           $scope.colList.push($scope.getColumnList)
         };
@@ -1234,7 +1236,7 @@ angular.module('myApp', [])
             //   return item.field
             // })
 
-            $scope.columnList = ['name', 'phone']
+            $scope.columnList = $scope.colList ? $scope.colList : ['name', 'phone']
 
             $scope.updatedColumn = []
             $scope.column.forEach(column => {
