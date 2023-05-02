@@ -122,7 +122,7 @@ angular.module('myApp', [])
 
           var isClickedElementChildOfPopup = event.target.closest(".popup-container")
           var t = event.target.closest("#closeSidePopup")
-          let wantedFields = ['Edit field','Set Column Header Color', 'Set Full Column Color', 'Set Conditional Colours']
+          let wantedFields = ['Edit field', 'Set Column Header Color', 'Set Full Column Color', 'Set Conditional Colours']
           if ($scope.optionForAddColumn) {
             filterPop = $scope.optionForAddColumn.field
             if (!wantedFields.includes(filterPop)) {
@@ -1422,10 +1422,10 @@ angular.module('myApp', [])
             $scope.grouping = false
           }
         }
-        setTimeout(function() {
+        setTimeout(function () {
           $scope.itemsPerPage = '5'
           $scope.$apply()
-        },1000);
+        }, 1000);
       }
     };
   });
