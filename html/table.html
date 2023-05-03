@@ -37,7 +37,7 @@
         <span class="material-symbols-outlined">help</span>
       </div>
       <ul ng-repeat="col in hidingColumnArryList" draggable="true" class="list-data">
-        <li>{{col.field}}</li>
+        <li>{{col.fieldName}}</li>
         <input type="checkbox" ng-model="col.checked" ng-click="hidingColumn(col.field, $event)" />
       </ul>
     </div>
@@ -108,7 +108,7 @@
     <div class="custom" ng-model="sortField" ng-show="showOptions" id="exampleFormControlSelect2">
       <h5>Find a Field</h5>
       <div class="option-val" ng-repeat="col in column" value="{{col.field}}" ng-click="updateMyObj(col.field);">
-        {{col.field}}</div>
+        {{col.fieldName}}</div>
     </div>
     <button class="btn btn-primary  card-btn" ng-click="hideSortPopup()">Close Popup</button>
   </div>
@@ -227,7 +227,7 @@
           overflow: auto;border: 1px solid;height: 250px;"> 
 
             <ul  ng-repeat="col in hidingColumnArryList" class="list-data">
-              <li ng-click="getColumn(col.field)">{{col.field}}</li>
+              <li ng-click="getColumn(col.field)">{{col.fieldName}}</li>
             </ul>
           </div>
         </div>
@@ -305,7 +305,7 @@ data-toggle="modal" data-target="#exampleModal"
           <select class="custom-select" ng-model="selectedValue" id="exampleFormControlSelect2">
             <!-- <option selected>Open this select menu</option> -->
             <option value="{{columns.field}}" ng-repeat="columns in column " ng-selected="columns === column[0]">
-              {{columns.field}}
+              {{columns.fieldName}}
             </option>
           </select>
           <div>
@@ -355,7 +355,7 @@ data-toggle="modal" data-target="#exampleModal"
             <div style="display: flex;gap: 20px;align-items: center;position: relative;">
 
               <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
-              {{columns.field}}
+              {{columns.fieldName}}
               <div style="position: relative;">
 
 
@@ -386,7 +386,7 @@ data-toggle="modal" data-target="#exampleModal"
                   <div style="position:absolute; top: 0px; left:-14px">
                     <div ng-if="editPopup" class="popup-container-1">
                       <div class="popup-item edit-popup">
-                        <div class="field-wrap">{{columns.field}}</div>
+                        <div class="field-wrap">{{columns.fieldName}}</div>
                         <div>
 
                           <select name="" id="" style=" width: 405px;
@@ -663,7 +663,7 @@ data-toggle="modal" data-target="#exampleModal"
   <div class="group-container">
     <div class="group-head" ng-repeat="col in column">
       <div>
-        {{col.field}}
+        {{col.fieldName}}
       </div>
     </div>
     <div class="body">

@@ -590,7 +590,7 @@ angular.module('myApp', [])
             })
 
             $scope.data = tempObject;
-            $scope.numOfPages()
+            $scope.numOfPagess()
           }
           else {
             filteredObjects = $scope.data;
@@ -1391,6 +1391,7 @@ angular.module('myApp', [])
             field: header ? header : 'TEST',
             type: "input",
             dataType: 'input',
+            fieldName: header ? header : 'TEST',
             editable: true,
             checked: false
           }
@@ -1401,6 +1402,7 @@ angular.module('myApp', [])
           }
           else if (option.field == "Insert right") {
             $scope.column.splice(columnIndex + 1, 0, data)
+            $scope.hidingColumnArryList = $scope.column;
             $scope.isColorOption = !$scope.isColorOption;
           }
         }
