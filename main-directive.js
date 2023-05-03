@@ -123,8 +123,10 @@ angular.module('myApp', [])
             }
 
             else {
+              if (!event.target.innerHTML == 'close'){
 
-              $scope.filterIcon = false
+                $scope.filterIcon = false
+              }
               $scope.columnDataList = []
               $scope.getColumnList = []
             }
@@ -450,10 +452,27 @@ angular.module('myApp', [])
             $scope.columnDataList.push(index)
             $scope.showColumnBox = true
             const box = document.getElementById('box');
+            const insideBox = document.createElement('div');
+            insideBox.classList.add('chip')
+            insideBox.style.display = 'flex'
+            insideBox.style.alignItems = 'center'
+            insideBox.style.gap = '5px'
             const chip = document.createElement('div');
-            chip.classList.add('chip');
+            chip.classList.add('col');
             chip.textContent = index;
-            box.appendChild(chip);
+            const icon = document.createElement('span');
+            icon.classList.add('icon');
+            icon.style.height = '10px'
+            icon.style.color = 'red'
+            icon.style.cursor = 'pointer'
+            icon.textContent = 'close';
+            insideBox.appendChild(chip);
+            insideBox.appendChild(icon);
+            box.appendChild(insideBox)
+            icon.addEventListener('click', function() {
+              $scope.removeColumn(chip.innerHTML)
+              insideBox.remove()
+            });
           }
 
           // if (!index) {
