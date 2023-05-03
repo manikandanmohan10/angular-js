@@ -123,8 +123,7 @@ angular.module('myApp', [])
             }
 
             else {
-              if (!event.target.innerHTML == 'close'){
-
+              if (!(event.target.innerHTML == 'close')){
                 $scope.filterIcon = false
               }
               $scope.columnDataList = []
