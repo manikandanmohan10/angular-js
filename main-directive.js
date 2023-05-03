@@ -96,7 +96,6 @@ angular.module('myApp', [])
         // $(".table").dragableColumns(); //Initialize dragndropjs for column dragndrop
         // }, 0);
         scope.temp = scope.column;
-        console.log(scope.tableData)
         scope.objectKeys = Object.keys(scope.tableData[0])
       },
       templateUrl: "html/table.html",
@@ -162,8 +161,6 @@ angular.module('myApp', [])
           //           var isClickedElementTriggerButton = event.target.matches('#triggerPopup');
           //           if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
           //             $scope.filterIcon = false
-          //             console.log(event.target.closest("#filterModal"))
-          //             // console.log("true")
           //           }
 
           // }
@@ -176,16 +173,13 @@ angular.module('myApp', [])
         // 
         // $scope.freezeInitialied = () => {
         //   $scope.resetFreeze()
-        //   console.log(typeof $scope.isFreeze)
         //   if ($scope.isFreeze === true) {
         //     var style = document.getElementById(`columns0`)
         //     var colsHeadStyle = window.getComputedStyle(style)
         //     var colsHeadWidth = colsHeadStyle.getPropertyValue("left");
         //     var colsHead = document.querySelector(`#myTable th:nth-child(2)`);
-        //     console.log(colsHead.offsetLeft)
         //     // const nextHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +3})`);
         //     var cols = document.querySelectorAll(`#myTable tbody td:nth-child(2)`);
-        //     console.log(cols, colsHead)
         //     cols.forEach(cell => {
         //       cell.style.position = 'sticky';
         //       cell.style.left = cell.offsetLeft - 20
@@ -220,7 +214,6 @@ angular.module('myApp', [])
               var topEdge = rect.top;
               if (x >= rightEdge - 5 || y >= bottomEdge - 5 || x <= leftEdge + 5 || y <= topEdge + 5) {
 
-                // console.log(rightEdge,x)
                 // Set cursor to "se-resize" to indicate resizing is possible
                 this.style.cursor = "cell";
                 // Add event listener for mousedown event
@@ -250,7 +243,6 @@ angular.module('myApp', [])
 
             // Function to handle mousemove event for resizing
             function resize(event) {
-              console.log('ladkfjsal', cell.style)
               var width = originalWidth + (event.clientX - originalX);
               var height = originalHeight + (event.clientY - originalY);
               cell.style.minWidth = width + "px";
@@ -374,9 +366,7 @@ angular.module('myApp', [])
 
         $scope.getData = function () {
           var inputData = $scope.myData; // Get the input field data from the bound variable
-          console.log("Input Data: " + inputData);
           var selectedOption = $scope.selectedValue; // Get the selected value from the bound variable
-          console.log("Selected Value: " + selectedOption);
           if ($scope.myData) {
             $scope.myStyle = {
               "background-color": $scope.myData,
@@ -422,7 +412,6 @@ angular.module('myApp', [])
           if (property.target.checked) {
             var table = document.getElementById("mytable");
             table.rows[count + 1].style.backgroundColor = "aliceblue";
-            console.log(event, count)
           }
           else {
             if ((count + 1) % 2 == 0) {
@@ -439,11 +428,9 @@ angular.module('myApp', [])
 
         };
         $scope.checkBoxchanges = function (event) {
-          console.log("checking")
           this.checkbox = event.target.checked
           let data = document.querySelectorAll('.myCheck')
           data.forEach((d) => {
-            console.log(d)
             d.click()
           })
 
@@ -488,30 +475,23 @@ angular.module('myApp', [])
             value: "",
           };
           $scope.myForm.myFields.push(field);
-          console.log($scope.myForm);
         };
         $scope.submitForm = function () {
           $scope.assignValues();
           $scope.column.forEach((value) => {
-            console.log(value.field);
             $scope.data.forEach((da) => {
               if (!$scope.filterData[value.field].includes(da[value.field])) {
                 $scope.filterData[value.field].push(da[value.field]);
               }
             });
           });
-          console.log($scope.filterData);
         };
 
         $scope.assignValues = () => {
           $scope.filterData = {};
-          // console.log($scope.column,$scope.data)
           $scope.column.forEach((value) => {
-            //  console.log($scope.data[0][value.field]);
             $scope.filterData[value.field] = [];
-            // console.log(value)
           });
-          // console.log($scope.filterData)
         };
 
         $scope.viewTable = () => {
@@ -530,7 +510,6 @@ angular.module('myApp', [])
 
         $scope.filterTable = () => {
           // Filter
-          console.log($scope.originalData)
           let filteredObjects = []
           let checkConditions = false;
           let tempObject = [];
@@ -538,7 +517,6 @@ angular.module('myApp', [])
           let filterOrder = ['not like', 'like', 'not equal', 'equal']
           // $scope.data=$scope.datas
           $scope.tableData = $scope.originalData;
-          // console.log($scope.myForm.myFields)
           const filterArr = $scope.myForm.myFields;
 
 
@@ -615,7 +593,6 @@ angular.module('myApp', [])
             case 'like':
               return $scope.filterValuefun(data, filterValue.value, filterValue.columnName.field);
             case 'not like':
-              console.log("not like => ", filterValue)
               return !$scope.filterValuefun(data, filterValue.value, filterValue.columnName.field);
             default:
               return false
@@ -624,7 +601,6 @@ angular.module('myApp', [])
 
 
         $scope.filterValuefun = (col, filter, key = null) => {
-          console.log(col, filter, key)
           if (key) {
             if (col[key].toString().toLowerCase().includes(filter.toLowerCase())) {
               return true;
@@ -636,7 +612,6 @@ angular.module('myApp', [])
           else {
             let keys = Object.keys(col);
             for (let key of keys) {
-              console.log(key)
               if (col[key].toString().toLowerCase().includes(filter.toLowerCase())) {
                 return true;
               }
@@ -758,7 +733,6 @@ angular.module('myApp', [])
 
         $scope.togglePopup = (headerIndex) => {
           $scope.editPopup = false
-          console.log(headerIndex)
           $scope.popup = document.getElementById("popup-" + headerIndex);
           $scope.allPopups = document.getElementsByClassName("popup-container");
           $scope.isVisible = window.getComputedStyle($scope.popup).getPropertyValue("display") === "block";
@@ -829,8 +803,7 @@ angular.module('myApp', [])
             // colorPicker.click();
             document.getElementById("columns" + index).style.backgroundColor = color;
           } else if (option === "Set Full Column Color") {
-            var targetHeaderText = column.field;
-
+            var targetHeaderText = column.fieldName;
             // Find the index of the target column
             var targetColumnIndex = -1;
             var table = document.querySelector('.table');
@@ -859,11 +832,9 @@ angular.module('myApp', [])
         $scope.deleteRow = function (row) {
           // delete the row
           //$scope.data = $scope.data.slice(0, 4);
-          console.log(row);
         };
         $scope.$watch("data", function () {
           // update the table
-          console.log("fayyas")
         });
         $scope.freezeColumnIndex = null;
 
@@ -872,21 +843,17 @@ angular.module('myApp', [])
 
         // Function to freeze a column based on user input
         // $scope.freezeColumn = function (index, field, event) {
-        //   console.log(event.target)
         //   const styleElement = document.createElement('style'); // create a new style element
         //   document.head.appendChild(styleElement); // append the style element to the head of the document
 
         //   const styleSheet = styleElement.sheet;
         //   cell = event.currentTarget.parentElement.parentElement.parentElement
-        //   console.log(cell)
         //   if (cell.tagName == 'TH' || cell.tagName == 'TD') {
         //     var cellLeft = cell.offsetLeft;
         //     var cellHeight = cell.offsetHeight;
-        //     console.log(cellLeft, cellHeight)
 
         //   }
         //   $scope.freezeColumnIndex = index
-        //   console.log($scope.column)
         //   if ($scope.freezeColumnIndex !== null && $scope.freezeColumnIndex >= 0 && $scope.freezeColumnIndex < $scope.column.length) {
 
         //     // var forzenCount =0;
@@ -901,7 +868,6 @@ angular.module('myApp', [])
         //     //       styleSheet.insertRule(cssRule,0)
         //     //       cell.style.position='sticky';
         //     //       cell.style.left = cellLeft+'px'
-        //     //       console.log(cell)
 
         //     //     }
         //     //     else{
@@ -919,14 +885,12 @@ angular.module('myApp', [])
         //         var nextHeaderPosition = nextHeaderStyle.getPropertyValue("position");
         //         var preHeaderStyle = window.getComputedStyle(preHeader)
         //         var preHeaderPosition = preHeaderStyle.getPropertyValue("position");
-        //         // console.log(width)
         //         // Add the "freeze" CSS class to the header and cells of the selected column
         //         // const preHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +1})`);
         //         const header = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex + 2})`);
         //         // const nextHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +3})`);
         //         const cells = document.querySelectorAll(`#myTable tbody td:nth-child(${$scope.freezeColumnIndex + 2})`);
         //         // header.classList.add('freeze');
-        //         console.log(preHeader.style, nextHeader.style)
         //         if (preHeaderPosition === 'sticky' && header.style.position === 'sticky' && nextHeaderPosition === 'static') {
         //           header.style.position = 'static'
         //           header.style.backgroundColor = '#ddd'
@@ -935,7 +899,6 @@ angular.module('myApp', [])
         //             cell.style.backgroundColor = 'white'
         //           });
         //           // header.style.left = (cellLeft-header.style.left)+'px'
-        //           console.log('hello', header.style)
         //         }
         //         else if (preHeaderPosition === 'sticky' && (header.style.position === 'static' || header.style.position === '') && nextHeaderPosition === 'static') {
 
@@ -948,7 +911,6 @@ angular.module('myApp', [])
         //           header.style.left = (cellLeft) + 'px'
         //           header.style.backgroundColor = '#ddd'
         //           header.style.zIndex = 2
-        //           console.log('=====>', header.style, cells.style)
 
         //         }
         //         else {
@@ -977,16 +939,26 @@ angular.module('myApp', [])
             $scope.head = ths[i];
             $scope.cols = document.querySelectorAll('td#columns' + i);
             var style = getComputedStyle(ths[i])
-            var colStyle = getComputedStyle($scope.cols[0])
+            var colStyle = ''
             var position = style.getPropertyValue('position')
+            var colour = style.getPropertyValue('background-color')
             // var width = colStyle.getPropertyValue('width')
             // width = parseInt(width,10)
             width = 100
             if (position == 'sticky') {
               $scope.freezeCondition('sticky', 'static', 'static', i, width)
             }
+            for(var j = 0; j<$scope.cols.length; j++){
+              if(j == 0 ){
+                 colStyle = getComputedStyle($scope.cols[j])
+                }
+                else{
+                  $scope.cols[j].style.backgroundColor = colStyle.getPropertyValue('background-color') 
+                }
+            }
 
           }
+
           // ths.forEach((th)=>{
           //   var style = getComputedStyle(th)
           //   var position = style.getPropertyValue('position')
@@ -996,7 +968,6 @@ angular.module('myApp', [])
           // })
         }
         $scope.freezeColumn = (a, c) => {
-          console.log(a, c)
           $scope.head = document.querySelector('th#' + c)
           $scope.cols = document.querySelectorAll('td#' + c);
           var headStyle = getComputedStyle($scope.head)
@@ -1034,7 +1005,6 @@ angular.module('myApp', [])
               var position = style.getPropertyValue('position')
               var width = style.getPropertyValue('width')
               width = parseInt(width, 10)
-              console.log(position, width, index)
               if (position === 'static') {
                 td.style.position = 'sticky'
                 td.style.left = 200 * index
@@ -1053,7 +1023,6 @@ angular.module('myApp', [])
               var position = style.getPropertyValue('position')
               var width = style.getPropertyValue('width')
               width = parseInt(width, 10)
-              console.log(position, width, index)
               if (position === 'sticky') {
                 td.style.position = 'static'
                 td.style.left = (width) * index + 95
@@ -1222,7 +1191,6 @@ angular.module('myApp', [])
         }
 
         $scope.getListValue = function ($event) {
-          console.log($event.currentTarget.textContent)
           $scope.groupValue = $event.currentTarget.textContent
           if ($event.currentTarget.textContent == 'Default') {
             $scope.column = $scope.columnData
@@ -1275,7 +1243,6 @@ angular.module('myApp', [])
             });
             $scope.column = $scope.updatedColumn
             $scope.searchButton = $event => {
-              console.log($event)
             }
           }
         }
@@ -1298,7 +1265,6 @@ angular.module('myApp', [])
               da['checked'] = checBox
             }
           })
-          console.log(item)
           if (checBox) {
             $scope.column.forEach((da) => {
               if (da['field'] == event) {
@@ -1327,11 +1293,9 @@ angular.module('myApp', [])
             $scope.Checkchecked.splice(checkbox, 1)
           }
           $scope.$apply();
-          console.log($scope.Checkchecked, "Checkchecked")
         }
 
         $scope.hidenColumnFilter = (event) => {
-          console.log(event, "hidden columns filter")
           $scope.hidingColumnArryList = $scope.constColumnArryList
           $scope.hidingColumnArryList = $scope.hidingColumnArryList.filter((data) => {
             if (data["field"].includes(event)) {
@@ -1353,25 +1317,20 @@ angular.module('myApp', [])
             var checkbox = $scope.checked.indeof(index)
             $scope.checked.splice(checkbox, 1)
           }
-          console.log($scope.checked)
         }
         $scope.groupBy = ["list"]
         grouped = {};
 
         setTimeout(() => {
-          console.log($scope.data)
           $scope.data.forEach(function (col) {
             $scope.groupBy.reduce(function (o, g, i) {
 
-              // console.log( g)// take existing object,
 
               o[col[g]] = o[col[g]] || (i + 1 === $scope.groupBy.length ? [] : {}); // or generate new obj, or
-              // console.log('dsghdf', grouped)
               return o[col[g]];
               // at last, then an array
             }, grouped).push(col);
           });
-          console.log(grouped)
         }, 1000)
 
         $scope.addFieldPopup = false
