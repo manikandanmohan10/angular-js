@@ -22,7 +22,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'input',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "phone",
@@ -30,7 +32,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'input',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "email",
@@ -38,7 +42,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'email',
         editable: false,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "address",
@@ -46,7 +52,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'text',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "postalZip",
@@ -54,7 +62,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'input',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "region",
@@ -62,7 +72,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'input',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "country",
@@ -70,7 +82,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'input',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "list",
@@ -78,7 +92,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'list',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "text",
@@ -86,7 +102,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'text',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "numberrange",
@@ -94,21 +112,27 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: "number",
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "alphanumeric",
         fieldName: "Alphanumeric",
         type: "input",
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "currency",
         fieldName: "Currency",
         type: "number",
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "date",
@@ -116,7 +140,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'date',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "constant",
@@ -124,7 +150,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'input',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "company",
@@ -132,7 +160,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'input',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "boolean",
@@ -140,7 +170,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'boolean',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "list1",
@@ -148,7 +180,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'list',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "guid",
@@ -156,7 +190,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'input',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "cvv",
@@ -164,7 +200,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'number',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       },
       {
         field: "track2",
@@ -172,7 +210,9 @@ module.controller("exampleCtrl", function ($scope) {
         type: "input",
         dataType: 'input',
         editable: true,
-        checked: false
+        checked: false,
+        headColor:null,
+        bodyColor:null,
       }
     ],
 

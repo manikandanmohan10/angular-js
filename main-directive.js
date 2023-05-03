@@ -820,6 +820,11 @@ angular.module('myApp', [])
             // });
             // colorPicker.click();
             document.getElementById("columns" + index).style.backgroundColor = color;
+            $scope.column.forEach((col) => {
+              if (column.fieldName === col.fieldName){
+                col.headColor = color
+              }
+            })
           } else if (option === "Set Full Column Color") {
             var targetHeaderText = column.fieldName;
             // Find the index of the target column
@@ -840,6 +845,11 @@ angular.module('myApp', [])
                 targetCells[j].style.backgroundColor = color; // Set desired background color for the column
               }
             }
+            $scope.column.forEach((col) => {
+              if (column.fieldName === col.fieldName){
+                col.bodyColor = color
+              }
+            })
             // document.getElementById("cell").style.backgroundColor = color;
           }
         }
@@ -966,16 +976,31 @@ angular.module('myApp', [])
             if (position == 'sticky') {
               $scope.freezeCondition('sticky', 'static', 'static', i, width)
             }
+            $scope.column.forEach((col) =>{
+              if(ths[i].textContent.includes(col.fieldName)){
+                ths[i].style.background = col.headColor;
+
+              }
+            })
             for(var j = 0; j<$scope.cols.length; j++){
-              if(j == 0 ){
-                 colStyle = getComputedStyle($scope.cols[j])
+              $scope.column.forEach((col) => {
+                if(ths[$scope.cols[j].cellIndex - 1].textContent.includes(col.fieldName)){
+                  if(col.bodyColor){
+
+                    console.log(col)
+                    $scope.cols[j].style.backgroundColor = col.bodyColor
+                  }
+                  else{
+                    $scope.cols[j].style.backgroundColor = 'white'
+
+                  }
+
                 }
-                else{
-                  $scope.cols[j].style.backgroundColor = colStyle.getPropertyValue('background-color') 
-                }
+              })
             }
 
           }
+
 
           // ths.forEach((th)=>{
           //   var style = getComputedStyle(th)
