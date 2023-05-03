@@ -18,6 +18,7 @@ module.controller("exampleCtrl", function ($scope) {
     column: [
       {
         field: "name",
+        fieldName: "Name",
         type: "input",
         dataType: 'input',
         editable: true,
@@ -25,6 +26,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "phone",
+        fieldName: "Phone",
         type: "input",
         dataType: 'input',
         editable: true,
@@ -32,6 +34,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "email",
+        fieldName: "Email",
         type: "input",
         dataType: 'email',
         editable: false,
@@ -39,6 +42,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "address",
+        fieldName: "Address",
         type: "input",
         dataType: 'text',
         editable: true,
@@ -46,6 +50,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "postalZip",
+        fieldName: "PostalZip",
         type: "input",
         dataType: 'input',
         editable: true,
@@ -53,6 +58,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "region",
+        fieldName: "Region",
         type: "input",
         dataType: 'input',
         editable: true,
@@ -60,6 +66,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "country",
+        fieldName: "Country",
         type: "input",
         dataType: 'input',
         editable: true,
@@ -67,6 +74,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "list",
+        fieldName: "List",
         type: "input",
         dataType: 'list',
         editable: true,
@@ -74,6 +82,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "text",
+        fieldName: "Text",
         type: "input",
         dataType: 'text',
         editable: true,
@@ -81,6 +90,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "numberrange",
+        fieldName: "Numberrange",
         type: "input",
         dataType: "number",
         editable: true,
@@ -88,18 +98,21 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "alphanumeric",
+        fieldName: "Alphanumeric",
         type: "input",
         editable: true,
         checked: false
       },
       {
         field: "currency",
+        fieldName: "Currency",
         type: "number",
         editable: true,
         checked: false
       },
       {
         field: "date",
+        fieldName: "Date",
         type: "input",
         dataType: 'date',
         editable: true,
@@ -107,6 +120,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "constant",
+        fieldName: "Constant",
         type: "input",
         dataType: 'input',
         editable: true,
@@ -114,6 +128,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "company",
+        fieldName: "Company",
         type: "input",
         dataType: 'input',
         editable: true,
@@ -121,6 +136,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "boolean",
+        fieldName: "Boolean",
         type: "input",
         dataType: 'boolean',
         editable: true,
@@ -128,6 +144,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "list1",
+        fieldName: "List1",
         type: "input",
         dataType: 'list',
         editable: true,
@@ -135,6 +152,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "guid",
+        fieldName: "Guid",
         type: "input",
         dataType: 'input',
         editable: true,
@@ -142,6 +160,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "cvv",
+        fieldName: "CVV",
         type: "input",
         dataType: 'number',
         editable: true,
@@ -149,6 +168,7 @@ module.controller("exampleCtrl", function ($scope) {
       },
       {
         field: "track2",
+        fieldName: "Track2",
         type: "input",
         dataType: 'input',
         editable: true,

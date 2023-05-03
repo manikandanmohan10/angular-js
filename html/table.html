@@ -37,7 +37,7 @@
         <span class="material-symbols-outlined">help</span>
       </div>
       <ul ng-repeat="col in hidingColumnArryList" draggable="true" class="list-data">
-        <li>{{col.field}}</li>
+        <li>{{col.fieldName}}</li>
         <input type="checkbox" ng-model="col.checked" ng-click="hidingColumn(col.field, $event)" />
       </ul>
     </div>
@@ -108,7 +108,7 @@
     <div class="custom" ng-model="sortField" ng-show="showOptions" id="exampleFormControlSelect2">
       <h5>Find a Field</h5>
       <div class="option-val" ng-repeat="col in column" value="{{col.field}}" ng-click="updateMyObj(col.field);">
-        {{col.field}}</div>
+        {{col.fieldName}}</div>
     </div>
     <button class="btn btn-primary  card-btn" ng-click="hideSortPopup()">Close Popup</button>
   </div>
@@ -192,23 +192,27 @@
             <!-- <button ng-click="submitForm()">Submit</button> -->
           </form>
         </div>
-        <div class="modal-body" ng-if="!filter_column">
+        <div class="modal-body" ng-if="!filter_column" style="margin-left: 15px;">
           <form>
             <div class="tab-icon">
               <div class="searchinp">
-                <div style="background-color: none;" ng-click="getColumn(searchItem)"
-                class="material-symbols-outlined icon addColumnFil">
-                  <input type="text" ng-model="searchItem" class="inp" ng-change="hidenColumnFilter(searchItem)" />
-                  <p class="searchIcon">search</p>
-              
+                <div style="background-color: none; align-items: center; gap: 15px;"
+                  class="material-symbols-outlined icon addColumnFil">
+                  <input type="text" ng-model="searchItem" class="inp" style="    border-radius: 5px;
+                  text-align: center;" ng-change="hidenColumnFilter(searchItem)" />
+                  <p class="searchIcon" style="position: absolute;left: 27px;">search</p>
+                  <div>
+
+                    <div ng-if="true" id="box"></div>
+                  </div>
+                </div>
+
+
               </div>
-            
-            
-              </div>
-             
+
             </div>
-            
-            <div ng-repeat="name in getColumnList" class="tab-icon">
+
+            <!-- <div ng-repeat="name in getColumnList" class="tab-icon">
               <div>{{name}}
                 <button class="btn icon" ng-click="removeColumn(name)"><span
                     class="material-symbols-outlined filter-box-icon">
@@ -216,12 +220,16 @@
                   </span></button>
               </div>
 
-            </div>
+            </div> -->
 
           </form>
-          <ul ng-if="(searchItem)" ng-repeat="col in hidingColumnArryList" class="list-data">
-            <li ng-click="getColumn(col.field)">{{col.field}}</li>
-          </ul>
+          <div ng-if="(searchItem)" style="    width: 270px;
+          overflow: auto;border: 1px solid;height: 250px;"> 
+
+            <ul  ng-repeat="col in hidingColumnArryList" class="list-data">
+              <li ng-click="getColumn(col.field)">{{col.fieldName}}</li>
+            </ul>
+          </div>
         </div>
 
         <div class="modal-footer">
@@ -297,7 +305,7 @@ data-toggle="modal" data-target="#exampleModal"
           <select class="custom-select" ng-model="selectedValue" id="exampleFormControlSelect2">
             <!-- <option selected>Open this select menu</option> -->
             <option value="{{columns.field}}" ng-repeat="columns in column " ng-selected="columns === column[0]">
-              {{columns.field}}
+              {{columns.fieldName}}
             </option>
           </select>
           <div>
@@ -347,7 +355,7 @@ data-toggle="modal" data-target="#exampleModal"
             <div style="display: flex;gap: 20px;align-items: center;position: relative;">
 
               <span style="font-size: initial;" class="material-symbols-outlined">expand_circle_down</span>
-              {{columns.field}}
+              {{columns.fieldName}}
               <div style="position: relative;">
 
 
@@ -378,7 +386,7 @@ data-toggle="modal" data-target="#exampleModal"
                   <div style="position:absolute; top: 0px; left:-14px">
                     <div ng-if="editPopup" class="popup-container-1">
                       <div class="popup-item edit-popup">
-                        <div class="field-wrap">{{columns.field}}</div>
+                        <div class="field-wrap">{{columns.fieldName}}</div>
                         <div>
 
                           <select name="" id="" style=" width: 405px;
@@ -517,7 +525,7 @@ data-toggle="modal" data-target="#exampleModal"
           </div>
 
         </th>
-        <th>Checkbox</th>
+        <!-- <th>Checkbox</th> -->
 
 
         <!-- <th>Update</th> -->
@@ -598,12 +606,12 @@ data-toggle="modal" data-target="#exampleModal"
         <td ng-if="{{!checked.includes(i)}}">
           <input type="checkbox" id="myCheckbox" ng-click="flagIcon(i)">
         </td>
-        <td ng-if="{{checked.includes(i)}}">
+        <!-- <td ng-if="{{checked.includes(i)}}">
           <span class="material-symbols-outlined" ng-click="flagIcon(i)">
             flag
           </span>
           </label>
-        </td>
+        </td> -->
 
 
       </tr>
@@ -616,7 +624,7 @@ data-toggle="modal" data-target="#exampleModal"
   <div class="pagination" style="display: flex;" ng-show="pagination_details">
     <div class="page-size" ng-class="showPagination()">
       <label>Page</label>
-      <select ng-model="itemsPerPage" ng-change="updateItemsPerPage()">
+      <select ng-model="itemsPerPage" ng-change="numOfPagess()">
         <option value="5" selected>5</option>
         <option value="10">10</option>
         <option value="20">20</option>
@@ -655,7 +663,7 @@ data-toggle="modal" data-target="#exampleModal"
   <div class="group-container">
     <div class="group-head" ng-repeat="col in column">
       <div>
-        {{col.field}}
+        {{col.fieldName}}
       </div>
     </div>
     <div class="body">
