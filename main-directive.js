@@ -441,13 +441,17 @@ angular.module('myApp', [])
         $scope.saveChanges = function () {
           $scope.colList.push($scope.getColumnList)
         };
+        $scope.columnDataList = []
         $scope.getColumn = function (index) {
-          $scope.showColumnBox = true
-          const box = document.getElementById('box');
-          const chip = document.createElement('div');
-          chip.classList.add('chip');
-          chip.textContent = index;
-          box.appendChild(chip);
+          if (!$scope.columnDataList.includes(index)){
+            $scope.columnDataList.push(index)
+            $scope.showColumnBox = true
+            const box = document.getElementById('box');
+            const chip = document.createElement('div');
+            chip.classList.add('chip');
+            chip.textContent = index;
+            box.appendChild(chip);
+          }
 
           // if (!index) {
           //   return

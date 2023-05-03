@@ -955,13 +955,20 @@ input:checked+.slider:before {
 }
 
 #box {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
   margin-top: 25px;
   border: 1px solid black;
   padding: 10px;
   width: 300px;
   height: 100px;
+  overflow: auto;
 }
 .chip {
+  position: relative;
+  top: 10px;
+  left: 10px;
   display: inline-block;
   padding: 5px 10px;
   border: 1px solid black;
@@ -970,4 +977,6 @@ input:checked+.slider:before {
   border-radius: 15px;
   font-size: 10px;
   text-align: center;
+  height: 12px;
 }
+
