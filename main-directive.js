@@ -101,8 +101,9 @@ angular.module('myApp', [])
       },
       templateUrl: "html/table.html",
       controller: function ($scope, $document) {
-
+        
         $document.on('click', function (event) {
+
           var isClickedElementChildOfPopup = event.target.closest("#closePopup")
           var isClickedElementTriggerButton = event.target.matches('#triggerClosePopup');
           if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
@@ -125,6 +126,8 @@ angular.module('myApp', [])
             else {
 
               $scope.filterIcon = false
+              $scope.columnDataList = []
+              $scope.getColumnList = []
             }
             // $scope.filterIcon = !$scope.filterIcon
             $scope.viewHideColumn = false
@@ -153,6 +156,7 @@ angular.module('myApp', [])
               $scope.popup.style.display = "none";
             })
           }
+
 
           //           var isClickedElementChildOfPopup = event.target.closest("#filterModal")
           //           var isClickedElementTriggerButton = event.target.matches('#triggerPopup');
