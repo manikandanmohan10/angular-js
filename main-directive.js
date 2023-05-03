@@ -988,8 +988,6 @@ angular.module('myApp', [])
               $scope.column.forEach((col) => {
                 if(ths[$scope.cols[j].cellIndex - 1].textContent.includes(col.fieldName)){
                   if(col.bodyColor){
-
-                    console.log(col)
                     $scope.cols[j].style.backgroundColor = col.bodyColor
                   }
                   else{
