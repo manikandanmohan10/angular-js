@@ -125,9 +125,9 @@ angular.module('myApp', [])
             else {
               if (!(event.target.innerHTML == 'close')){
                 $scope.filterIcon = false
+                $scope.columnDataList = []
+                $scope.getColumnList = []
               }
-              $scope.columnDataList = []
-              $scope.getColumnList = []
             }
             // $scope.filterIcon = !$scope.filterIcon
             $scope.viewHideColumn = false
@@ -461,7 +461,9 @@ angular.module('myApp', [])
             chip.textContent = index;
             const icon = document.createElement('span');
             icon.classList.add('icon');
+            icon.classList.add('material-symbols-outlined')
             icon.style.height = '10px'
+            icon.style.fontSize = '15px'
             icon.style.color = 'red'
             icon.style.cursor = 'pointer'
             icon.textContent = 'close';
