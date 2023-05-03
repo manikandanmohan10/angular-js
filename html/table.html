@@ -192,23 +192,27 @@
             <!-- <button ng-click="submitForm()">Submit</button> -->
           </form>
         </div>
-        <div class="modal-body" ng-if="!filter_column">
+        <div class="modal-body" ng-if="!filter_column" style="margin-left: 15px;">
           <form>
             <div class="tab-icon">
               <div class="searchinp">
-                <div style="background-color: none;" ng-click="getColumn(searchItem)"
-                class="material-symbols-outlined icon addColumnFil">
-                  <input type="text" ng-model="searchItem" class="inp" ng-change="hidenColumnFilter(searchItem)" />
-                  <p class="searchIcon">search</p>
-              
+                <div style="background-color: none; align-items: center; gap: 15px;"
+                  class="material-symbols-outlined icon addColumnFil">
+                  <input type="text" ng-model="searchItem" class="inp" style="    border-radius: 5px;
+                  text-align: center;" ng-change="hidenColumnFilter(searchItem)" />
+                  <p class="searchIcon" style="position: absolute;left: 27px;">search</p>
+                  <div>
+
+                    <div ng-if="true" id="box"></div>
+                  </div>
+                </div>
+
+
               </div>
-            
-            
-              </div>
-             
+
             </div>
-            
-            <div ng-repeat="name in getColumnList" class="tab-icon">
+
+            <!-- <div ng-repeat="name in getColumnList" class="tab-icon">
               <div>{{name}}
                 <button class="btn icon" ng-click="removeColumn(name)"><span
                     class="material-symbols-outlined filter-box-icon">
@@ -216,12 +220,16 @@
                   </span></button>
               </div>
 
-            </div>
+            </div> -->
 
           </form>
-          <ul ng-if="(searchItem)" ng-repeat="col in hidingColumnArryList" class="list-data">
-            <li ng-click="getColumn(col.field)">{{col.field}}</li>
-          </ul>
+          <div ng-if="(searchItem)" style="    width: 270px;
+          overflow: auto;border: 1px solid;height: 250px;"> 
+
+            <ul  ng-repeat="col in hidingColumnArryList" class="list-data">
+              <li ng-click="getColumn(col.field)">{{col.field}}</li>
+            </ul>
+          </div>
         </div>
 
         <div class="modal-footer">

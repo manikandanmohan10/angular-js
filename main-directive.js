@@ -1,4 +1,3 @@
-
 angular.module('myApp', [])
   .directive('myDirective', function ($http) {
     return {
@@ -10,7 +9,7 @@ angular.module('myApp', [])
         sortBy: "&",
       },
       link: function (scope, element, attrs) {
-        scope.colList = new Array();
+        // scope.colList = new Array();
         scope.card = "Daniel"
         scope.isGroup = false
         scope.isFreeze = JSON.parse(attrs.ngFreeze)
@@ -443,9 +442,16 @@ angular.module('myApp', [])
           $scope.colList.push($scope.getColumnList)
         };
         $scope.getColumn = function (index) {
-          if (!index) {
-            return
-          }
+          $scope.showColumnBox = true
+          const box = document.getElementById('box');
+          const chip = document.createElement('div');
+          chip.classList.add('chip');
+          chip.textContent = index;
+          box.appendChild(chip);
+
+          // if (!index) {
+          //   return
+          // }
           if (!$scope.getColumnList) {
             $scope.getColumnList = []
           }
@@ -500,6 +506,7 @@ angular.module('myApp', [])
 
 
         }
+        
 
         $scope.filterTable = () => {
           // Filter
