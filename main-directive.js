@@ -34,14 +34,26 @@ angular.module('myApp', [])
         let end = begin + scope.itemsPerPage;
 
         scope.tableData = scope.data.slice(begin, end);
-
+        scope.getRowsObjects();
         scope.numOfPages = function () {
           //
-          scope.tableData = scope.data.slice(parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
+          //scope.tableData = scope.data.slice(parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
           var noOfPages = Math.ceil(scope.data.length / scope.itemsPerPage);
           // scope.freezeInitialied()
           scope.initialFreezeColumn()
           return noOfPages
+
+        };
+
+        scope.numOfPagess = function () {
+          //
+         
+          scope.tableData = scope.data.slice(parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
+          scope.getRowsObjects();
+          //var noOfPages = Math.ceil(scope.data.length / scope.itemsPerPage);
+          // scope.freezeInitialied()
+          //scope.initialFreezeColumn()
+          //return noOfPages
 
         };
 
@@ -625,105 +637,107 @@ angular.module('myApp', [])
 
           return false
         }
-
-        setTimeout(() => {
-          $scope.initialFreezeColumn()
-
-          var rows = document.querySelectorAll('.rows');
-          var columns = document.querySelectorAll('.columns');
-          columns.forEach(function (row) {
-            row.addEventListener('dragstart', function (event) {
-              // Set the data that you want to transfer
-              event.dataTransfer.setData('text/plain', event.target.id);
-
-              // Set the opacity of the dragged row
-              event.target.style.opacity = '0.4';
+        $scope.getRowsObjects = () => {
+          setTimeout(() => {
+            $scope.initialFreezeColumn()
+  
+            var rows = document.querySelectorAll('.rows');
+            var columns = document.querySelectorAll('.columns');
+            columns.forEach(function (row) {
+              row.addEventListener('dragstart', function (event) {
+                // Set the data that you want to transfer
+                event.dataTransfer.setData('text/plain', event.target.id);
+  
+                // Set the opacity of the dragged row
+                event.target.style.opacity = '0.4';
+              });
+  
+              row.addEventListener('dragend', function (event) {
+                // Perform any necessary cleanup operations
+                event.target.style.opacity = '1';
+              });
             });
-
-            row.addEventListener('dragend', function (event) {
-              // Perform any necessary cleanup operations
-              event.target.style.opacity = '1';
+            columns.forEach(function (row) {
+              row.addEventListener('dragover', function (event) {
+                // Specify whether the drop target is a valid drop target
+                event.preventDefault();
+              });
+  
+              row.addEventListener('drop', function (event) {
+                // Retrieve the data that was set in the dragstart event handler
+  
+                var data = event.dataTransfer.getData('text/plain');
+  
+                // Get the row that was dragged
+                var draggedRow = document.getElementById(data);
+                let i = Number(draggedRow.id.slice(7));
+                // Swap the rows
+                //$scope.data = $scope.data.slice(0, 1);
+                $scope.deleteRow('eerr');
+  
+                // /if (event.target.tagName === 'TR') {
+                let rowa = draggedRow.parentNode;
+                let sibiling = returnParent(event.target, 'TH')
+                let j = Number(sibiling.id.slice(7));
+                let a = $scope.column.splice(i, 1);
+                $scope.column.splice(j, 0, ...a);
+                $scope.$apply();
+                //let sibiling = returnParent(event.target)
+                //rowa.insertBefore(draggedRow, sibiling.nextSibling);
+                //}
+              });
             });
-          });
-          columns.forEach(function (row) {
-            row.addEventListener('dragover', function (event) {
-              // Specify whether the drop target is a valid drop target
-              event.preventDefault();
+  
+            // Define the drag event handlers for each row
+            rows.forEach(function (row) {
+              row.addEventListener('dragstart', function (event) {
+                // Set the data that you want to transfer
+                event.dataTransfer.setData('text/plain', event.target.id);
+  
+                // Set the opacity of the dragged row
+                event.target.style.opacity = '0.4';
+              });
+  
+              row.addEventListener('dragend', function (event) {
+                // Perform any necessary cleanup operations
+                event.target.style.opacity = '1';
+              });
             });
-
-            row.addEventListener('drop', function (event) {
-              // Retrieve the data that was set in the dragstart event handler
-
-              var data = event.dataTransfer.getData('text/plain');
-
-              // Get the row that was dragged
-              var draggedRow = document.getElementById(data);
-              let i = Number(draggedRow.id.slice(7));
-              // Swap the rows
-              //$scope.data = $scope.data.slice(0, 1);
-              $scope.deleteRow('eerr');
-
-              // /if (event.target.tagName === 'TR') {
-              let rowa = draggedRow.parentNode;
-              let sibiling = returnParent(event.target, 'TH')
-              let j = Number(sibiling.id.slice(7));
-              let a = $scope.column.splice(i, 1);
-              $scope.column.splice(j, 0, ...a);
-              $scope.$apply();
-              //let sibiling = returnParent(event.target)
-              //rowa.insertBefore(draggedRow, sibiling.nextSibling);
-              //}
+            rows.forEach(function (row) {
+              row.addEventListener('dragover', function (event) {
+                // Specify whether the drop target is a valid drop target
+                event.preventDefault();
+              });
+  
+              row.addEventListener('drop', function (event) {
+                // Retrieve the data that was set in the dragstart event handler
+  
+                var data = event.dataTransfer.getData('text/plain');
+  
+                // Get the row that was dragged
+                var draggedRow = document.getElementById(data);
+                let i = Number(draggedRow.id.slice(4));
+                // Swap the rows
+                //$scope.data = $scope.data.slice(0, 1);
+                $scope.deleteRow('eerr');
+  
+                // /if (event.target.tagName === 'TR') {
+                let rowa = draggedRow.parentNode;
+                let sibiling = returnParent(event.target, 'TR')
+  
+                let j = Number(sibiling.id.slice(4));
+                let c = $scope.tableData.splice(i, 1);
+                $scope.tableData.splice(j, 0, ...c);
+                //$scope.tableData = [...$scope.tableData];
+                $scope.$apply();
+                // rowa.insertBefore(draggedRow, sibiling.nextSibling);
+  
+                //}
+              });
             });
-          });
-
-          // Define the drag event handlers for each row
-          rows.forEach(function (row) {
-            row.addEventListener('dragstart', function (event) {
-              // Set the data that you want to transfer
-              event.dataTransfer.setData('text/plain', event.target.id);
-
-              // Set the opacity of the dragged row
-              event.target.style.opacity = '0.4';
-            });
-
-            row.addEventListener('dragend', function (event) {
-              // Perform any necessary cleanup operations
-              event.target.style.opacity = '1';
-            });
-          });
-          rows.forEach(function (row) {
-            row.addEventListener('dragover', function (event) {
-              // Specify whether the drop target is a valid drop target
-              event.preventDefault();
-            });
-
-            row.addEventListener('drop', function (event) {
-              // Retrieve the data that was set in the dragstart event handler
-
-              var data = event.dataTransfer.getData('text/plain');
-
-              // Get the row that was dragged
-              var draggedRow = document.getElementById(data);
-              let i = Number(draggedRow.id.slice(4));
-              // Swap the rows
-              //$scope.data = $scope.data.slice(0, 1);
-              $scope.deleteRow('eerr');
-
-              // /if (event.target.tagName === 'TR') {
-              let rowa = draggedRow.parentNode;
-              let sibiling = returnParent(event.target, 'TR')
-
-              let j = Number(sibiling.id.slice(4));
-              let c = $scope.tableData.splice(i, 1);
-              $scope.tableData.splice(j, 0, ...c);
-              //$scope.tableData = [...$scope.tableData];
-              $scope.$apply();
-              // rowa.insertBefore(draggedRow, sibiling.nextSibling);
-
-              //}
-            });
-          });
-        }, 1000)
+          }, 1000)
+        }
+       
 
         function returnParent(event, data) {
           if (event.tagName === data) {

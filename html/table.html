@@ -525,7 +525,7 @@ data-toggle="modal" data-target="#exampleModal"
           </div>
 
         </th>
-        <th>Checkbox</th>
+        <!-- <th>Checkbox</th> -->
 
 
         <!-- <th>Update</th> -->
@@ -606,12 +606,12 @@ data-toggle="modal" data-target="#exampleModal"
         <td ng-if="{{!checked.includes(i)}}">
           <input type="checkbox" id="myCheckbox" ng-click="flagIcon(i)">
         </td>
-        <td ng-if="{{checked.includes(i)}}">
+        <!-- <td ng-if="{{checked.includes(i)}}">
           <span class="material-symbols-outlined" ng-click="flagIcon(i)">
             flag
           </span>
           </label>
-        </td>
+        </td> -->
 
 
       </tr>
@@ -624,7 +624,7 @@ data-toggle="modal" data-target="#exampleModal"
   <div class="pagination" style="display: flex;" ng-show="pagination_details">
     <div class="page-size" ng-class="showPagination()">
       <label>Page</label>
-      <select ng-model="itemsPerPage" ng-change="updateItemsPerPage()">
+      <select ng-model="itemsPerPage" ng-change="numOfPagess()">
         <option value="5" selected>5</option>
         <option value="10">10</option>
         <option value="20">20</option>
