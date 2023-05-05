@@ -1431,12 +1431,13 @@ angular.module('myApp', [])
 
         $scope.generateDuplicateField = (columnName) => {
           columnIndex = $scope.column.indexOf(columnName)
-          oldField = columnName.field
+          oldField = columnName.fieldName
           fieldCount = $scope.countNames($scope.data[0], oldField)
-          newField = `${columnName.field}${fieldCount}`
+          newField = `${columnName.fieldName}${fieldCount+1}`
           data = {
             field: newField,
             type: columnName.type,
+            fieldName: newField,
             dataType: columnName.dataType,
             editable: true,
             checked: columnName.checked
