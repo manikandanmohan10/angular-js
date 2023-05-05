@@ -410,30 +410,28 @@ angular.module('myApp', [])
 
 
         };
-        $scope.format = function (event, count, property) {
+        $scope.format = function (item, count, property) {
+          $scope.data[count].checked = property.target.checked
           if (property.target.checked) {
             var table = document.getElementById("mytable");
             table.rows[count + 1].style.backgroundColor = "aliceblue";
           }
-          else {
-            if ((count + 1) % 2 == 0) {
-              var table = document.getElementById("mytable");
-              table.rows[count + 1].style.backgroundColor = "f3f3f3";
-            }
-            else {
-              var table = document.getElementById("mytable");
-              table.rows[count + 1].style.backgroundColor = "white";
-            }
+          // else {
+          //   if ((count + 1) % 2 == 0) {
+          //     var table = document.getElementById("mytable");
+          //     table.rows[count + 1].style.backgroundColor = "f3f3f3";
+          //   }
+          //   else {
+          //     var table = document.getElementById("mytable");
+          //     table.rows[count + 1].style.backgroundColor = "white";
+          //   }
 
-          }
-
-
+          // }
         };
-        $scope.checkBoxchanges = function (event) {
-          this.checkbox = event.target.checked
-          let data = document.querySelectorAll('.myCheck')
-          data.forEach((d) => {
-            d.click()
+        $scope.checkBoxchanges = function (event, item) {
+          let datacheck = document.querySelectorAll('.markCheck')
+          $scope.data.forEach((d) => {
+            d.checked = datacheck[0].checked
           })
 
         }
