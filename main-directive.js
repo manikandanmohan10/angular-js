@@ -38,10 +38,10 @@ angular.module('myApp', [])
         scope.numOfPages = function () {
           //
           //scope.tableData = scope.data.slice(parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
-          var noOfPages = Math.ceil(scope.data.length / scope.itemsPerPage);
+          scope.noOfPages = Math.ceil(scope.data.length / scope.itemsPerPage);
           // scope.freezeInitialied()
-          scope.initialFreezeColumn()
-          return noOfPages
+          // scope.initialFreezeColumn()
+          // return noOfPages
 
         };
 
@@ -50,6 +50,7 @@ angular.module('myApp', [])
          
           scope.tableData = scope.data.slice(parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
           scope.getRowsObjects();
+          scope.numOfPages()
           //var noOfPages = Math.ceil(scope.data.length / scope.itemsPerPage);
           // scope.freezeInitialied()
           //scope.initialFreezeColumn()
@@ -66,7 +67,7 @@ angular.module('myApp', [])
 
         // Function to handle next page button click
         scope.nextPage = function () {
-          if (scope.curPage < scope.numOfPages()) {
+          if (scope.curPage < scope.noOfPages) {
             scope.curPage++;
           }
           scope.tableData = scope.data.slice(parseInt(scope.curPage) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
@@ -1185,7 +1186,8 @@ angular.module('myApp', [])
 
         };
         $scope.showPagination = function (event) {
-          if ($scope.numOfPages() > 0 && $scope.tableData.length !== 0) {
+          $scope.numOfPages()
+          if ( $scope.noOfPages> 0 && $scope.tableData.length !== 0) {
             $scope.pagination_details = true;
           }
           else {

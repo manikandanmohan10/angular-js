@@ -633,12 +633,11 @@ data-toggle="modal" data-target="#exampleModal"
         <ul class="pagination-list" style="display: flex; list-style: none;">
 
 
-          <li ng-class="{disabled: curPage === 1}" class="btn-pagination-li" ng-if="curPage !== 1">
+          <li class="btn-pagination-li" ng-if="curPage !== 1">
             <a class="btn-pagination" href="#" ng-click="prevPage()">Previous</a>
           </li>
 
-          <div ng-class="{disabled: curPage === numOfPages()}"
-            ng-repeat="i in generateArray(numOfPages()) track by $index"
+          <div ng-repeat="i in generateArray(noOfPages) track by $index"
             ng-if="$index >= curPage - 3 && $index <= curPage + 1">
             <li class="btn-pagination-li">
               <button class="pagination-btn" ng-click="gotopage(i)" ng-class="{active: i===curPage}">{{i}}</button>
@@ -646,8 +645,8 @@ data-toggle="modal" data-target="#exampleModal"
 
           </div>
 
-          <li ng-class="{disabled: curPage === numOfPages()}" class="btn-pagination-li"
-            ng-if="curPage !== numOfPages()">
+          <li class="btn-pagination-li"
+            ng-if="curPage !== noOfPages-1">
             <a class="btn-pagination" href="#" ng-click="nextPage()">Next</a>
           </li>
 
