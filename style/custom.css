@@ -1,3 +1,7 @@
+.body-container{
+  width: 100%;
+  margin-bottom: 150px;
+}
 .list-icon {
   visibility: hidden;
   /* Hide the icon by default */
