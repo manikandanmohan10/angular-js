@@ -4,13 +4,10 @@
 }
 .list-icon {
   visibility: hidden;
-  /* Hide the icon by default */
-  /* position: absolute; */
 }
 
 th:hover .icon {
   visibility: visible;
-  /* Show the icon when hovering over the header cell */
 }
 
 th {
@@ -102,7 +99,6 @@ body {
 .icon-wrap {
   display: flex;
   align-items: center;
-  /* justify-content: space-evenly; */
   width: fit-content;
   justify-content: space-around;
   margin: 10px;
@@ -166,9 +162,7 @@ select {
 
 .custom-dropdown .select2-results__option {
   height: 40px;
-  /* Set the desired height for the options */
   line-height: 40px;
-  /* Set the desired line-height for the options */
 }
 
 .sticky-column-head {
@@ -215,9 +209,6 @@ select {
 .arrow-icon--up {
   transform: rotate(180deg);
 }
-
-
-/* Style for popup dropdown items on hover */
 .popup-item:hover {
   background-color: #f2f2f2;
 }
@@ -238,26 +229,6 @@ select {
 .popup.ng-hide {
   display: none;
 }
-
-/* .popup:before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 10px solid transparent;
-  border-bottom-color: black;
-} */
-/*
-.popup:after {
-  content: '';
-  position: absolute;
-  top: -9px;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 9px solid transparent;
-  border-bottom-color: white;
-} */
 
 .popup h1 {
   margin-top: 0;
@@ -375,7 +346,6 @@ select {
   background-color: #bbbbbb;
 }
 
-/* Style the navigation menu */
 nav {
   position: fixed;
   top: 0;
@@ -399,7 +369,7 @@ nav select {
   appearance: none;
 }
 
-/* Style the open button */
+
 #openNav {
   position: fixed;
   top: 0;
@@ -408,7 +378,7 @@ nav select {
   margin-right: 10px;
 }
 
-/* Style the side navigation menu */
+
 .sidenav {
   height: 100%;
   width: 250px;
@@ -446,37 +416,7 @@ nav select {
   left: 0;
 }
 
-/* table{
-  width: 100%;
-  border-collapse: collapse;
-}
 
-.side-nav {
-  position: absolute;
-  top: 0;
-  left: -300px;
-  width: 300px;
-  height: 100vh;
-  background-color: #f1f1f1;
-  transition: left 0.3s ease-in-out;
-}
-
-.side-nav--open {
-  left: 0;
-}
-.side-nav--close{
-  width: 0;
-}
-
-.sidenavv{
-  background-color: #9b0606;
-}
-
-.grid-view{
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: 10%;
-} */
 
 .popup-edit {
   display: none;
@@ -609,53 +549,18 @@ nav select {
   width: 704px;
 }
 
-/* table{
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.side-nav {
-  position: absolute;
-  top: 0;
-  left: -300px;
-  width: 300px;
-  height: 100vh;
-  background-color: #f1f1f1;
-  transition: left 0.3s ease-in-out;
-}
-
-.side-nav--open {
-  left: 0;
-}
-.side-nav--close{
-  width: 0;
-}
-
-.sidenavv{
-  background-color: #9b0606;
-}
-
-.grid-view{
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: 10%;
-} */
 .my-select-td {
-  /* height: 300px; */
+
   border: none;
   min-width: 300px;
   width: 300px;
-  /* rowspan: "5"; */
+
 }
 
 .list-data {
   list-style: none;
 }
 
-/* table tr:first-child td:first-child {
-  vertical-align: top;
-  column-span: 5;
-  /* height: 300px; */
 
 .hide-column {
   position: relative
@@ -683,7 +588,6 @@ nav select {
   border-radius: 10px;
   justify-content: center;
   gap: 7px;
-  /* margin: 0 37px; */
   background: aliceblue;
 }
 
@@ -718,18 +622,6 @@ nav select {
   background-color: transparent;
 }
 
-/* .parentPopup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  visibility: hidden;
-  z-index: -1;
-  transition: opacity 0.3s ease-in-out;
-} */
 
 .filterPopup {
   position: absolute;
