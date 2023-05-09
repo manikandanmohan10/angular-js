@@ -5,10 +5,6 @@ module.controller("exampleCtrl", function ($scope) {
   $scope.sortedFieldDict = [];
 
   $scope.name = 'MM';
-  // $("#my-select").select2({
-  //   dropdownCssClass: "custom-dropdown",
-  //   containerCssClass: "custom-container",
-  // });
   $scope.updateDatas = ($event) => {
     console.log(`------${$event}`);
   },
@@ -57519,20 +57515,4 @@ module.controller("exampleCtrl", function ($scope) {
       },
     ],
   };
-
-  // $scope.tableParams = new ngTableParams({
-  //     page: 1,
-  //     count: 10
-  // }, {
-  //     total: $scope.data.length,
-  //     getData: function ($defer, params) {
-  //         var filteredData = $scope.data;
-  //         var orderedData = params.sorting() ?
-  //                            $filter('orderBy')(filteredData, params.orderBy()) :
-  //                            filteredData;
-
-  //         params.total(orderedData.length);
-  //         $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-  //     }
-  // });
 })

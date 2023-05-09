@@ -9,7 +9,6 @@ angular.module('myApp', [])
         sortBy: "&",
       },
       link: function (scope, element, attrs) {
-        // scope.colList = new Array();
         scope.card = "Daniel"
         scope.isGroup = false
         scope.isFreeze = JSON.parse(attrs.ngFreeze)
@@ -27,7 +26,6 @@ angular.module('myApp', [])
         scope.curPage = 1,
           scope.itemsPerPage = 5,
           scope.maxSize = 5;
-        // scope.tableData = [...datas.data];
         scope.originalData = scope.data
         this.items = scope.data;
         let begin = ((scope.curPage - 1) * scope.itemsPerPage);
@@ -36,25 +34,14 @@ angular.module('myApp', [])
         scope.tableData = scope.data.slice(begin, end);
         scope.getRowsObjects();
         scope.numOfPages = function () {
-          //
-          //scope.tableData = scope.data.slice(parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
           scope.noOfPages = Math.ceil(scope.data.length / scope.itemsPerPage);
-          // scope.freezeInitialied()
-          // scope.initialFreezeColumn()
-          // return noOfPages
-
         };
 
         scope.numOfPagess = function () {
-          //
-         
+
           scope.tableData = scope.data.slice(parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage - 1) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
           scope.getRowsObjects();
           scope.numOfPages()
-          //var noOfPages = Math.ceil(scope.data.length / scope.itemsPerPage);
-          // scope.freezeInitialied()
-          //scope.initialFreezeColumn()
-          //return noOfPages
 
         };
 
@@ -84,24 +71,13 @@ angular.module('myApp', [])
           scope.tableData = scope.data.slice(parseInt(scope.curPage) * parseInt(scope.itemsPerPage), (parseInt(scope.curPage) * parseInt(scope.itemsPerPage)) + parseInt(scope.itemsPerPage))
         };
 
-        scope.$watch('curPage + numPerPage', function () {
-          //                               var begin = ((scope.curPage - 1) * scope.itemsPerPage),
-          // end = begin + scope.itemsPerPage;
-
-          // scope.tableData = scope.data.slice(begin, end);
-        });
         scope.pages = Array.from({ length: scope.numOfPages() }, (_, i) => i + 1);
-        // setTimeout(function () {
-        //   $("#mytable").DataTable(); // Initialize DataTables plugin after AngularJS data is populated
-        //   $("#mytable").tableDnD(); // Initialize TableDnD plugin for row drag-and-drop
-        // $(".table").dragableColumns(); //Initialize dragndropjs for column dragndrop
-        // }, 0);
         scope.temp = scope.column;
         scope.objectKeys = Object.keys(scope.tableData[0])
       },
       templateUrl: "html/table.html",
       controller: function ($scope, $document) {
-        
+
         $document.on('click', function (event) {
 
           var isClickedElementChildOfPopup = event.target.closest("#closePopup")
@@ -116,7 +92,6 @@ angular.module('myApp', [])
             if ($scope.optionForAddColumn) {
               filterPop = $scope.optionForAddColumn.field
               if (filterPop == 'Filter by this field') {
-                // $scope.filterIcon = true
                 $scope.filterByField($scope.columnForAddColumn)
                 $scope.optionForAddColumn = undefined
                 $scope.columnForAddColumn = undefined
@@ -124,13 +99,12 @@ angular.module('myApp', [])
             }
 
             else {
-              if (!(event.target.innerHTML == 'close')){
+              if (!(event.target.innerHTML == 'close')) {
                 $scope.filterIcon = false
                 $scope.columnDataList = []
                 $scope.getColumnList = []
               }
             }
-            // $scope.filterIcon = !$scope.filterIcon
             $scope.viewHideColumn = false
             $scope.$apply()
 
@@ -142,7 +116,6 @@ angular.module('myApp', [])
           if ($scope.optionForAddColumn) {
             filterPop = $scope.optionForAddColumn.field
             if (!wantedFields.includes(filterPop)) {
-              // $scope.filterIcon = true
               $scope.$apply(function () {
                 $scope.popup.style.display = "none";
               })
@@ -158,42 +131,12 @@ angular.module('myApp', [])
             })
           }
 
-
-          //           var isClickedElementChildOfPopup = event.target.closest("#filterModal")
-          //           var isClickedElementTriggerButton = event.target.matches('#triggerPopup');
-          //           if (!isClickedElementChildOfPopup && !isClickedElementTriggerButton) {
-          //             $scope.filterIcon = false
-          //           }
-
-          // }
-
         });
         setTimeout(() => {
           $scope.hidingColumnArryList = [...$scope.column];
           $scope.constColumnArryList = [...$scope.column];
         }, 1000)
-        // 
-        // $scope.freezeInitialied = () => {
-        //   $scope.resetFreeze()
-        //   if ($scope.isFreeze === true) {
-        //     var style = document.getElementById(`columns0`)
-        //     var colsHeadStyle = window.getComputedStyle(style)
-        //     var colsHeadWidth = colsHeadStyle.getPropertyValue("left");
-        //     var colsHead = document.querySelector(`#myTable th:nth-child(2)`);
-        //     // const nextHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +3})`);
-        //     var cols = document.querySelectorAll(`#myTable tbody td:nth-child(2)`);
-        //     cols.forEach(cell => {
-        //       cell.style.position = 'sticky';
-        //       cell.style.left = cell.offsetLeft - 20
-        //       cell.style.backgroundColor = 'white'
-        //       cell.style.zIndex = 0
-        //     });
-        //     colsHead.style.position = 'sticky';
-        //     colsHead.style.left = colsHead.offsetLeft -20
-        //     colsHead.style.backgroundColor = '#ddd'
-        //     colsHead.style.zIndex = 2
-        //   }
-        // }
+
 
         setTimeout(() => {
 
@@ -202,11 +145,8 @@ angular.module('myApp', [])
 
           var cells = document.getElementsByTagName("td");
 
-          // Loop through each cell
           for (var i = 0; i < cells.length; i++) {
-            // Add event listener for mouseover event
             cells[i].addEventListener("mouseover", function (event) {
-              // Check if mouse pointer is near the right or bottom edge of the cell
               var rect = this.getBoundingClientRect();
               var x = event.clientX;
               var y = event.clientY;
@@ -216,20 +156,18 @@ angular.module('myApp', [])
               var topEdge = rect.top;
               if (x >= rightEdge - 5 || y >= bottomEdge - 5 || x <= leftEdge + 5 || y <= topEdge + 5) {
 
-                // Set cursor to "se-resize" to indicate resizing is possible
+
                 this.style.cursor = "cell";
-                // Add event listener for mousedown event
+
                 this.addEventListener("mousedown", startResize);
               } else {
-                // Reset cursor to default
+
                 this.style.cursor = "default";
-                // Remove event listener for mousedown event
                 this.removeEventListener("mousedown", startResize);
               }
             });
           }
 
-          // Function to handle mousedown event for resizing
           function startResize(event) {
             var cell = this;
             var originalWidth = cell.offsetWidth;
@@ -237,13 +175,10 @@ angular.module('myApp', [])
             var originalX = event.clientX;
             var originalY = event.clientY;
 
-            // Add event listener for mousemove event
             document.addEventListener("mousemove", resize);
 
-            // Add event listener for mouseup event
             document.addEventListener("mouseup", stopResize);
 
-            // Function to handle mousemove event for resizing
             function resize(event) {
               var width = originalWidth + (event.clientX - originalX);
               var height = originalHeight + (event.clientY - originalY);
@@ -252,9 +187,7 @@ angular.module('myApp', [])
 
             }
 
-            // Function to handle mouseup event to stop resizing
             function stopResize() {
-              // Remove event listeners for mousemove and mouseup events
               document.removeEventListener("mousemove", resize);
               document.removeEventListener("mouseup", stopResize);
             }
@@ -290,10 +223,9 @@ angular.module('myApp', [])
           }]
         }]
         $scope.checkbox = false;
-        // $scope.myData = ""; // Initialize the variable to hold the input field data
+
 
         window.addEventListener('keydown', function (event) {
-          // some code here
           if ($scope.selectedCell.length) {
 
             let as = $scope.selectedCell[$scope.selectedCell.length - 1];
@@ -352,35 +284,28 @@ angular.module('myApp', [])
           $scope.selectedCell = $scope.selectedCell.filter(data => (existData[0] === data[0] && existData[0] === data[0]))
         }
         $scope.toggleSidenav = () => {
-          // const sideNav = document.querySelector('.side-nav');
-          // sideNav.classList.toggle('side-nav--open');
-          // document.getElementById("mySidenav").classList.add("show-nav");
 
-          // $scope.column = [{field: 'test', type: 'input', daatType: 'input', editable: true}].concat($scope.column)
           $scope.toggleFirstColumn = !$scope.toggleFirstColumn
           $scope.freezeColumn(0, 'MyViews')
 
         }
-        // document.getElementsByClassName("closebtn")[0].addEventListener("click", function() {
-        //   document.getElementById("mySidenav").classList.remove("show-nav");
-        // });
+
 
 
         $scope.getData = function () {
-          var inputData = $scope.myData; // Get the input field data from the bound variable
-          var selectedOption = $scope.selectedValue; // Get the selected value from the bound variable
+          var inputData = $scope.myData;
+          var selectedOption = $scope.selectedValue;
           if ($scope.myData) {
             $scope.myStyle = {
               "background-color": $scope.myData,
-            }; // Log the input data to the console
+            };
           } else {
             $scope.myStyle = {
               "background-color": "black",
-            }; // Log the input data to the console
+            };
           }
         };
         $scope.editRow = function (row) {
-          // update the row
           row.editable = !row.editable;
           row = row;
           $scope.onButtonClick({ $event: row });
@@ -395,7 +320,7 @@ angular.module('myApp', [])
               b.style.display = 'block';
               b.focus();
               document.addEventListener("click", function () {
-                b.blur(); // Remove focus from the input element
+                b.blur();
                 a.style.display = 'block';
                 b.style.display = 'none';
               });
@@ -416,17 +341,6 @@ angular.module('myApp', [])
             var table = document.getElementById("mytable");
             table.rows[count + 1].style.backgroundColor = "aliceblue";
           }
-          // else {
-          //   if ((count + 1) % 2 == 0) {
-          //     var table = document.getElementById("mytable");
-          //     table.rows[count + 1].style.backgroundColor = "f3f3f3";
-          //   }
-          //   else {
-          //     var table = document.getElementById("mytable");
-          //     table.rows[count + 1].style.backgroundColor = "white";
-          //   }
-
-          // }
         };
         $scope.checkBoxchanges = function (event, item) {
           let datacheck = document.querySelectorAll('.markCheck')
@@ -440,13 +354,13 @@ angular.module('myApp', [])
         $scope.removeField = function (index) {
           $scope.myForm.myFields.splice(index, 1);
         };
-        
+
         $scope.saveChanges = function () {
           $scope.colList.push($scope.getColumnList)
         };
         $scope.columnDataList = []
         $scope.getColumn = function (index) {
-          if (!$scope.columnDataList.includes(index)){
+          if (!$scope.columnDataList.includes(index)) {
             $scope.columnDataList.push(index)
             $scope.showColumnBox = true
             const box = document.getElementById('box');
@@ -469,15 +383,12 @@ angular.module('myApp', [])
             insideBox.appendChild(chip);
             insideBox.appendChild(icon);
             box.appendChild(insideBox)
-            icon.addEventListener('click', function() {
+            icon.addEventListener('click', function () {
               $scope.removeColumn(chip.innerHTML)
               insideBox.remove()
             });
           }
 
-          // if (!index) {
-          //   return
-          // }
           if (!$scope.getColumnList) {
             $scope.getColumnList = []
           }
@@ -525,7 +436,7 @@ angular.module('myApp', [])
 
 
         }
-        
+
 
         $scope.filterTable = () => {
           // Filter
@@ -534,7 +445,6 @@ angular.module('myApp', [])
           let tempObject = [];
           let orderedFilterList = []
           let filterOrder = ['not like', 'like', 'not equal', 'equal']
-          // $scope.data=$scope.datas
           $scope.tableData = $scope.originalData;
           const filterArr = $scope.myForm.myFields;
 
@@ -642,18 +552,18 @@ angular.module('myApp', [])
         $scope.getRowsObjects = () => {
           setTimeout(() => {
             $scope.initialFreezeColumn()
-  
+
             var rows = document.querySelectorAll('.rows');
             var columns = document.querySelectorAll('.columns');
             columns.forEach(function (row) {
               row.addEventListener('dragstart', function (event) {
-                // Set the data that you want to transfer
+
                 event.dataTransfer.setData('text/plain', event.target.id);
-  
-                // Set the opacity of the dragged row
+
+
                 event.target.style.opacity = '0.4';
               });
-  
+
               row.addEventListener('dragend', function (event) {
                 // Perform any necessary cleanup operations
                 event.target.style.opacity = '1';
@@ -664,82 +574,55 @@ angular.module('myApp', [])
                 // Specify whether the drop target is a valid drop target
                 event.preventDefault();
               });
-  
+
               row.addEventListener('drop', function (event) {
-                // Retrieve the data that was set in the dragstart event handler
-  
+
                 var data = event.dataTransfer.getData('text/plain');
-  
-                // Get the row that was dragged
                 var draggedRow = document.getElementById(data);
                 let i = Number(draggedRow.id.slice(7));
-                // Swap the rows
-                //$scope.data = $scope.data.slice(0, 1);
-                $scope.deleteRow('eerr');
-  
-                // /if (event.target.tagName === 'TR') {
+
                 let rowa = draggedRow.parentNode;
                 let sibiling = returnParent(event.target, 'TH')
                 let j = Number(sibiling.id.slice(7));
                 let a = $scope.column.splice(i, 1);
                 $scope.column.splice(j, 0, ...a);
                 $scope.$apply();
-                //let sibiling = returnParent(event.target)
-                //rowa.insertBefore(draggedRow, sibiling.nextSibling);
-                //}
               });
             });
-  
+
             // Define the drag event handlers for each row
             rows.forEach(function (row) {
               row.addEventListener('dragstart', function (event) {
-                // Set the data that you want to transfer
                 event.dataTransfer.setData('text/plain', event.target.id);
-  
-                // Set the opacity of the dragged row
                 event.target.style.opacity = '0.4';
               });
-  
+
               row.addEventListener('dragend', function (event) {
-                // Perform any necessary cleanup operations
                 event.target.style.opacity = '1';
               });
             });
             rows.forEach(function (row) {
               row.addEventListener('dragover', function (event) {
-                // Specify whether the drop target is a valid drop target
                 event.preventDefault();
               });
-  
+
               row.addEventListener('drop', function (event) {
-                // Retrieve the data that was set in the dragstart event handler
-  
+
                 var data = event.dataTransfer.getData('text/plain');
-  
-                // Get the row that was dragged
                 var draggedRow = document.getElementById(data);
                 let i = Number(draggedRow.id.slice(4));
-                // Swap the rows
-                //$scope.data = $scope.data.slice(0, 1);
-                $scope.deleteRow('eerr');
-  
-                // /if (event.target.tagName === 'TR') {
                 let rowa = draggedRow.parentNode;
                 let sibiling = returnParent(event.target, 'TR')
-  
+
                 let j = Number(sibiling.id.slice(4));
                 let c = $scope.tableData.splice(i, 1);
                 $scope.tableData.splice(j, 0, ...c);
-                //$scope.tableData = [...$scope.tableData];
                 $scope.$apply();
-                // rowa.insertBefore(draggedRow, sibiling.nextSibling);
-  
-                //}
               });
             });
           }, 1000)
         }
-       
+
 
         function returnParent(event, data) {
           if (event.tagName === data) {
@@ -755,11 +638,6 @@ angular.module('myApp', [])
           $scope.popup = document.getElementById("popup-" + headerIndex);
           $scope.allPopups = document.getElementsByClassName("popup-container");
           $scope.isVisible = window.getComputedStyle($scope.popup).getPropertyValue("display") === "block";
-          //   if (isVisible) {
-          //     popup.style.display = "none";
-          // } else {
-          //     popup.style.display = "block";
-          // }
           for (var i = 0; i < $scope.allPopups.length; i++) {
             if ($scope.allPopups[i] !== $scope.popup) {
               $scope.allPopups[i].style.display = "none";
@@ -771,17 +649,6 @@ angular.module('myApp', [])
             $scope.popup.style.display = "none";
           }
         }
-        // Add click event listener on document to close popup when clicked outside
-        //    document.addEventListener("click", function(event) {
-        //     var popups = document.getElementsByClassName("popup-container");
-        //     for (var i = 0; i < popups.length; i++) {
-        //         if (popups[i].style.display === "block" && !popups[i].contains(event.target)) {
-        //             popups[i].style.display = "none";
-        //         }
-        //     }
-        // });
-        // Function to set dynamic header cell color
-        // Function to open color picker for selecting color
         $scope.deleteIcon = false
         $scope.openColorPicker = (option, headerIndex, column) => {
           $scope.isColorOption = !$scope.isColorOption;
@@ -793,10 +660,9 @@ angular.module('myApp', [])
 
           if (option.field == "Insert left" || option.field == "Insert right") {
             $scope.addFieldPopup = true
-            // $scope.addColumn(option, column)
+
           }
           else if (option.field == 'Delete field') {
-            // $scope.deleteColumn(column)
             $scope.columnNamee = column
             $scope.deleteIcon = true
           }
@@ -814,21 +680,14 @@ angular.module('myApp', [])
 
         $scope.headerColor = (index, color, option, column) => {
           if (option === "Set Column Header Color") {
-            // var colorPicker = document.getElementById("color-picker");
-            // colorPicker.value = document.getElementById("columns" + headerIndex).style.backgroundColor;
-            // colorPicker.addEventListener("change", function() {
-            //     setHeaderColor(headerIndex, colorPicker.value);
-            // });
-            // colorPicker.click();
             document.getElementById("columns" + index).style.backgroundColor = color;
             $scope.column.forEach((col) => {
-              if (column.fieldName === col.fieldName){
+              if (column.fieldName === col.fieldName) {
                 col.headColor = color
               }
             })
           } else if (option === "Set Full Column Color") {
             var targetHeaderText = column.fieldName;
-            // Find the index of the target column
             var targetColumnIndex = -1;
             var table = document.querySelector('.table');
             var headerRow = table.rows[0];
@@ -843,125 +702,22 @@ angular.module('myApp', [])
             if (targetColumnIndex !== -1) {
               var targetCells = table.querySelectorAll('tr td:nth-child(' + (targetColumnIndex + 1) + ')');
               for (var j = 0; j < targetCells.length; j++) {
-                targetCells[j].style.backgroundColor = color; // Set desired background color for the column
+                targetCells[j].style.backgroundColor = color;
               }
             }
             $scope.column.forEach((col) => {
-              if (column.fieldName === col.fieldName){
+              if (column.fieldName === col.fieldName) {
                 col.bodyColor = color
               }
             })
-            // document.getElementById("cell").style.backgroundColor = color;
           }
         }
         $scope.closePopup = (headerIndex) => {
           document.getElementById("popup-" + headerIndex).style.display = "none";
         }
-
-        $scope.deleteRow = function (row) {
-          // delete the row
-          //$scope.data = $scope.data.slice(0, 4);
-        };
-        $scope.$watch("data", function () {
-          // update the table
-        });
         $scope.freezeColumnIndex = null;
 
-        // Function to toggle the frozen state of a column
 
-
-        // Function to freeze a column based on user input
-        // $scope.freezeColumn = function (index, field, event) {
-        //   const styleElement = document.createElement('style'); // create a new style element
-        //   document.head.appendChild(styleElement); // append the style element to the head of the document
-
-        //   const styleSheet = styleElement.sheet;
-        //   cell = event.currentTarget.parentElement.parentElement.parentElement
-        //   if (cell.tagName == 'TH' || cell.tagName == 'TD') {
-        //     var cellLeft = cell.offsetLeft;
-        //     var cellHeight = cell.offsetHeight;
-
-        //   }
-        //   $scope.freezeColumnIndex = index
-        //   if ($scope.freezeColumnIndex !== null && $scope.freezeColumnIndex >= 0 && $scope.freezeColumnIndex < $scope.column.length) {
-
-        //     // var forzenCount =0;
-        //     // angular.forEach($scope.column, (col)=>{
-        //     //   if(col.field === field){
-        //     //     const cssRule = `.freeze{
-        //     //       position: sticky;
-        //     //       left: 0;
-        //     //       z-index: 1;
-        //     //       background-color: #009879;}`
-        //     //       // $scope.column[$scope.freezeColumnIndex].frozen = !$scope.column[$scope.freezeColumnIndex].frozen;
-        //     //       styleSheet.insertRule(cssRule,0)
-        //     //       cell.style.position='sticky';
-        //     //       cell.style.left = cellLeft+'px'
-
-        //     //     }
-        //     //     else{
-        //     //       // col.frozen = false;
-
-        //     //     }
-        //     // })
-
-        //     var frozenCount = 0;
-        //     angular.forEach($scope.column, (col) => {
-        //       if (col.field === field) {
-        //         var preHeader = document.getElementById(`columns${$scope.freezeColumnIndex - 1}`)
-        //         var nextHeader = document.getElementById(`columns${$scope.freezeColumnIndex + 1}`)
-        //         var nextHeaderStyle = window.getComputedStyle(nextHeader)
-        //         var nextHeaderPosition = nextHeaderStyle.getPropertyValue("position");
-        //         var preHeaderStyle = window.getComputedStyle(preHeader)
-        //         var preHeaderPosition = preHeaderStyle.getPropertyValue("position");
-        //         // Add the "freeze" CSS class to the header and cells of the selected column
-        //         // const preHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +1})`);
-        //         const header = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex + 2})`);
-        //         // const nextHeader = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex +3})`);
-        //         const cells = document.querySelectorAll(`#myTable tbody td:nth-child(${$scope.freezeColumnIndex + 2})`);
-        //         // header.classList.add('freeze');
-        //         if (preHeaderPosition === 'sticky' && header.style.position === 'sticky' && nextHeaderPosition === 'static') {
-        //           header.style.position = 'static'
-        //           header.style.backgroundColor = '#ddd'
-        //           cells.forEach(cell => {
-        //             cell.style.position = 'static';
-        //             cell.style.backgroundColor = 'white'
-        //           });
-        //           // header.style.left = (cellLeft-header.style.left)+'px'
-        //         }
-        //         else if (preHeaderPosition === 'sticky' && (header.style.position === 'static' || header.style.position === '') && nextHeaderPosition === 'static') {
-
-        //           cells.forEach(cell => {
-        //             cell.style.position = 'sticky';
-        //             cell.style.left = (cellLeft) + 'px'
-        //             cell.style.backgroundColor = 'white'
-        //           });
-        //           header.style.position = 'sticky';
-        //           header.style.left = (cellLeft) + 'px'
-        //           header.style.backgroundColor = '#ddd'
-        //           header.style.zIndex = 2
-
-        //         }
-        //         else {
-
-        //         }
-
-        //       } else {
-        //         // Remove the "freeze" CSS class from the header and cells of other columns
-        //         const header = document.querySelector(`#myTable th:nth-child(${$scope.freezeColumnIndex + 1})`);
-        //         const cells = document.querySelectorAll(`#myTable tbody td:nth-child(${$scope.freezeColumnIndex + 1})`);
-        //         header.classList.remove('freeze');
-        //         cells.forEach(cell => {
-        //           cell.classList.remove('freeze');
-        //         });
-        //       }
-        //     });
-
-        //   }
-
-        // };
-        // freeze function
-        // $scope.initialFreezeColumn()
         $scope.initialFreezeColumn = () => {
           var ths = document.querySelectorAll('th[id*="columns"]');
           for (var i = 0; i < ths.length; i++) {
@@ -971,25 +727,23 @@ angular.module('myApp', [])
             var colStyle = ''
             var position = style.getPropertyValue('position')
             var colour = style.getPropertyValue('background-color')
-            // var width = colStyle.getPropertyValue('width')
-            // width = parseInt(width,10)
             width = 100
             if (position == 'sticky') {
               $scope.freezeCondition('sticky', 'static', 'static', i, width)
             }
-            $scope.column.forEach((col) =>{
-              if(ths[i].textContent.includes(col.fieldName)){
+            $scope.column.forEach((col) => {
+              if (ths[i].textContent.includes(col.fieldName)) {
                 ths[i].style.background = col.headColor;
 
               }
             })
-            for(var j = 0; j<$scope.cols.length; j++){
+            for (var j = 0; j < $scope.cols.length; j++) {
               $scope.column.forEach((col) => {
-                if(ths[$scope.cols[j].cellIndex - 1].textContent.includes(col.fieldName)){
-                  if(col.bodyColor){
+                if (ths[$scope.cols[j].cellIndex - 1].textContent.includes(col.fieldName)) {
+                  if (col.bodyColor) {
                     $scope.cols[j].style.backgroundColor = col.bodyColor
                   }
-                  else{
+                  else {
                     $scope.cols[j].style.backgroundColor = 'white'
 
                   }
@@ -1000,14 +754,6 @@ angular.module('myApp', [])
 
           }
 
-
-          // ths.forEach((th)=>{
-          //   var style = getComputedStyle(th)
-          //   var position = style.getPropertyValue('position')
-          //   if(position === 'sticky')
-          //   $scope.freezeCondition('sticky','static','static') 
-
-          // })
         }
         $scope.freezeColumn = (a, c) => {
           $scope.head = document.querySelector('th#' + c)
@@ -1185,7 +931,7 @@ angular.module('myApp', [])
         };
         $scope.showPagination = function (event) {
           $scope.numOfPages()
-          if ( $scope.noOfPages> 0 && $scope.tableData.length !== 0) {
+          if ($scope.noOfPages > 0 && $scope.tableData.length !== 0) {
             $scope.pagination_details = true;
           }
           else {
@@ -1209,23 +955,6 @@ angular.module('myApp', [])
         $scope.viewlistFunc = () => {
           $scope.viewIcon = !$scope.viewIcon
           if ($scope.viewIcon) {
-            // $http({
-            //   method: 'POST',
-            //   url: 'https://c236-14-98-32-198.ngrok-free.app/register',
-            //   headers: {
-            //     'Content-Type': 'application/json'
-            //   },
-            //   data: {
-            //     name: 'rafiq2s3332343',
-            //     password: 'rafiq232ssfds33@gmail.com'
-            //   }
-            // }).then(function successCallback(response) {
-            //   // This function will be called if the API call is successful
-            //   $scope.listData = response.data;
-            // }, function errorCallback(response) {
-            //   // This function will be called if there is an error with the API call
-            //   console.error('Error retrieving data:', response.status, response.statusText);
-            // });
 
             $scope.expandIcon = 'expand_less'
           } else {
@@ -1270,11 +999,6 @@ angular.module('myApp', [])
               editable: true,
             },
             ]
-            //  $scope.column = $scope.newColumn
-
-            // $scope.columnList = $scope.newColumn.map(item => {
-            //   return item.field
-            // })
 
             $scope.columnList = $scope.colList ? $scope.colList : ['name', 'phone']
 
@@ -1328,7 +1052,6 @@ angular.module('myApp', [])
 
         $scope.Checkchecked = [];
         $scope.flagIcon = (index) => {
-          // $scope.myFlagCheckboxModel = !$scope.myFlagCheckboxModel
           if (!$scope.Checkchecked.includes(index)) {
             $scope.Checkchecked.push(index)
           } else {
@@ -1353,7 +1076,7 @@ angular.module('myApp', [])
         }
 
         $scope.flagIcon = (index) => {
-          // $scope.myFlagCheckboxModel = !$scope.myFlagCheckboxModel
+
           if (!$scope.checked.includes(index)) {
             checked.push(index)
           } else {
@@ -1378,8 +1101,6 @@ angular.module('myApp', [])
 
         $scope.addFieldPopup = false
         $scope.toggleaddFieldPopup = (headerName) => {
-          // $scope.addFieldPopup = !$scope.addFieldPopup
-          // $scope.headerName = headerName
           $scope.addFieldPopup = false
           $scope.addColumn(headerName, $scope.curOption, $scope.columnForAddColumn)
         }
@@ -1389,7 +1110,6 @@ angular.module('myApp', [])
           $scope.headerPopup = !$scope.headerPopup
           columnIndex = $scope.column.indexOf(columnName)
           data = {
-            // field: $scope.headerName ? $scope.headerName : 'TEST',
             field: header ? header : 'TEST',
             type: "input",
             dataType: 'input',
@@ -1431,7 +1151,7 @@ angular.module('myApp', [])
           columnIndex = $scope.column.indexOf(columnName)
           oldField = columnName.fieldName
           fieldCount = $scope.countNames($scope.data[0], oldField)
-          newField = `${columnName.fieldName}${fieldCount+1}`
+          newField = `${columnName.fieldName}${fieldCount + 1}`
           data = {
             field: newField,
             type: columnName.type,
